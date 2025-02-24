@@ -1,0 +1,380 @@
+@import url('https://fonts.cdnfonts.com/css/lufga');            
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Lufga', sans-serif;
+                                                
+}
+body {
+    overflow-x: hidden; /* Hides the horizontal scrollbar */
+}
+
+
+.video-background {
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-background video {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    overflow: hidden;
+}
+/* Enable hover dropdown */
+.nav-item.dropdown:hover .dropdown-menu {
+    display: block;
+    position: absolute;
+}
+
+/* Dropdown menu styling */
+.dropdown-menu {
+    background-color: rgb(2, 0, 20);
+    border: none;
+    margin-top: 0px;
+}
+
+.dropdown-item {
+    color: aliceblue;
+    padding: 10px 20px;
+}
+
+.dropdown-item:hover {
+    background-color: #C5A880;
+    color: #fff;
+}
+
+.navbar {
+    background: rgba(65, 65, 65, 0.205) !important;
+    backdrop-filter: blur(10px);
+}
+
+.navbar .container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 15px;
+}
+
+.navbar .navbar-collapse {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navbar-brand img {
+    height: 60px;
+    width: auto;
+}
+
+.navbar-nav {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-nav.me-auto {
+    margin-right: auto;
+}
+
+.navbar-nav:not(.me-auto) {
+    margin-left: auto;
+}
+
+.navbar-toggler {
+    margin-left: auto;
+}
+
+.navbar-nav .nav-link {
+    color: aliceblue;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #C5A880 !important; /* Change text color on hover */
+}
+
+.navbar-nav .book-now-btn {
+    background-color: #C5A880; /* Custom button color */
+    border: none; /* Remove border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 8px 20px; /* Button padding */
+    font-size: 16px; /* Font size */
+    font-weight: 500; /* Medium font weight */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.hero-content {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    align-items: center; 
+    text-align: center;
+    padding-bottom: 30px;
+    z-index: 10;
+}
+
+.hero-content h1 {
+    font-weight: 900;
+    font-size: 60px;
+}
+
+.hero-content p {
+    font-size: 16px;
+}
+
+.booking-form {
+    background: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    width: 100%;
+    max-width: 1000px;
+    padding: 10px 100px;
+    margin-top: 10px;
+}
+
+.book-now-btn {
+    background-color: #C5A880 !important;
+    border-color: #C5A880 !important;
+    border-radius: 5px;
+}
+.more-btn{
+    background-color: #1E1E1E !important;
+}
+
+.book-now-btn:hover {
+    background-color: #6b573a;
+}
+
+.form-control, .form-select {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
+    color: white !important;
+}
+
+.form-control::placeholder, .form-select {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.form-select option {
+    background-color: #343a40;
+    color: white;
+}
+
+.new {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 600px;
+    width: 99vw;
+}
+
+.new span {
+    color: #C5A880;
+}
+
+.image img {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+p{
+    font-size: 15px;
+}
+/* Custom styles for jQuery UI Datepicker */
+.ui-datepicker {
+    width: 350px; /* Original width */
+    font-size: 14px; /* Original font size */
+    background-color: #fff; /* Background color */
+    border: 1px solid #C5A880; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add shadow */
+    padding: 10px; /* Add padding */
+   transform: scale(1.2);
+    margin-top: 20px; /* Add top margin for better positioning */
+}
+
+.ui-datepicker-header {
+    background-color: #C5A880; /* Header background color */
+    color: #fff; /* Header text color */
+    border: none; /* Remove border */
+    border-radius: 6px 6px 0 0; /* Rounded corners for header */
+    padding: 10px; /* Add padding */
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+    cursor: pointer; /* Pointer cursor for navigation buttons */
+    color: #fff; /* Navigation button color */
+}
+
+.ui-datepicker-prev:hover,
+.ui-datepicker-next:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Hover effect for navigation buttons */
+    border-radius: 4px; /* Rounded corners for hover effect */
+}
+
+.ui-datepicker-title {
+    font-weight: bold; /* Bold font for month/year */
+}
+
+.ui-datepicker-calendar th {
+    color: #C5A880; /* Weekday header color */
+    font-weight: bold; /* Bold font for weekdays */
+}
+
+.ui-datepicker-calendar td {
+    padding: 5px; /* Add padding to calendar cells */
+}
+
+.ui-datepicker-calendar td a {
+    color: #333; /* Default date text color */
+    text-align: center; /* Center-align date text */
+    display: block; /* Make dates block elements */
+    padding: 5px; /* Add padding to dates */
+    border-radius: 4px; /* Rounded corners for dates */
+    transition: background-color 0.3s ease; /* Smooth hover transition */
+}
+
+.ui-datepicker-calendar td a:hover {
+    background-color: #f0f0f0; /* Hover background color */
+}
+
+.ui-datepicker-calendar .ui-state-active {
+    background-color: #C5A880; /* Active date background color */
+    color: #fff; /* Active date text color */
+    border-radius: 4px; /* Rounded corners for active date */
+}
+
+.ui-datepicker-calendar .ui-state-highlight {
+    background-color: #f8f9fa; /* Highlighted date background color */
+    color: #C5A880; /* Highlighted date text color */
+    border: 1px solid #C5A880; /* Highlighted date border color */
+    border-radius: 4px; /* Rounded corners for highlighted date */
+}
+
+.form-control[readonly] {
+    background-color: #f8f9fa;
+    cursor: pointer;
+    border: 1px solid #C5A880;
+    color: #C5A880;
+    border-radius: 4px;
+    padding: 8px 12px;
+    font-size: 16px;
+}
+.ui-datepicker-title-custom {
+    background-color: #C5A880; /* Background color */
+    color: #fff; /* Text color */
+    font-size: 18px; /* Font size */
+    font-weight: bold; /* Bold font */
+    text-align: center; /* Center-align text */
+    padding: 10px; /* Add padding */
+    border-radius: 6px 6px 0 0; /* Rounded corners for the top */
+    margin-bottom: 10px; /* Add margin below the title */
+}
+
+.content-1 {
+    padding: 80px 0 0 70px;
+}
+.content-1 p{
+    font-size: 12px;
+}
+.content p{
+    font-size: 12px;
+}
+.image img {
+    height: 250px;
+    object-fit: cover; 
+}
+
+.img{
+    position: relative;
+    overflow: hidden; 
+}
+
+.image .details,.elevetor2 .details {
+    bottom: 0px;
+    position: absolute;
+    width: 100%;
+    height: 100px;
+    color: white;
+    background: linear-gradient(rgba(20, 20, 20, 0.11), rgba(0, 0, 0, 0.945)); /* Gradient background */
+    padding: 10px;
+    z-index: 1;
+    transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.image:hover .details {
+    opacity: 0;
+}
+
+.image .details h3 {
+    margin: 0; /* Remove default margin */
+}
+
+.after-det {
+    opacity: 0; 
+    bottom: -100px; 
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    color: white;
+    background: linear-gradient(rgba(24, 23, 23, 0.007), rgba(0, 0, 0, 0.863)); 
+    padding: 10px;
+    z-index: 1;
+    transition: opacity 0.3s ease, transform 0.3s ease; 
+}
+.after-det h3{
+    margin-top: 140px;
+}
+.image:hover .after-det {
+    opacity: 1; 
+    transform: translateY(-100px); 
+}
+.elevetor1 {
+    background-color: #1E1E1E;
+    height: 50vh;
+    position: relative;
+}
+
+.elevetor2 {
+    position: absolute;
+    bottom: 80;
+    margin: 7%;
+    width: 86%; /* Ensure it fits within the container */
+}
+
+.elevetor2 img {
+    height: 500px;
+    width: 100%; /* Ensure the image takes full width */
+    object-fit: cover; /* Maintain aspect ratio */
+}
+
+
+.elevetor2 .details h3 {
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.2; 
+}
+.elevetor2 .details{
+    gap: 50%;
+}
+.elevetor2 .details a{
+    background: #C5A880;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+}
+.elevetor2 .details a i{
+    margin-top: 25px;
+    font-size: 50px;
+    color: white;
+}
