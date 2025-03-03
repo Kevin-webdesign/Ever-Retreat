@@ -1,81 +1,189 @@
-<header class="header-area">
-    <!-- Navbar Area -->
-    <div class="palatin-main-menu">
-        <div class="classy-nav-container breakpoint-off">
-            <div class="containers" style="padding:5px;">
-                <!-- Menu -->
-                <nav class="classy-navbar justify-content-between" id="palatinNav">
+<nav class="navbar navbar-expand-sm navbar-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto" href="../../General/views/index.php">
+                <img src="../../../assets/image/logo-retreat.png" alt="Logo">
+            </a>
 
-                    <!-- Nav brand -->
-                    <a href="index.php" class="nav-brand" style="width: 140px; margin: 0px 15px; border:solid 2px black;">
-                        <img src="../../../assets/img/logo-retreat.png" alt="Brand Logo" class="brand-logo">
-                    </a>
+            <!-- Toggler Button for Mobile -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-                    <!-- Navbar Toggler -->
-                    <div class="classy-navbar-toggler">
-                        <span class="navbarToggler"><span></span><span></span><span></span></span>
-                    </div>
-
-                    <!-- Menu -->
-                    <div class="classy-menu" style="border: solid 2px green; width:90%;">
-                        <!-- close btn -->
-                        <div class="classycloseIcon">
-                            <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
-                        </div>
-
-                        <!-- Nav Start -->
-                        <div class="classynav" style="border: solid 2px red;">
-                            <ul class="left-menus" style="border: solid 2px red; margin-right:20px;">
-                                <li class="active"><a href="accommodation.php">Accommodation</a></li>
-                                <li><a href="about-us.php">Tourism</a></li>
-                                <li><a href="#">Social & Culture</a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega cn-col-4">
-                                            <li><a href="index.php">Home</a></li>
-                                            <li><a href="about-us.php">About Us</a></li>
-                                            <li><a href="services.php">Services</a></li>
-                                            <li><a href="rooms.php">Rooms</a></li>
-                                            <li><a href="blog.php">News</a></li>
-                                            <li><a href="contact.php">Contact</a></li>
-                                            <li><a href="elements.php">Elements</a></li>
-                                        </ul>
-                                        <!-- Repeat columns as needed -->
-                                    </div>
-                                </li>
-                                <li><a href="#">Investment</a>
-                                    <div class="megamenu">
-                                        <ul class="single-mega cn-col-4">
-                                            <li><a href="index.php">Home</a></li>
-                                            <li><a href="about-us.php">About Us</a></li>
-                                            <li><a href="services.php">Services</a></li>
-                                            <li><a href="rooms.php">Rooms</a></li>
-                                            <li><a href="blog.php">News</a></li>
-                                            <li><a href="contact.php">Contact</a></li>
-                                            <li><a href="elements.php">Elements</a></li>
-                                        </ul>
-                                        <!-- Repeat columns as needed -->
-                                    </div>
-                                </li>
-                            </ul>
-                            <div class="right" style="border:solid 2px green; margin-left:20px;">
-                                <ul class="right-buttons" style="border: solid 2px red;">
-                                    <li><a href="partnenership.php">Partnership</a></li>
-                                    <li><a href="#">Everdesign</a></li>
-                                    <li><a href="aboutus.php">About Us</a></li>
-                                    <li><a href="contact.php">Contact Us</a></li>
+            <!-- Collapsible Content -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Accommodation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../General/views/tourism.php">Tourism</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Social & culture
+                        </a>
+                        <div class="dropdown-menu custom-dropdown drop1" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-content d-flex">
+                                <ul class="navigation">
+                                    <h2>Social &amp; culture</h2>
+                                    <li><a class="dropdown-item" href="../../General/views/museum.php" data-target="ever">Ever
+                                            Retreat Museum</a></li>
+                                    <li><a class="dropdown-item" href="../../General/views/Craft.php"
+                                            data-target="community">Community Empowerment</a></li>
+                                    <li><a class="dropdown-item" href="#" data-target="advarture">Adventure</a></li>
                                 </ul>
+                                <div class="content-section">
+                                    <!-- Default content -->
+                                    <div class="content-item active">
+                                        <div class="description d-flex">
+                                            <div class="text">
+                                                <p><b>Welcome to Social & Culture</b></p>
+                                                <p>Explore our rich cultural heritage and social initiatives that make
+                                                    Ever Retreat unique.</p>
+                                            </div>
+                                            <div class="nav-image">
+                                                <img src="../../../assets/image/nyanza.jpg" alt="Default Image 1">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Content items -->
+                                    <div id="ever" class="content-item">
+                                        <div class="description d-flex">
+                                            <div class="text">
+                                                <p><b>Why invest in Ever Retreat?</b></p>
+                                                <p>Experience ultimate luxury and tranquility in our master suite,
+                                                    featuring a private balcony that offers stunning views of our serene
+                                                    garden and lively farm.</p>
+                                            </div>
+                                            <div class="nav-image">
+                                                <img src="../../../assets/image/first.webp" alt="Why Invest">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="community" class="content-item">
+                                        <div class="description d-flex">
+                                            <div class="text">
+                                                <p><b>Where to invest in Ever Retreat?</b></p>
+                                                <p>Discover prime locations in Ever Retreat that offer the best
+                                                    opportunities for investment and growth.</p>
+                                            </div>
+                                            <div class="nav-image">
+                                                <img src="../../../assets/image/first.jpg" alt="Where to Invest">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="advarture" class="content-item">
+                                        <div class="description d-flex">
+                                            <div class="text">
+                                                <p><b>How to invest in Ever Retreat?</b></p>
+                                                <p>Learn about the simple steps to invest in Ever Retreat and secure
+                                                    your future with us.</p>
+                                            </div>
+                                            <div class="nav-image">
+                                                <img src="../../../assets/image/dsc_9633.jpg" alt="How to Invest">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-
-                            <!-- Button -->
-                            <div class="menu-btn" style="margin-left:10px;">
-                                <a href="#" class="btn palatin-btn">Book Now</a>
-                            </div>
-
                         </div>
-                        <!-- Nav End -->
-                    </div>
-                </nav>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Investment
+                        </a>
+                        <div class="dropdown-menu custom-dropdown" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-content d-flex">
+                                <ul class="navigation">
+                                    <h2>Investment</h2>
+                                    <li><a class="dropdown-item" href="#" data-target="why">Why invest in Ever
+                                            Retreat?</a></li>
+                                    <li><a class="dropdown-item" href="#" data-target="where">Where to invest in Ever
+                                            Retreat?</a></li>
+                                    <li><a class="dropdown-item" href="#" data-target="how">How to invest in Ever
+                                            Retreat?</a></li>
+                                </ul>
+                                <div class="content-section">
+                                    <!-- Default content -->
+                                    <div class="content-item active">
+                                        <div class="description d-flex">
+                                            <div class="text">
+                                                <p><b>Welcome to Investment</b></p>
+                                                <p>Explore the best investment opportunities in Ever Retreat and secure
+                                                    your future with us.</p>
+                                            </div>
+                                            <div class="nav-image">
+                                                <img src="../../../assets/image/nyungwe.jpg" alt="Default Image 2">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Content items -->
+                                    <div id="why" class="content-item">
+                                        <div class="description d-flex">
+                                            <div class="text">
+                                                <p><b>Why invest in Ever Retreat?</b></p>
+                                                <p>Experience ultimate luxury and tranquility in our master suite,
+                                                    featuring a private balcony that offers stunning views of our serene
+                                                    garden and lively farm.</p>
+                                            </div>
+                                            <div class="nav-image">
+                                                <img src="../../../assets/image/musanze.jpg" alt="Why Invest">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="where" class="content-item">
+                                        <div class="description d-flex">
+                                            <div class="text">
+                                                <p><b>Where to invest in Ever Retreat?</b></p>
+                                                <p>Discover prime locations in Ever Retreat that offer the best
+                                                    opportunities for investment and growth.</p>
+                                            </div>
+                                            <div class="nav-image">
+                                                <img src="../../../assets/image/nyanza.jpg" alt="Where to Invest">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div id="how" class="content-item">
+                                        <div class="description d-flex">
+                                            <div class="text">
+                                                <p><b>How to invest in Ever Retreat?</b></p>
+                                                <p>Learn about the simple steps to invest in Ever Retreat and secure
+                                                    your future with us.</p>
+                                            </div>
+                                            <div class="nav-image">
+                                                <img src="../../../assets/image/kigali.jpg" alt="How to Invest">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- Right-aligned Links -->
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Partnership</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Everdesign</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Booking">
+                            <button class="btn btn-primary book-now-btn">Book Now</button>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </div>
-</header>
+    </nav>

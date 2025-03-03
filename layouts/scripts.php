@@ -1,11 +1,4 @@
-
-    <!-- jQuery-2.2.4 js -->
-    <script src="../../../assets/js/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="../../../assets/js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="../../../assets/js/bootstrap.min.js"></script>
-    <!-- All Plugins js -->
-    <script src="../../../assets/js/plugins.js"></script>
-    <!-- Active js -->
-    <script src="../../../assets/js/active.js"></script>
+    <!-- Bootstrap JS (online link) -->
+    <script src="../../../assets/js/bootstrap.bundle.min.js"></script>
+    <!-- jQuery -->
+    <script src="../../../assets/js/script.js"></script>
