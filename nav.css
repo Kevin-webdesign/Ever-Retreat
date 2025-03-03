@@ -1,0 +1,138 @@
+/* Import Lufga font */
+@import url('https://fonts.cdnfonts.com/css/lufga');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Lufga', sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+nav {
+    position: fixed;
+    background: rgba(65, 65, 65, 0.205) !important;
+    backdrop-filter: blur(10px);
+    display: flex;
+    width: 100%;
+    padding: 0 20px;
+}
+
+nav img {
+    height: 60px;
+    width: auto;
+}
+
+.navbar-toggler {
+    margin-left: auto;
+}
+
+.nav-link {
+    color: white !important;
+    margin: 10px 0;
+    font-weight: 300;
+}
+
+.nav-link:hover {
+    color: #C5A880 !important;
+}
+
+.book-now-btn {
+    background-color: #C5A880;
+    border: none;
+    border-radius: 0px;
+    padding: 8px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.book-now-btn:hover {
+    background-color: #b5946e;
+}
+
+.dropdown-menu.custom-dropdown {
+    top: 120%;
+    left: 50%;
+    transform: translateX(-50%); /* Adjust to center */
+    min-width: 900px; /* Adjust as needed */
+    border: none;
+    background: transparent;
+}
+
+.dropdown-content {
+    display: flex;
+}
+
+.dropdown-content .navigation {
+    list-style: none;
+    background-color: rgb(43, 42, 42);
+    font-size: 14px;
+    width: 30%;
+    color: white !important;
+}
+
+.text {
+    font-size: 14px;
+    width: 50%;
+    margin-top: 20px;
+}
+.dropdown-content .navigation h2{
+margin-top: 40px;
+font-size: 23px;
+}
+.dropdown-content .navigation  ul{
+    gap: 20px;
+}
+.dropdown-menu.custom-dropdown.drop1{
+    left: 100%;
+}
+.dropdown-content .navigation .dropdown-item {
+    font-size: 13px;
+    padding: 5px;
+    margin: 10px 0;
+    color: white ;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 90%;
+    border-radius: 5px;
+    background-color: rgb(71, 70, 70);
+}
+
+.dropdown-content .navigation .dropdown-item:hover {
+    background-color: #C5A880;
+    color: rgb(1, 19, 34) !important;
+}
+
+.content-section {
+    background-color: rgb(255, 249, 249);
+    width: 70%;
+    padding: 0 0 0 30px;
+}
+
+.content-section .content-item {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.content-section .content-item.active {
+    display: block;
+    opacity: 1;
+}
+
+.content-item .description p {
+    color: rgb(43, 41, 41);
+    
+}
+
+.content-item .description .nav-image img {
+    margin: 20px;
+    width: 300px;
+    height: 300px;
+    overflow: hidden;
+}
