@@ -6,21 +6,35 @@
                                                 
 }
 body {
-    overflow-x: hidden; /* Hides the horizontal scrollbar */
+    overflow-x: hidden;
 }
-
+.video-overlay{
+    background-color: #1e1e1e81;
+    width: 100vw;
+    position: absolute;
+    height: 100vh; 
+}
 
 .video-background {
     position: static;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
     overflow: hidden;
 }
 
-.video-background video {
+.video-background .top_image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.video-background video{
     position: absolute;
     top: 50%;
     left: 50%;
@@ -31,85 +45,9 @@ body {
     pointer-events: none;
     overflow: hidden;
 }
-/* Enable hover dropdown */
-.nav-item.dropdown:hover .dropdown-menu {
-    display: block;
-    position: absolute;
-}
 
-/* Dropdown menu styling */
-.dropdown-menu {
-    background-color: rgb(2, 0, 20);
-    border: none;
-    margin-top: 0px;
-}
-
-.dropdown-item {
-    color: aliceblue;
-    padding: 10px 20px;
-}
-
-.dropdown-item:hover {
-    background-color: #C5A880;
-    color: #fff;
-}
-
-.navbar {
-    background: rgba(65, 65, 65, 0.205) !important;
-    backdrop-filter: blur(10px);
-}
-
-.navbar .container {
-    align-items: center;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 0 15px;
-}
-
-.navbar .navbar-collapse {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-.navbar-brand img {
-    height: 60px;
-    width: auto;
-}
-
-.navbar-nav {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-nav.me-auto {
-    margin-right: auto;
-}
-
-.navbar-nav:not(.me-auto) {
-    margin-left: auto;
-}
-
-.navbar-toggler {
-    margin-left: auto;
-}
-
-.navbar-nav .nav-link {
-    color: aliceblue;
-}
-
-.navbar-nav .nav-link:hover {
-    color: #C5A880 !important; /* Change text color on hover */
-}
-
-.navbar-nav .book-now-btn {
-    background-color: #C5A880; /* Custom button color */
-    border: none; /* Remove border */
-    border-radius: 5px; /* Rounded corners */
-    padding: 8px 20px; /* Button padding */
-    font-size: 16px; /* Font size */
-    font-weight: 500; /* Medium font weight */
-    transition: background-color 0.3s ease; /* Smooth hover transition */
+content{
+    gap: 30px;
 }
 
 .hero-content {
@@ -287,18 +225,27 @@ p{
     font-size: 12px;
 }
 .content p{
+    font-size: 20px;
+}
+.content-2 {
+    padding: 0;
+}
+.content-2 p{
     font-size: 12px;
 }
 .image img {
     height: 250px;
     object-fit: cover; 
 }
-
+.about img{
+    margin: 0 20px;
+    height: 400px;
+    object-fit: cover; 
+}
 .img{
     position: relative;
     overflow: hidden; 
 }
-
 .image .details,.elevetor2 .details {
     bottom: 0px;
     position: absolute;
@@ -345,16 +292,16 @@ p{
 }
 
 .elevetor2 {
-    position: absolute;
+    position:absolute;
     bottom: 80;
     margin: 7%;
-    width: 86%; /* Ensure it fits within the container */
+    width: 86%; 
 }
 
 .elevetor2 img {
     height: 500px;
-    width: 100%; /* Ensure the image takes full width */
-    object-fit: cover; /* Maintain aspect ratio */
+    width: 100%; 
+    object-fit: cover; 
 }
 
 
@@ -372,9 +319,130 @@ p{
     height: 100px;
     border-radius: 50%;
     text-align: center;
+    margin: 0 0 40px 0;
 }
 .elevetor2 .details a i{
     margin-top: 25px;
     font-size: 50px;
     color: white;
+}
+
+.message{
+    margin-top: 300px;
+}
+.message h3{
+    font-weight: bold;
+}
+.messagebox img{
+width: 50px;
+}
+.box {
+    margin: 10px;
+    box-shadow: 0 0 5px rgba(22, 22, 22, 0.582);
+    height: 200px;
+    border-radius: 5px;
+    border: none;
+    width: 400px;
+}
+.card-header{
+    margin: 10px 5px;
+}
+.card-header .img{
+    margin-right: 10px;
+}
+footer{
+    padding-top: 30px;
+    position: relative;
+    background-color: #1E1E1E;
+    width: 100%;
+    margin:70px 0 0 0;
+}
+.part {
+    margin: 0px;
+}
+.footerimage img{
+width: 100px;
+}
+footer p{
+    font-weight: 200;
+    font-size: 13px;
+    margin-top: 10px;
+}
+footer form{
+    display: flex;
+}
+footer form input{
+    padding: 0 0 0 20px;
+    height: 50px;
+}
+footer form button{
+    height: 50px;
+    background-color: #C5A880 !important;
+    border: none;
+    color: #f0f0f0;
+    text-align: center;
+    font-size: 15px;
+    padding: 10px;
+}
+footer .icons{
+    display: flex;
+    justify-content: space-between;
+}
+.footer{
+    margin: 20px 30px 0 30px;
+}
+
+.move{
+    margin: 20px;
+}
+.move .icon{
+text-align: center;
+font-size: 25px;
+margin: 10px;
+color: #f0f0f0;
+background-color: #C5A880;
+border-radius: 50%;
+}
+.move .icon i{
+    padding: 15px;
+    height: 50px;
+    width: 50px;
+}
+.move .icon:hover{
+    background-color: #9c835f;
+}
+
+/* -------meassge----------- */
+.messagebox {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+.box-container {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.box {
+    flex: 0 0 auto; /* Ensure boxes don't shrink or grow */
+    box-sizing: border-box;
+    padding: 10px;
+    width: calc(100% / 3); /* Show 3 boxes at a time (adjust as needed) */
+}
+
+.move {
+    margin-top: 10px;
+}
+
+.icon {
+    cursor: pointer;
+    margin: 0 10px;
+}
+.container-top{
+    position: absolute;
+    top: 50%;
+}
+.container-top h1{
+    font-weight: 500;
 }
