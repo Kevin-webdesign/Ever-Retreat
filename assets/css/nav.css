@@ -44,7 +44,7 @@ nav img {
     border: none;
     border-radius: 0px;
     padding: 8px 20px;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 500;
     transition: background-color 0.3s ease;
 }
@@ -54,44 +54,53 @@ nav img {
 }
 
 .dropdown-menu.custom-dropdown {
-    top: 120%;
-    left: 50%;
-    transform: translateX(-50%); /* Adjust to center */
-    min-width: 900px; /* Adjust as needed */
+    top: 100%;
+    margin-top: 10px;
+    left: 0;
+    /* transform: translateX(-50%);  */
+    min-width: 920px; /* Adjust as needed */
     border: none;
+    transition: all 0.3s ease;
     background: transparent;
 }
 
 .dropdown-content {
     display: flex;
+    flex-wrap: wrap;
 }
 
 .dropdown-content .navigation {
     list-style: none;
     background-color: rgb(43, 42, 42);
-    font-size: 14px;
-    width: 30%;
+    font-size: 12px;
+    width: 28%;
     color: white !important;
 }
 
 .text {
-    font-size: 14px;
+    font-size: 10px;
     width: 50%;
     margin-top: 20px;
+    text-align: justify;
 }
 .dropdown-content .navigation h2{
 margin-top: 40px;
-font-size: 23px;
+font-size: 16px;
+text-align: center;
 }
 .dropdown-content .navigation  ul{
     gap: 20px;
 }
 .dropdown-menu.custom-dropdown.drop1{
-    left: 100%;
+    left: -20%;
+}
+.dropdown-menu.custom-dropdown.drop2{
+    left: -150%;
 }
 .dropdown-content .navigation .dropdown-item {
-    font-size: 13px;
-    padding: 5px;
+    font-size: 11px;
+    text-align: center;
+    padding: 10px;
     margin: 10px 0;
     color: white ;
     overflow: hidden;
@@ -99,7 +108,7 @@ font-size: 23px;
     display: block;
     transition: background-color 0.3s ease, color 0.3s ease;
     width: 90%;
-    border-radius: 5px;
+    border-radius: 0px;
     background-color: rgb(71, 70, 70);
 }
 
@@ -111,7 +120,7 @@ font-size: 23px;
 .content-section {
     background-color: rgb(255, 249, 249);
     width: 70%;
-    padding: 0 0 0 30px;
+    padding: 28px;
 }
 
 .content-section .content-item {
@@ -126,13 +135,13 @@ font-size: 23px;
 }
 
 .content-item .description p {
-    color: rgb(43, 41, 41);
-    
+    color: rgb(73, 70, 70);
+    font-size: 14px;
 }
 
 .content-item .description .nav-image img {
-    margin: 20px;
-    width: 300px;
-    height: 300px;
+    margin-left: 28px;
+    width: 250px;
+    height: 250px;
     overflow: hidden;
 }

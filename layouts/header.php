@@ -7,6 +7,7 @@
     <link href="../../../assets/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../assets/css/style.css">
     <link rel="stylesheet" href="../../../assets/css/nav.css">
+    <link rel="stylesheet" href="../../../assets/css/classy-nav.css">
     <!-- jQuery -->
     <script src="../../../assets/js/jquery-3.6.0.min.js"></script>
     <!-- jQuery UI CSS -->

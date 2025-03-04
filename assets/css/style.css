@@ -1,4 +1,9 @@
-@import url('https://fonts.cdnfonts.com/css/lufga');            
+@import url('https://fonts.cdnfonts.com/css/lufga');  
+@font-face {
+    font-family: 'FuturaLT-Book';
+    src: url("../fontawesome-free-6.7.2-web/webfonts/FuturaLT-Book.eot?#iefix") format("embedded-opentype"), url("../fontawesome-free-6.7.2-web/webfonts/FuturaLT-Book.woff") format("woff"), url("../fontawesome-free-6.7.2-web/webfonts/FuturaLT-Book.ttf") format("truetype"), url("../fontawesome-free-6.7.2-web/webfonts/FuturaLT-Book.svg#FuturaLT-Book") format("svg");
+    font-weight: normal;
+    font-style: normal; }          
 *{
     margin: 0;
     padding: 0;
@@ -445,4 +450,92 @@ border-radius: 50%;
 }
 .container-top h1{
     font-weight: 500;
+}
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.contact-header {
+    text-align: center;
+    padding: 40px 0;
+    background-color: #fff;
+}
+
+.contact-header h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+.map-container {
+    height: 100%;
+    min-height: 450px;
+    background-color: #e9f5eb;
+}
+
+.contact-form {
+    background-color: #faf7f2;
+    padding: 40px;
+}
+
+.contact-form h2 {
+    font-weight: 600;
+    margin-bottom: 30px;
+}
+
+.c-form-control {
+    border: 1px solid #d0a85c;
+    padding: 12px;
+    margin-bottom: 20px;
+    border-radius: 0;
+}
+
+textarea.c-form-control {
+    height: 150px;
+}
+
+.btn-submit {
+    background-color: #c9a55c;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #b08d3f;
+}
+
+.contact-info-card {
+    text-align: center;
+    padding: 30px 20px;
+    margin-bottom: 30px;
+    background-color: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.contact-icon {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.contact-info-title {
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.contact-info-text {
+    color: #333;
+}
+
+.world-map-bg {
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 50px 0;
 }
