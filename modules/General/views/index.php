@@ -6,6 +6,8 @@
 <body>
     <!-- Navbar -->
     <?php include("../../../layouts/navbar.php"); ?>
+
+    
     
     <!-- Hero Section -->
     <div class="hero-content text-white text-center vh-100">
@@ -128,93 +130,111 @@
                     </div>
                 </div>
             </div>
-            <div class="row text-center mt-5">
+            <div class="row text-center mt-5 mb-5">
                 <div class="col-md-12">
                     <p><span>Our Location</span></p>
-                    <h4 style="font-weight: bold;">Explore Our Best Location for an Unforgettable Vacation</h4>
+                    <h5 style="font-weight: bold;">Explore Our Best Location for an Unforgettable Vacation</h5>
                 </div>
             </div>
-            <div class="row content">
-                <div class="image col-md-3">
+            <div class="content location-row">
+                <div class="image loc-col-3 margin-right-img">
                     <div class="img">
                         <img src="../../../assets/image/kigali.jpg" alt="Kigali" class="img-fluid">
                         <div class="details">
-                            <h3>Kigali</h3>
+                            <h6>Kigali</h6>
                             <p>The heart of modern Rwanda</p>
                         </div>
                         <div class="after-det text-white">
-                            <h3>Kigali</h3>
+                            <h6>Kigali</h6>
                             <p>Kigali pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
                         </div>
+                        <a href="destinations/nyungwe" class="link-circle">
+                            <i class="fa fa-arrow-right diagonal"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="image col-md-6">
+                <div class="image loc-col-5 margin-right-img">
                     <div class="img">
                         <img src="../../../assets/image/rubavu.jpg" alt="rubavu" class="img-fluid">
                         <div class="details">
                             <a href=""></a>
-                            <h3>Rubavu</h3>
+                            <h6>Rubavu</h6>
                             <p>The serenity of lake kivu</p>
                         </div>
                         <div class="after-det text-white">
-                            <h3>Rubavu</h3>
+                            <h6>Rubavu</h6>
                             <p>Rubavu offers an unmatched sense <br> of tranquility.</p>
                         </div>
+                        <a href="destinations/nyungwe" class="link-circle">
+                            <i class="fa fa-arrow-right diagonal"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="image col-md-3">
+                <div class="image loc-col-3">
                     <div class="img">
                         <img src="../../../assets/image/musanze.jpg" alt="musanze" class="img-fluid">
                         <div class="details">
-                            <h3>musanze</h3>
+                            <h6>Musanze</h6>
                             <p>The heart of modern Rwanda</p>
                         </div>
                         <div class="after-det text-white">
-                            <h3>Musanze</h3>
+                            <h6>Musanze</h6>
                             <p>Kigali pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
                         </div>
+                        <a href="destinations/nyungwe" class="link-circle">
+                            <i class="fa fa-arrow-right diagonal"></i>
+                        </a>
                     </div>
                 </div>
             </div>
-            <div class="row content mt-4">
-                <div class="image col-md-6">
+            <div class="content location-row">
+                <div class="image loc-col-5 margin-right-img">
                     <div class="img">
                         <img src="../../../assets/image/nyungwe.jpg" alt="nyungwe" class="img-fluid">
                         <div class="details">
-                            <h3>Nyungwe</h3>
+                            <h6>Nyungwe</h6>
                             <p>The heart of modern Rwanda</p>
                         </div>
                         <div class="after-det text-white">
-                            <h3>Nyungwe</h3>
-                            <p>Kigali pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
+                            <h6>Nyungwe</h6>
+                            <p>Nyungwe pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
                         </div>
+                        <a href="destinations/nyungwe" class="link-circle">
+                            <i class="fa fa-arrow-right diagonal"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="image col-md-3">
+                <div class="image loc-col-3 margin-right-img">
                     <div class="img">
                         <img src="../../../assets/image/nyanza.jpg" alt="Nyanza" class="img-fluid">
                         <div class="details">
                             <a href=""></a>
-                            <h3>Nyanza</h3>
+                            <h6>Nyanza</h6>
                             <p>The serenity of lake kivu</p>
                         </div>
                         <div class="after-det text-white">
-                            <h3>Nyanza</h3>
-                            <p>Rubavu offers an unmatched sense <br> of tranquility.</p>
+                            <h6>Nyanza</h6>
+                            <p>Nyanza offers an unmatched sense <br> of tranquility.</p>
                         </div>
+                        <a href="destinations/nyungwe" class="link-circle">
+                            <i class="fa fa-arrow-right diagonal"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="image col-md-3">
+                <div class="image loc-col-3">
                     <div class="img">
                         <img src="../../../assets/image/huye.jpg" alt="musanze" class="img-fluid">
                         <div class="details">
-                            <h3>huye</h3>
+                            <h6>Huye</h6>
                             <p>The heart of modern Rwanda</p>
                         </div>
                         <div class="after-det text-white">
-                            <h3>huye</h3>
-                            <p>Kigali pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
+                            <h6>Huye</h6>
+                            <p>Huye pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
                         </div>
+                        <a href="destinations/nyungwe" class="link-circle">
+                            <i class="fa fa-arrow-right diagonal"></i>
+                        </a>
                     </div>
                 </div>
             </div>

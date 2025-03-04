@@ -55,6 +55,32 @@ content{
     gap: 30px;
 }
 
+.location-row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 10px 0px;
+}
+.loc-col-3{
+    flex:0 0 auto;
+    width:26%;
+}
+.loc-col-4{
+    flex:0 0 auto;
+    width:33.33333333%;
+}
+.margin-right-img{
+    margin-right: 1%;
+}
+
+.loc-col-5{
+    flex:0 0 auto;
+    width:41.66666667%;
+}
+.loc-col-6{
+    flex:0 0 auto;
+    width:50%;
+}
 .hero-content {
     min-height: 100vh;
     display: flex;
@@ -122,12 +148,15 @@ content{
 .new span {
     color: #C5A880;
 }
-
-.image img {
+.image  {
+    height: 280px;
+}
+.image .img {
     height: 100%;
     width: 100%;
-    overflow: hidden;
 }
+
+
 p{
     font-size: 15px;
 }
@@ -239,7 +268,8 @@ p{
     font-size: 12px;
 }
 .image img {
-    height: 250px;
+    height: 100%;
+    width: 100%;
     object-fit: cover; 
 }
 .about img{
@@ -257,7 +287,7 @@ p{
     width: 100%;
     height: 100px;
     color: white;
-    background: linear-gradient(rgba(20, 20, 20, 0.11), rgba(0, 0, 0, 0.945)); /* Gradient background */
+    background: linear-gradient(rgba(20, 20, 20, 0.11), rgba(0, 0, 0, 0.745)); /* Gradient background */
     padding: 10px;
     z-index: 1;
     transition: opacity 0.3s ease; /* Smooth transition for hover effect */
@@ -267,7 +297,7 @@ p{
     opacity: 0;
 }
 
-.image .details h3 {
+.image .details h6 {
     margin: 0; /* Remove default margin */
 }
 
@@ -283,13 +313,57 @@ p{
     z-index: 1;
     transition: opacity 0.3s ease, transform 0.3s ease; 
 }
-.after-det h3{
-    margin-top: 140px;
+.after-det h3,h6{
+    margin-top: 180px;
 }
 .image:hover .after-det {
     opacity: 1; 
     transform: translateY(-100px); 
 }
+.details p{
+    font-size: 12px;
+    font-weight: 400;
+}
+.after-det p{
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* links locations */
+
+.link-circle {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    z-index: 1;
+    text-decoration: none;
+}
+
+.link-circle:hover {
+    transform: scale(1.1);
+}
+
+.diagonal {
+    /* border: solid #333; */
+    border-width: 0 1px 1px 0;
+    display: inline-block;
+    padding: 1px 0px 1px 5px;
+    text-decoration: none;
+    color: #333;
+    font-size: 10px;
+    font-weight: 300;
+    transform: rotate(-45deg);
+}
+
 .elevetor1 {
     background-color: #1E1E1E;
     height: 50vh;
