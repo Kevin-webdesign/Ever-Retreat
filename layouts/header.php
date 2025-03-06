@@ -19,5 +19,6 @@
     <link rel="stylesheet" href="../../../assets/fontawesome-free-6.7.2-web/css/fontawesome.min.css">
     <link rel="stylesheet" href="../../../assets/fontawesome-free-6.7.2-web/css/solid.min.css">
     <link rel="stylesheet" href="../../../assets/fontawesome-free-6.7.2-web/css/brands.min.css">
+    <link rel="stylesheet" href="../../../assets/bootstrap-icons/bootstrap-icons.css">
 
 </head>

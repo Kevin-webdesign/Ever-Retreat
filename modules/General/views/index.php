@@ -58,41 +58,55 @@
     </div>
 
     <div class="new ">
-        <div class="row d-flex" style="margin: 60px;">
-            <div class="col-md-6">
-                <p>About us</p>
-                <h4><b>Welcome to <span>Premier B&P Beach Villa</span>, the Best <br>Destination for Tranquility</b>
-                </h4>
-                <a href="" class="btn book-now-btn text-white">More About us</a>
-            </div>
-            <div class="col-md-6">
-                <p>There are two types of travelers: trend-seekers and those chasing the unexpected. Our accommodations
-                    offer the best of both - luxury and discovery.</p>
-                <hr>
-                <div class="row d-flex">
-                    <div class="col-md">
-                        <h1>150k +</h1>
-                        <p>Guests Served</p>
+        <div class="row d-flex" style="margin: 60px; margin-bottom:30px;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p>About us</p>
+                        <h5><b>Welcome to <span>Premier B&P Beach Villa</span>, the Best <br>Destination for Tranquility</b>
+                        </h5>
+                        <a href="" class="btn book-now-btn text-white">More About us</a>
                     </div>
-                    <div class="col-md">
-                        <h1>24</h1>
-                        <p>Villas & Resorts</p>
-                    </div>
-                    <div class="col-md">
-                        <h1>06 +</h1>
-                        <p>Years of Experience</p>
+                    <div class="col-md-6">
+                        <p>There are two types of travelers: trend-seekers and those chasing the unexpected. Our accommodations
+                            offer the best of both - luxury and discovery.</p>
+                        <hr>
+                        <div class="row d-flex">
+                            <div class="col-md">
+                                <h1>150k +</h1>
+                                <p>Guests Served</p>
+                            </div>
+                            <div class="col-md">
+                                <h1>24</h1>
+                                <p>Villas & Resorts</p>
+                            </div>
+                            <div class="col-md">
+                                <h1>06 +</h1>
+                                <p>Years of Experience</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="row d-flex about">
-                <div class="col-md-6">
-                    <img src="./image/first.jpg" alt="">
+            <div class="location-row ev-container" style="padding: 50px;">
+                
+                <!-- HTML Structure -->
+                <div class="ab-col-4 margin-right-img">
+                    <div class="video-player">
+                        <img src="../../../assets/image/first.jpg"  alt="Video Thumbnail" class="video-thumbnail">
+                        <button class="play-button" data-video-id="s8vnc9l8sz4&ab_channel=CircleDigitalMarketingAgency">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 48" style="height:60px; width:60px; border-radius:95px;">
+                                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#C5A880"></path>
+                                <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <img src="./image/second.jpg" alt="">
+                <div class="ab-col-8 about-img">
+                    <img src="../../../assets/image/second.jpg" alt="">
                 </div>
             </div>
-            <div class="row text-center mt-5">
+            <div class="location-row text-center mt-5" style="padding: 50px;">
                 <div class="col-md-12">
                     <p><span>Our Accommodation</span></p>
                     <h4 style="font-weight: bold;">Find the Perfect Space for Your Stay</h4>
@@ -148,7 +162,7 @@
                             <h6>Kigali</h6>
                             <p>Kigali pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
                         </div>
-                        <a href="destinations/nyungwe" class="link-circle">
+                        <a href="../../../modules/General/views/location_kigali.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
                         </a>
                     </div>
@@ -159,13 +173,13 @@
                         <div class="details">
                             <a href=""></a>
                             <h6>Rubavu</h6>
-                            <p>The serenity of lake kivu</p>
+                            <p>The Wisdom of History</p>
                         </div>
                         <div class="after-det text-white">
                             <h6>Rubavu</h6>
-                            <p>Rubavu offers an unmatched sense <br> of tranquility.</p>
+                            <p>Huye is where history and innovation meet. Sit with local elders under ancient trees, hearing tales of Rwanda's journey through time. Art and cultural camps celebrate creative traditions, preserving community spirit while inspiring the future. Huye is a place of reflection and progress, where the past shapes the promise of tomorrow Huye: The Wisdom of History.</p>
                         </div>
-                        <a href="destinations/nyungwe" class="link-circle">
+                        <a href="../../../modules/General/views/location_rubavu.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
                         </a>
                     </div>
@@ -181,7 +195,7 @@
                             <h6>Musanze</h6>
                             <p>Kigali pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
                         </div>
-                        <a href="destinations/nyungwe" class="link-circle">
+                        <a href="../../../modules/General/views/location_musanze.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
                         </a>
                     </div>
@@ -199,7 +213,7 @@
                             <h6>Nyungwe</h6>
                             <p>Nyungwe pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
                         </div>
-                        <a href="destinations/nyungwe" class="link-circle">
+                        <a href="../../../modules/General/views/location_nyungwe.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
                         </a>
                     </div>
@@ -216,7 +230,7 @@
                             <h6>Nyanza</h6>
                             <p>Nyanza offers an unmatched sense <br> of tranquility.</p>
                         </div>
-                        <a href="destinations/nyungwe" class="link-circle">
+                        <a href="../../../modules/General/views/location_nyanza.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
                         </a>
                     </div>
@@ -232,7 +246,7 @@
                             <h6>Huye</h6>
                             <p>Huye pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
                         </div>
-                        <a href="destinations/nyungwe" class="link-circle">
+                        <a href="../../../modules/General/views/location_huye.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
                         </a>
                     </div>
@@ -246,10 +260,13 @@
             <div class="col-md-12 elevetor2">
                 <div class="img">
                     <img src="../../../assets/image/dsc_9633.jpg" alt="fresh">
-                    <div class="details d-flex">
-                        <h3>Elevetor Your stay With Premium <br>features and services</h3>
-                        <a href=""><i class="fas fa-arrow-right"></i></a>
+                    <div class="after-det2 d-flex">
+                        <h4 class="ev-title" >Elevate Your stay with Premium <br>Features and Services</h4>
+                        <!-- <a href=""><i class="bi bi-arrow-up-right"></i></a> -->
                     </div>
+                    <a href="#" class="link-circle2">
+                        <i class="bi bi-arrow-up-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -260,8 +277,24 @@
             </div>
         </div>
         <div class="row d-flex justify-content-center messagebox">
-            <div class="box-container">
+            <div class="container">
                 <div class="box">
+                    <div class="card-header d-flex">
+                        <div class="img">
+                            <img src="../../../assets/img/profile.jpg" alt="Profile" class="avatar-img rounded-circle" />
+                        </div>
+                        <div class="title">
+                            <label for="name"><span> UMULISA Alice </span></label> <br>
+                            <label for="title">Our customer</label>
+                        </div>
+                    </div>
+                    <div class="msg">
+                        <p>"From the moment we arrived, we were blown away by the villa's
+                            beauty and tranquility the private pool and stunning views provided
+                            the perfect backdrop for a relaxing getway."</p>
+                    </div>
+                </div>
+                <!-- <div class="box">
                     <div class="card-header d-flex">
                         <div class="img">
                             <img src="img/profile.jpg" alt="Profile" class="avatar-img rounded-circle" />
@@ -340,23 +373,7 @@
                             beauty and tranquility the private pool and stunning views provided
                             the perfect backdrop for a relaxing getway."</p>
                     </div>
-                </div>
-                <div class="box">
-                    <div class="card-header d-flex">
-                        <div class="img">
-                            <img src="img/profile.jpg" alt="Profile" class="avatar-img rounded-circle" />
-                        </div>
-                        <div class="title">
-                            <label for="name"><span> MUKAMANA Alice </span></label> <br>
-                            <label for="title">Our customer</label>
-                        </div>
-                    </div>
-                    <div class="msg">
-                        <p>"From the moment we arrived, we were blown away by the villa's
-                            beauty and tranquility the private pool and stunning views provided
-                            the perfect backdrop for a relaxing getway."</p>
-                    </div>
-                </div>
+                </div> -->
             </div>
             <div class="move justify-content-center d-flex">
                 <div class="icon" id="prev">
@@ -415,6 +432,19 @@
 
     <!-- ADDING JAVASCRIPTS -->
     <?php include("../../../layouts/scripts.php"); ?>
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+  const playButtons = document.querySelectorAll('.play-button');
+  
+  playButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const videoId = this.getAttribute('data-video-id');
+      const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
+      window.open(youtubeUrl, '_blank');
+    });
+  });
+});
+</script>
     
 </body>
 

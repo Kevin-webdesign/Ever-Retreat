@@ -14,7 +14,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto" style="font-size: 13px!important; margin-left: 12px;">
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Accommodation</a>
+                    <a class="nav-link" href="../../General/views/accommodation.php">Accommodation</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../../General/views/tourism.php">Tourism</a>

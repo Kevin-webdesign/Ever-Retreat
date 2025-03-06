@@ -32,6 +32,19 @@
                     width: 90%;
                 }
             </style>
+            <div class="content d-flex">
+                <div class="col-md-6">
+                    <div class="content-2">
+                        <h6 class="text-warninig">Tourism </h6>
+                        <h3>Musanze: The Call of the Mountain</h3>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="content-2">
+                        <p></p>
+                    </div>
+                </div>
+            </div>
             <div class=" content d-flex">
                 <div class="col-md-6">
                     <img src="../../../assets/image/nyungwe.jpg" class="h-100">

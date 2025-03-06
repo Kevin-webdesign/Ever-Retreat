@@ -13,11 +13,11 @@
         <!-- Video Background -->
         <div class="video-background">
             <video autoplay muted loop playsinline>
-                <source src="../../../assets/video/FOUR POINTS BY SHERATON HOTEL KIGALI _ HOTEL COMMERCIAL _ 1MIN _-VIDEO PROJECT 4K.mp4" type="video/mp4">
+                <source src="../../../assets/video/EverRetreatTourism.mp4" type="video/mp4">
             </video>
         </div>
         <div class="container-top">
-            <h1 class="display-4">Tourism</h1> 
+            <!-- <h1 class="display-4">Tourism</h1>  -->
         </div>
     </div>
 
