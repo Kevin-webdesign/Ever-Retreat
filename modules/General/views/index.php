@@ -14,13 +14,11 @@
         <!-- Video Background -->
         <div class="video-background">
             <video autoplay muted loop playsinline>
-                <source
-                    src="../../../assets/video/FOUR POINTS BY SHERATON HOTEL KIGALI _ HOTEL COMMERCIAL _ 1MIN _-VIDEO PROJECT 4K.mp4"
-                    type="video/mp4">
+                <source src="../../../assets/video/EverRetreatInvestment.mp4" type="video/mp4">
             </video>
         </div>
         <div class="container" id="Booking">
-            <h1 class="display-4 mb-4">Premier B&P Beach Villa</h1>
+            <h1 class="display-4 mb-4">B&P Ever Retreat Beach Villa</h1>
             <p class="lead mb-5">Welcome to our Master Suite, where time slows down and the elegance of simplicity
                 flourishes.</p>
 
@@ -173,11 +171,11 @@
                         <div class="details">
                             <a href=""></a>
                             <h6>Rubavu</h6>
-                            <p>The Wisdom of History</p>
+                            <p>The Serenity of Lake Kivu</p>
                         </div>
                         <div class="after-det text-white">
                             <h6>Rubavu</h6>
-                            <p>Huye is where history and innovation meet. Sit with local elders under ancient trees, hearing tales of Rwanda's journey through time. Art and cultural camps celebrate creative traditions, preserving community spirit while inspiring the future. Huye is a place of reflection and progress, where the past shapes the promise of tomorrow Huye: The Wisdom of History.</p>
+                            <p>Rubavu, offers an unmatched sense of the tranquility .</p>
                         </div>
                         <a href="../../../modules/General/views/location_rubavu.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
@@ -189,11 +187,11 @@
                         <img src="../../../assets/image/musanze.jpg" alt="musanze" class="img-fluid">
                         <div class="details">
                             <h6>Musanze</h6>
-                            <p>The heart of modern Rwanda</p>
+                            <p>The Call of the Mountains</p>
                         </div>
                         <div class="after-det text-white">
                             <h6>Musanze</h6>
-                            <p>Kigali pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
+                            <p>Musanze, surrounded by misty volcanic peaks, calls to adventurers and nature lovers alike.</p>
                         </div>
                         <a href="../../../modules/General/views/location_musanze.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
@@ -207,11 +205,11 @@
                         <img src="../../../assets/image/nyungwe.jpg" alt="nyungwe" class="img-fluid">
                         <div class="details">
                             <h6>Nyungwe</h6>
-                            <p>The heart of modern Rwanda</p>
+                            <p>The Soul of Tradition</p>
                         </div>
                         <div class="after-det text-white">
                             <h6>Nyungwe</h6>
-                            <p>Nyungwe pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
+                            <p>Nyungwe Forest, a timeless sanctuary, offers breathtaking beauty and rich biodiversity.</p>
                         </div>
                         <a href="../../../modules/General/views/location_nyungwe.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
@@ -224,11 +222,11 @@
                         <div class="details">
                             <a href=""></a>
                             <h6>Nyanza</h6>
-                            <p>The serenity of lake kivu</p>
+                            <p>The Trail of Kings</p>
                         </div>
                         <div class="after-det text-white">
                             <h6>Nyanza</h6>
-                            <p>Nyanza offers an unmatched sense <br> of tranquility.</p>
+                            <p>Nyanza, Tradition thrives through cultural experiences.</p>
                         </div>
                         <a href="../../../modules/General/views/location_nyanza.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
@@ -240,11 +238,11 @@
                         <img src="../../../assets/image/huye.jpg" alt="musanze" class="img-fluid">
                         <div class="details">
                             <h6>Huye</h6>
-                            <p>The heart of modern Rwanda</p>
+                            <p>The Wisdom of the History</p>
                         </div>
                         <div class="after-det text-white">
                             <h6>Huye</h6>
-                            <p>Huye pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
+                            <p>Huye is where history and innovation meet. Sit with local elders under ancient trees, hearing tales of Rwanda's journey through time.</p>
                         </div>
                         <a href="../../../modules/General/views/location_huye.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
@@ -384,50 +382,9 @@
                 </div>
             </div>
         </div>
-        <footer class="d-flex justify-content-center  text-white">
-            <div class=" row footer">
-                <div class="part col-md-3">
-                    <a class="footerimage" href="#">
-                        <img src="../../../assets/image/logo-retreat.png" alt="Logo">
-                    </a>
-                    <p>kN 4 AVe,kigali ,Rwanda</p>
-                </div>
-                <div class="part col-md-3">
-                    <p><b>Address</b></p>
-                    <p>kN 4 AVe,kigali ,Rwanda</p>
-                </div>
-                <div class="part col-md-3">
-                    <p><b>Contact Us </b></p>
-                    <p>Email: info@everretreat.com</p>
-                    <p>Phone: +250 787524298</p>
-                    <p>Phone: +250 785035071</p>
-                </div>
-                <div class="part col-md-3">
-                    <p><b>subscribe to our newsletter to get update information
-                            news and free insight </b>
-                    </p>
-
-                    <form action="">
-                        <input type="email" name="email" placeholder="email">
-                        <button>Subscribe</button>
-                    </form>
-
-
-                </div>
-                <hr />
-                <div class="d-flex icons">
-                    <div class="copy">
-                        <P>&copy; Copyright Everestreat .2025</P>
-                    </div>
-                    <div class="links">
-                        <i class="fab fa-facebook"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-x-twitter"></i>
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <?php
+            include("../../../layouts/footer.php");
+        ?>
     </div>
 
     <!-- ADDING JAVASCRIPTS -->

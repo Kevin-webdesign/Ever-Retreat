@@ -1,49 +1,48 @@
-<footer class="footer-area">
-    <div class="container">
-        <div class="row">
+<footer class="d-flex justify-content-center  text-white ">
+    <div class=" row footer">
+        <div class="part col-md-3">
+            <a class="footerimage" href="#">
+                <img src="../../../assets/image/logo-retreat.png" alt="Logo">
+            </a>
 
-            <!-- Footer Widget Area -->
-            <div class="col-12 col-lg-5">
-                <div class="footer-widget-area mt-50">
-                    <a href="#" class="d-block mb-5"><img src="img/core-img/logo.png" alt=""></a>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris
-                        sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus
-                        finibus. </p>
-                </div>
+        </div>
+        <div class="part col-md-3">
+            <p><b>Address</b></p>
+            <p>M.peace plaza 3<sup>rd</sup> Floor <br>Block B F331 ROOM</p>
+            <p>KN 4 Ave, Kigali, Rwanda</p>
+        </div>
+        <div class="part col-md-3">
+            <p><b>Contact Us </b></p>
+            <p>Email: info@everretreat.com</p>
+            <p>Phone: +250 787524298</p>
+            <p>Phone: +250 788846668</p>
+        </div>
+        <div class="part col-md-3">
+            <p><b>subscribe to our newsletter to get update information
+                    news and free insight </b>
+            </p>
+
+            <form action="">
+                <input type="email" name="email" placeholder="email">
+                <button>Subscribe</button>
+            </form>
+
+
+        </div>
+        <hr />
+        <div class="d-flex icons">
+            <div class="copy">
+                <P>&copy; Copyright Everretreat
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                </P>
             </div>
-
-            <!-- Footer Widget Area -->
-            <div class="col-12 col-md-6 col-lg-4">
-                <div class="footer-widget-area mt-50">
-                    <h6 class="widget-title mb-5">Find us on the map</h6>
-                    <img src="img/bg-img/footer-map.png" alt="">
-                </div>
-            </div>
-
-            <!-- Footer Widget Area -->
-            <div class="col-12 col-md-6 col-lg-3">
-                <div class="footer-widget-area mt-50">
-                    <h6 class="widget-title mb-5">Subscribe to our newsletter</h6>
-                    <form action="#" method="post" class="subscribe-form">
-                        <input type="email" name="subscribe-email" id="subscribeemail" placeholder="Your E-mail">
-                        <button type="submit">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-
-            <!-- Copywrite Text -->
-            <div class="col-12">
-                <div class="copywrite-text mt-30">
-                    <p><a href="#">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                            Copyright &copy;
-                            <script>
-                            document.write(new Date().getFullYear());
-                            </script> All rights reserved | This template is made with <i class="fa fa-heart-o"
-                                aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </p>
-                </div>
+            <div class="links">
+                <i class="fab fa-facebook"></i>
+                <i class="fab fa-instagram"></i>
+                <i class="fab fa-x-twitter"></i>
+                <i class="fab fa-youtube"></i>
             </div>
         </div>
     </div>

@@ -14,7 +14,7 @@
         <div class="video-background">
             <video autoplay muted loop playsinline>
                 <source
-                    src="../../../assets/video/FOUR POINTS BY SHERATON HOTEL KIGALI _ HOTEL COMMERCIAL _ 1MIN _-VIDEO PROJECT 4K.mp4"
+                    src="../../../assets/video/short_inside.mp4"
                     type="video/mp4">
             </video>
         </div>
@@ -111,6 +111,19 @@
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
                     </div>
                 </div>
+                <div class="col-lg-6">
+                    <div class="map-container">
+                    <iframe style="height: 400px; width: 100%;" src="https://www.openstreetmap.org/export/embed.html?bbox=30.05815386772156%2C-1.947573777669934%2C30.06020843982697%2C-1.946024355699963&amp;layer=mapnik" style="border: 1px solid black"></iframe><br/><small><a href="https://www.openstreetmap.org/?#map=19/-1.946799/30.059181">View Larger Map</a></small>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="map-container">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.5159553475164!2d30.056990474967098!3d-1.9465655980357923!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x19dca4240db7b3f5%3A0x5256fd511623ef15!2sMakuza%20Peace%20Plaza!5e0!3m2!1sen!2srw!4v1741457610139!5m2!1sen!2srw&t=k" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div id="map" style="border: solid 2px red;"></div>
+                </div>
             </div>
         </div>
     </section>
@@ -119,55 +132,33 @@
         <div class="row d-flex" style="margin: 60px; border: solid 2px red;">
             
         </div>
-        <footer class="d-flex justify-content-center  text-white ">
-            <div class=" row footer">
-                <div class="part col-md-3">
-                    <a class="footerimage" href="#">
-                        <img src="../../../assets/image/logo-retreat.png" alt="Logo">
-                    </a>
-                    <p>kN 4 AVe,kigali ,Rwanda</p>
-                </div>
-                <div class="part col-md-3">
-                    <p><b>Address</b></p>
-                    <p>kN 4 AVe,kigali ,Rwanda</p>
-                </div>
-                <div class="part col-md-3">
-                    <p><b>Contact Us </b></p>
-                    <p>Email: info@everretreat.com</p>
-                    <p>Phone: +250 787524298</p>
-                    <p>Phone: +250 785035071</p>
-                </div>
-                <div class="part col-md-3">
-                    <p><b>subscribe to our newsletter to get update information
-                            news and free insight </b>
-                    </p>
-
-                    <form action="">
-                        <input type="email" name="email" placeholder="email">
-                        <button>Subscribe</button>
-                    </form>
-
-
-                </div>
-                <hr />
-                <div class="d-flex icons">
-                    <div class="copy">
-                        <P>&copy; Copyright Everestreat .2025</P>
-                    </div>
-                    <div class="links">
-                        <i class="fab fa-facebook"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-x-twitter"></i>
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <?php
+            include("../../../layouts/footer.php");
+        ?>
     </div>
 
 
     <!-- ADDING JAVASCRIPTS -->
     <?php include("../../../layouts/scripts.php"); ?>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUd3yrAhSHE-ecKWcrdyLfd-aI5WPUGFk"></script>
+    <script>
+    function initMap() {
+    // Create a map object and specify the DOM element for display.
+    var map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: -1.7638287544250488, lng: 29.275720596313477},
+    zoom: 17,
+    mapTypeId: 'satellite' // This sets the default view to satellite
+    });
+    var marker = new google.maps.Marker({
+    position: {lat: -1.7638287544250488, lng: 29.275720596313477},
+    map: map,
+    title: 'B&P Beach Villa'
+    });
+    }
+    initMap();
+    console.log("map: ",map);
+    </script>
 
 </body>
 

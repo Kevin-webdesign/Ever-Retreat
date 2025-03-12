@@ -171,10 +171,10 @@
                     <a class="nav-link" href="#">Partnership</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Everdesign</a>
+                    <a class="nav-link" href="https://www.everdesigngroup.rw" target="_blank">Everdesign</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">About Us</a>
+                    <a class="nav-link" href="../../General/views/aboutus.php">About Us</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="../../General/views/contactus.php">Contact Us</a>

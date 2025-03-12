@@ -1,7 +1,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premier B&P Beach Villa</title>
+    <title>B&P Ever Retreat Beach Villa</title>
     <link rel="icon" type="image/jpeg" href="../../../assets/image/everretrea-300x300.jpg">
     <!-- Bootstrap CSS -->
     <link href="../../../assets/css/bootstrap.min.css" rel="stylesheet">

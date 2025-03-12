@@ -109,50 +109,9 @@
                 </div>
             </div>
         </div>
-        <footer class="d-flex justify-content-center  text-white ">
-            <div class=" row footer">
-                <div class="part col-md-3">
-                    <a class="footerimage" href="#">
-                        <img src="../../../assets/image/logo-retreat.png" alt="Logo">
-                    </a>
-                    <p>kN 4 AVe,kigali ,Rwanda</p>
-                </div>
-                <div class="part col-md-3">
-                    <p><b>Address</b></p>
-                    <p>kN 4 AVe,kigali ,Rwanda</p>
-                </div>
-                <div class="part col-md-3">
-                    <p><b>Contact Us </b></p>
-                    <p>Email: info@everretreat.com</p>
-                    <p>Phone: +250 787524298</p>
-                    <p>Phone: +250 785035071</p>
-                </div>
-                <div class="part col-md-3">
-                    <p><b>subscribe to our newsletter to get update information
-                            news and free insight </b>
-                    </p>
-
-                    <form action="">
-                        <input type="email" name="email" placeholder="email">
-                        <button>Subscribe</button>
-                    </form>
-
-
-                </div>
-                <hr />
-                <div class="d-flex icons">
-                    <div class="copy">
-                        <P>&copy; Copyright Everestreat .2025</P>
-                    </div>
-                    <div class="links">
-                        <i class="fab fa-facebook"></i>
-                        <i class="fab fa-instagram"></i>
-                        <i class="fab fa-x-twitter"></i>
-                        <i class="fab fa-youtube"></i>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <?php
+            include("../../../layouts/footer.php");
+        ?>
     </div>
 
 
