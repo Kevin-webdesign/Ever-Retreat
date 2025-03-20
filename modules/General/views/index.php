@@ -4,11 +4,78 @@
 <?php include("../../../layouts/header.php"); ?>
 
 <body>
+    <style>
+        .fancybox-content {
+          width: 90vw;
+          height: 80vh;
+          margin-top: 80px;
+          max-width: 90vw;  /* Limit width to 90% of viewport width */
+          max-height: 95vh; /* Limit height to 80% of viewport height */
+          margin: 0 auto;   /* Center horizontally */
+          border-radius: 4px;
+          overflow: hidden;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+        
+        .fancybox-slide {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0;
+        }
+        
+        /* Video element styling */
+        .fancybox-video {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          background: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Animation for open/close transitions */
+        .fancybox-container {
+          opacity: 0;
+          transition: opacity 0.4s ease;
+        }
+        
+        .fancybox-is-open {
+          opacity: 1;
+        }
+        
+        /* Mobile-specific enhancements */
+        @media screen and (max-width: 768px) {
+          .fancybox-content {
+            width: 90vw!important;
+            height: 80vh!important;
+            margin-top: 20px;
+            max-width: 95vw;
+            max-height: 60vh;
+          }
+          
+          .fancybox-caption {
+            padding: 12px;
+            font-size: 14px;
+          }
+          
+          .fancybox-toolbar {
+            opacity: 1;
+          }
+        }
+        
+        /* Improved caption styling */
+        .fancybox-caption {
+          background: rgba(0, 0, 0, 0.75);
+          padding: 15px;
+          text-align: center;
+        }
+        /* Custom FancyBox styling for videos */
+        
+    </style>
     <!-- Navbar -->
     <?php include("../../../layouts/navbar.php"); ?>
 
-    
-    
+
+
     <!-- Hero Section -->
     <div class="hero-content text-white text-center vh-100">
         <!-- Video Background -->
@@ -26,28 +93,74 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10 col-md-12">
                     <div class="booking-form p-4 bg-dark bg-opacity-75 rounded">
-                        <div class="row g-3">
-                            <div class="col-md">
-                                <input type="text" class="form-control" id="checkin" placeholder="Check-in Date"
-                                    readonly>
-                            </div>
-                            <div class="col-md">
-                                <input type="text" class="form-control" id="checkout" placeholder="Check-out Date"
-                                    readonly>
-                            </div>
-                            <div class="col-md">
-                                <input type="number" class="form-control" id="guests" placeholder="Number of Guests">
-                            </div>
-                            <div class="col-md">
-                                <select class="form-select" id="villa">
-                                    <option selected>Master Suite</option>
-                                    <option value="villa2">Villa Type B</option>
-                                    <option value="villa3">Villa Type C</option>
-                                </select>
-                            </div>
-                            <div class="col-md">
-                                <button class="btn btn-primary book-now-btn w-100">Book Now</button>
-                            </div>
+                        <div class="cs-reservation-form style-banner-3 style-banner cs-form-square inline-label">
+                            <form class="cs-form-wrap" data-date-format="DD-MM-YYYY" id="myForm" method="POST">
+                                <div class="cs-form-field cs-check-in">
+                                    <div class="field-wrap">
+                                        <label class="cs-form-label">Check In</label>
+
+                                        <div class="field-input-wrap checkin-date">
+                                            <input type="text" value="" readonly="" placeholder="04-01-2024"
+                                                class="check-in-date" id="start" name="start" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cs-form-field cs-check-out">
+                                    <div class="field-wrap">
+                                        <label class="cs-form-label">Check Out</label>
+
+                                        <div class="field-input-wrap checkout-date">
+                                            <input type="text" value="" readonly="" placeholder="03-04-2024"
+                                                class="check-in-date" id="end" name="end" required="">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cs-form-field cs-guests cs-has-dropdown">
+                                    <div class="field-wrap">
+                                        <label class="cs-form-label">Guests</label>
+
+                                        <div class="field-input-wrap has-dropdown">
+                                            <input type="text" name="guest" id="guest" value="1 Adult, 0 Child"
+                                                style="cursor: pointer;" readonly="">
+                                        </div>
+
+                                        <div class="csf-dropdown is-open" style="display: none;">
+                                            <div class="csf-dropdown-item">
+                                                <label class="cs-form-label">Adult</label>
+
+                                                <div class="quantity cs-quantity" data-label="adult">
+                                                    <label class="screen-reader-text">Adults quantity</label>
+                                                    <span class="minus" id="decreaseAdults"></span>
+                                                    <input type="text" name="adult-quantity" id="adults" value="1"
+                                                        min="1" required="" class="input-text" autocomplete="off"
+                                                        readonly="" data-min="1" data-max="50">
+                                                    <span class="plus" id="increaseAdults"></span>
+                                                </div>
+                                            </div>
+                                            <div class="csf-dropdown-item">
+                                                <label class="cs-form-label">Child</label>
+
+                                                <div class="quantity cs-quantity" data-label="child">
+                                                    <label class="screen-reader-text">Children quantity</label>
+                                                    <span class="minus" id="decreaseKids"></span>
+                                                    <input type="text" name="child-quantity" id="kids" onchange=""
+                                                        value="0" class="input-text" autocomplete="off" readonly=""
+                                                        data-min="0" data-max="50">
+                                                    <span class="plus" id="increaseKids"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="cs-form-field cs-submit">
+                                    <div class="field-wrap">
+                                        <button class="button book-now-btn2" role="button" style="z-index: 0;" type="submit">
+                                            <span class="btn-text">Book Now</span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <input type="hidden" name="search_rooms" value="">
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -56,17 +169,20 @@
     </div>
 
     <div class="new ">
-        <div class="row d-flex" style="margin: 60px; margin-bottom:30px;">
+        <div class="row holder">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>About us</p>
-                        <h5><b>Welcome to <span>Premier B&P Beach Villa</span>, the Best <br>Destination for Tranquility</b>
+                        <p class="title-p">About us</p>
+                        <h5 class="head-title"><b>Welcome to <span class="color-primary">Everretreat</span>, The Best
+                                Destination for Tranquility</b>
                         </h5>
-                        <a href="" class="btn book-now-btn text-white">More About us</a>
+                        <a href="../../../modules/General/views/aboutus.php" class="btn book-now-btn text-white">More
+                            About us &nbsp;&nbsp;<i class="bi bi-arrow-right"></i></a>
                     </div>
                     <div class="col-md-6">
-                        <p>There are two types of travelers: trend-seekers and those chasing the unexpected. Our accommodations
+                        <p class="head-text">There are two types of travelers: trend-seekers and those chasing the
+                            unexpected. Our accommodations
                             offer the best of both - luxury and discovery.</p>
                         <hr>
                         <div class="row d-flex">
@@ -86,27 +202,25 @@
                     </div>
                 </div>
             </div>
-            <div class="location-row ev-container" style="padding: 50px;">
-                
+            <div class="location-row ev-container">
+
                 <!-- HTML Structure -->
                 <div class="ab-col-4 margin-right-img">
                     <div class="video-player">
-                        <img src="../../../assets/image/first.jpg"  alt="Video Thumbnail" class="video-thumbnail">
-                        <button class="play-button" data-video-id="s8vnc9l8sz4&ab_channel=CircleDigitalMarketingAgency">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 48" style="height:60px; width:60px; border-radius:95px;">
-                                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#C5A880"></path>
-                                <path d="M 45,24 27,14 27,34" fill="#fff"></path>
-                            </svg>
-                        </button>
+                        <img src="../../../assets/image/first.jpg" alt="Video Thumbnail" class="video-thumbnail">
+                        <a href="../../../assets/video/Ever-short-vid.mp4" class="play-button js-fancybox"
+                            data-fancybox>
+                            <i class="bi bi-play-fill"></i>
+                        </a>
                     </div>
                 </div>
                 <div class="ab-col-8 about-img">
                     <img src="../../../assets/image/second.jpg" alt="">
                 </div>
             </div>
-            <div class="location-row text-center mt-5" style="padding: 50px;">
+            <div class="location-row text-center mt-5 marg-50">
                 <div class="col-md-12">
-                    <p><span>Our Accommodation</span></p>
+                    <p class="title-p"><span>Our Accommodation</span></p>
                     <h4 style="font-weight: bold;">Find the Perfect Space for Your Stay</h4>
                     <div class="content">
                         <p style="font-size: 12px">
@@ -117,13 +231,13 @@
                     </div>
                 </div>
             </div>
-            <div class="row d-flex">
-                <div class="col-md-6">
-                    <img src="../../../assets/image/first.jpg">
+            <div class="location-row">
+                <div class="col-md-6 vh80">
+                    <img class="img-responsive" src="../../../assets/image/firstb.png">
                 </div>
-                <div class="col-md-6 mt-5">
+                <div class="col-md-6">
                     <div class="content-1">
-                        <h5><b>Premier B&P Beach Villa</b></h5>
+                        <h5><b>B&P Beach Villa</b></h5>
                         <p>
                             Welcome to our Master Suite, where time slows down
                             and the elegance of simplicity flourishes. Our Master Suite accommodates
@@ -144,11 +258,11 @@
             </div>
             <div class="row text-center mt-5 mb-5">
                 <div class="col-md-12">
-                    <p><span>Our Location</span></p>
+                    <p class="title-p"><span>Our Location</span></p>
                     <h5 style="font-weight: bold;">Explore Our Best Location for an Unforgettable Vacation</h5>
                 </div>
             </div>
-            <div class="content location-row">
+            <div class="content mafoto location-row">
                 <div class="image loc-col-3 margin-right-img">
                     <div class="img">
                         <img src="../../../assets/image/kigali.jpg" alt="Kigali" class="img-fluid">
@@ -191,7 +305,8 @@
                         </div>
                         <div class="after-det text-white">
                             <h6>Musanze</h6>
-                            <p>Musanze, surrounded by misty volcanic peaks, calls to adventurers and nature lovers alike.</p>
+                            <p>Musanze, surrounded by misty volcanic peaks, calls to adventurers and nature lovers
+                                alike.</p>
                         </div>
                         <a href="../../../modules/General/views/location_musanze.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
@@ -209,7 +324,8 @@
                         </div>
                         <div class="after-det text-white">
                             <h6>Nyungwe</h6>
-                            <p>Nyungwe Forest, a timeless sanctuary, offers breathtaking beauty and rich biodiversity.</p>
+                            <p>Nyungwe Forest, a timeless sanctuary, offers breathtaking beauty and rich biodiversity.
+                            </p>
                         </div>
                         <a href="../../../modules/General/views/location_nyungwe.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
@@ -242,7 +358,8 @@
                         </div>
                         <div class="after-det text-white">
                             <h6>Huye</h6>
-                            <p>Huye is where history and innovation meet. Sit with local elders under ancient trees, hearing tales of Rwanda's journey through time.</p>
+                            <p>Huye is where history and innovation meet. Sit with local elders under ancient trees,
+                                hearing tales of Rwanda's journey through time.</p>
                         </div>
                         <a href="../../../modules/General/views/location_huye.php" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
@@ -259,8 +376,7 @@
                 <div class="img">
                     <img src="../../../assets/image/dsc_9633.jpg" alt="fresh">
                     <div class="after-det2 d-flex">
-                        <h4 class="ev-title" >Elevate Your stay with Premium <br>Features and Services</h4>
-                        <!-- <a href=""><i class="bi bi-arrow-up-right"></i></a> -->
+                        <h4 class="ev-title">Elevate Your stay with Premium <br>Features and Services</h4>
                     </div>
                     <a href="#" class="link-circle2">
                         <i class="bi bi-arrow-up-right"></i>
@@ -268,141 +384,208 @@
                 </div>
             </div>
         </div>
-        <div class="row text-center message">
+        <div class="row text-center message marg-50">
             <div class="col-md-12">
-                <p><span>Testimonials</span></p>
-                <h3>What Guests saying ? </h3>
+                <p class="title-p"><span>Testimonials</span></p>
+                <h5>What Are Guests Saying ? </h5>
             </div>
         </div>
-        <div class="row d-flex justify-content-center messagebox">
-            <div class="container">
-                <div class="box">
-                    <div class="card-header d-flex">
-                        <div class="img">
-                            <img src="../../../assets/img/profile.jpg" alt="Profile" class="avatar-img rounded-circle" />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div id="testimonial-slider" class="owl-carousel">
+                        <div class="testimonial">
+                            <div class="pic">
+                                <img src="../../../assets/img/profile2.jpg">
+                            </div>
+                            <h3 class="title">Williamson</h3>
+                            <span class="post">Customer</span>
+                            <p class="description">
+                                Staying at Ever Retreat was an unforgettable experience.
+                                The attention to detail in the architecture, the serene environment, and the commitment
+                                to sustainability made it stand out from any other place I’ve visited in Rwanda. It’s
+                                not just a retreat; it’s a movement towards responsible tourism.
+                                I left feeling refreshed and deeply inspired by the vision behind this place. Highly
+                                recommended for anyone looking to escape the ordinary!
+                            </p>
                         </div>
-                        <div class="title">
-                            <label for="name"><span> UMULISA Alice </span></label> <br>
-                            <label for="title">Our customer</label>
-                        </div>
-                    </div>
-                    <div class="msg">
-                        <p>"From the moment we arrived, we were blown away by the villa's
-                            beauty and tranquility the private pool and stunning views provided
-                            the perfect backdrop for a relaxing getway."</p>
-                    </div>
-                </div>
-                <!-- <div class="box">
-                    <div class="card-header d-flex">
-                        <div class="img">
-                            <img src="img/profile.jpg" alt="Profile" class="avatar-img rounded-circle" />
-                        </div>
-                        <div class="title">
-                            <label for="name"><span> MUKAMANA Alice </span></label> <br>
-                            <label for="title">Our customer</label>
-                        </div>
-                    </div>
-                    <div class="msg">
-                        <p>"From the moment we arrived, we were blown away by the villa's
-                            beauty and tranquility the private pool and stunning views provided
-                            the perfect backdrop for a relaxing getway."</p>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="card-header d-flex">
-                        <div class="img">
-                            <img src="img/profile.jpg" alt="Profile" class="avatar-img rounded-circle" />
-                        </div>
-                        <div class="title">
-                            <label for="name"><span> MUKAMANA Alice </span></label> <br>
-                            <label for="title">Our customer</label>
+
+                        <div class="testimonial">
+                            <div class="pic">
+                                <img src="../../../assets/img/Pamela.jpg">
+                            </div>
+                            <h3 class="title">Pamella</h3>
+                            <span class="post">Customer</span>
+                            <p class="description">
+                                Ever Retreat is truly a hidden gem! From the moment I arrived, I felt an overwhelming
+                                sense of peace and connection with nature.
+                                The eco-friendly design is breathtaking, blending luxury with sustainability in a way
+                                I’ve never experienced before.
+                                The staff were incredibly warm, and it was inspiring to see how the retreat empowers the
+                                local community.
+                                This is more than just a getaway—it’s a meaningful experience that leaves a lasting
+                                impact. I can’t wait to return.
+                            </p>
                         </div>
                     </div>
-                    <div class="msg">
-                        <p>"From the moment we arrived, we were blown away by the villa's
-                            beauty and tranquility the private pool and stunning views provided
-                            the perfect backdrop for a relaxing getway."</p>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="card-header d-flex">
-                        <div class="img">
-                            <img src="img/profile.jpg" alt="Profile" class="avatar-img rounded-circle" />
-                        </div>
-                        <div class="title">
-                            <label for="name"><span> MUKAMANA Alice </span></label> <br>
-                            <label for="title">Our customer</label>
-                        </div>
-                    </div>
-                    <div class="msg">
-                        <p>"From the moment we arrived, we were blown away by the villa's
-                            beauty and tranquility the private pool and stunning views provided
-                            the perfect backdrop for a relaxing getway."</p>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="card-header d-flex">
-                        <div class="img">
-                            <img src="img/profile.jpg" alt="Profile" class="avatar-img rounded-circle" />
-                        </div>
-                        <div class="title">
-                            <label for="name"><span> MUKAMANA Alice </span></label> <br>
-                            <label for="title">Our customer</label>
-                        </div>
-                    </div>
-                    <div class="msg">
-                        <p>"From the moment we arrived, we were blown away by the villa's
-                            beauty and tranquility the private pool and stunning views provided
-                            the perfect backdrop for a relaxing getway."</p>
-                    </div>
-                </div>
-                <div class="box">
-                    <div class="card-header d-flex">
-                        <div class="img">
-                            <img src="img/profile.jpg" alt="Profile" class="avatar-img rounded-circle" />
-                        </div>
-                        <div class="title">
-                            <label for="name"><span> MUKAMANA Alice </span></label> <br>
-                            <label for="title">Our customer</label>
-                        </div>
-                    </div>
-                    <div class="msg">
-                        <p>"From the moment we arrived, we were blown away by the villa's
-                            beauty and tranquility the private pool and stunning views provided
-                            the perfect backdrop for a relaxing getway."</p>
-                    </div>
-                </div> -->
-            </div>
-            <div class="move justify-content-center d-flex">
-                <div class="icon" id="prev">
-                    <i class="fas fa-arrow-left"></i>
-                </div>
-                <div class="icon" id="next">
-                    <i class="fas fa-arrow-right"></i>
                 </div>
             </div>
         </div>
         <?php
-            include("../../../layouts/footer.php");
+        include("../../../layouts/footer.php");
         ?>
     </div>
 
     <!-- ADDING JAVASCRIPTS -->
     <?php include("../../../layouts/scripts.php"); ?>
+
+    <!-- TEST POP UP VIDEO -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script> -->
+
     <script>
-document.addEventListener('DOMContentLoaded', function() {
-  const playButtons = document.querySelectorAll('.play-button');
-  
-  playButtons.forEach(button => {
-    button.addEventListener('click', function() {
-      const videoId = this.getAttribute('data-video-id');
-      const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
-      window.open(youtubeUrl, '_blank');
-    });
-  });
-});
-</script>
-    
+
+        $(document).ready(function() {
+            $("[data-fancybox]").fancybox({
+              // Core settings
+              buttons: ["play", "close"],
+              animationEffect: "zoom",
+              animationDuration: 400,
+              
+              // Video settings
+              youtube: { controls: 1, showinfo: 0 },
+              vimeo: { color: "f00" },
+              
+              // Responsive behavior
+              responsive: true,
+              autoFocus: false,
+              
+              // Center content
+              centerOnScroll: true,
+              
+              // Mobile settings
+              mobile: {
+                clickContent: "close",
+                clickSlide: "close",
+                touch: {
+                  vertical: true,
+                  momentum: true
+                }
+              },
+              
+              // Prevent scrolling behind modal
+              beforeShow: function() {
+                $('body').css('overflow', 'hidden');
+              },
+              afterClose: function() {
+                $('body').css('overflow', 'visible');
+              }
+            });
+          });
+    </script>
+
+    <script>
+        // document.addEventListener('DOMContentLoaded', function () {
+        //     const playButtons = document.querySelectorAll('.play-button');
+
+        //     playButtons.forEach(button => {
+        //         button.addEventListener('click', function () {
+        //             const videoId = this.getAttribute('data-video-id');
+        //             const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
+        //             window.open(youtubeUrl, '_blank');
+        //         });
+        //     });
+        // });
+
+        $(document).ready(function () {
+            $("#testimonial-slider").owlCarousel({
+                items: 2,
+                itemsDesktop: [1000, 2],
+                itemsDesktopSmall: [979, 2],
+                itemsTablet: [768, 1],
+                pagination: true,
+                navigation: false,
+                autoplay: true
+            });
+        });
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            function updateGuestField() {
+                var adults = $('#adults').val();
+                var kids = $('#kids').val();
+                $('#guest').val(adults + ' Adult, ' + kids + ' Child');
+            }
+
+            $('#increaseAdults').click(function() {
+                $('#adults').val(parseInt($('#adults').val()) + 1);
+                updateGuestField();
+            });
+
+            $('#decreaseAdults').click(function() {
+                if ($('#adults').val() > 0) {
+                    $('#adults').val(parseInt($('#adults').val()) - 1);
+                }
+                updateGuestField();
+            });
+
+            $('#increaseKids').click(function() {
+                $('#kids').val(parseInt($('#kids').val()) + 1);
+                updateGuestField();
+            });
+
+            $('#decreaseKids').click(function() {
+                if ($('#kids').val() > 0) {
+                    $('#kids').val(parseInt($('#kids').val()) - 1);
+                }
+                updateGuestField();
+            });
+        });
+
+        $(document).ready(function() {
+            // When the input field is clicked
+            $('#guest').on('click', function(event) {
+                event.stopPropagation(); // Prevent the click from bubbling up
+                $('.csf-dropdown.is-open').css('display', 'block'); // Change display to none
+            });
+        
+            // When the input field is clicked
+            $('.csf-dropdown.is-open').on('mouseleave', function(event) {
+                event.stopPropagation(); // Prevent the click from bubbling up
+                $('.csf-dropdown.is-open').css('display', 'none'); // Change display to none
+            });
+        });
+        $(function() {
+            var start = $('#start');
+            var end = $('#end');
+
+            $('#start').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                },
+                minDate: new Date() // Disable past dates
+            });
+            $('#end').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                },
+                minDate: new Date() // Disable past dates
+            });
+
+            $('input').on('apply.daterangepicker', function(ev, picker) {
+                start.val(picker.startDate.format('YYYY-MM-DD'));
+                end.val(picker.endDate.format('YYYY-MM-DD'));
+            });
+
+            $('input').on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
+            });
+        });
+    </script>
+
 </body>
 
 </html>

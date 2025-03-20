@@ -59,7 +59,15 @@ content{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    margin: 10px 0px;
+    margin: 6px 0px;
+}
+@media (max-width: 768px) {
+    .mafoto.location-row{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin: -6px 0px;
+    }
 }
 .loc-col-3{
     flex:0 0 auto;
@@ -93,12 +101,34 @@ content{
     flex:0 0 auto;
     width:38.33333333%;
 }
+.ab-col-6{
+    flex:0 0 auto;
+    width:50%;
+}
 .ab-col-8{
     flex:0 0 auto;
     width:60.33333333%;
 }
+.marg-60{
+    margin: 60px;
+}
+.marg-50{
+    margin: 50px;
+}
+@media (max-width: 768px) {
+    .marg-60,.marg-50{
+        margin: 10px;
+    }
+}
 .about-img img{
     width: 100%;
+}
+.img-responsive{
+    width: 100%;
+    height: 100%;
+}
+.vh80{
+    height: 80vh;
 }
 .hero-content {
     min-height: 100vh;
@@ -119,21 +149,43 @@ content{
 .hero-content p {
     font-size: 16px;
 }
-
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-weight: 900;
+        font-size: 32px;
+    }
+    
+    .hero-content p {
+        font-size: 12px;
+    }
+}
 .booking-form {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(10px);
     border-radius: 8px;
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px;
     padding: 10px 100px;
     margin-top: 10px;
 }
 
 .book-now-btn {
-    background-color: #C5A880 !important;
-    border-color: #C5A880 !important;
+    background-color: #b8945e !important;
+    border-color: #aa8856!important;
     border-radius: 5px;
+    margin: 10px 0px;
+}
+.book-now-btn2 {
+    background-color: #b8945e !important;
+    border-color: #aa8856!important;
+}
+.book-now-btn2:hover {
+    background-color: #9e7e4d !important;
+    border-color: #8b7047!important;
+}
+
+.book-now-btn i{
+    margin-top: 5px;
 }
 .more-btn{
     background-color: #1E1E1E !important;
@@ -158,14 +210,460 @@ content{
     color: white;
 }
 
+/* RESERVATION FORM STYLE */
+    .cs-reservation-form {
+        --field-height: 48px;
+        --field-space: 30px;
+        --dropdown-bg:rgb(248, 245, 241);
+        --dropdown-color: #000;
+        --dropdown-border: var(--primary-color);
+        --icon-color: var(--primary-color);
+        --divider-color: var(--primary-color);
+    }
+    
+    .cs-reservation-form .cs-form-field .field-wrap, .cs-reservation-form .cs-form-field .field-input-wrap {
+        position: relative;
+    }
+    
+    .cs-reservation-form .cs-form-field:not(.cs-submit) .field-input-wrap:after {
+        font-family: 'ElegantIcons';
+        speak: none;
+        font-style: normal;
+        font-weight: normal;
+        font-variant: normal;
+        text-transform: none;
+        line-height: 1;
+        -webkit-font-smoothing: antialiased;
+        /* content: "\33"; */
+        font-size: 20px;
+        line-height: 1;
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        right: 10px;
+        opacity: 0.35;
+    }
+    
+    .cs-reservation-form .cs-form-label {
+        display: block;
+    }
+    
+    .cs-reservation-form .field-wrap > .cs-form-label {
+        color: var(--text-color);
+    }
+    
+    .cs-reservation-form input[type="text"], .cs-reservation-form input[type="email"], .cs-reservation-form input[type="url"], .cs-reservation-form input[type="file"], .cs-reservation-form input[type="password"], .cs-reservation-form input[type="number"], .cs-reservation-form input[type="date"], .cs-reservation-form input[type="search"], .cs-reservation-form input[type="tel"], .cs-reservation-form textarea, .cs-reservation-form select {
+        height: var(--field-height);
+        font-size: 12px;
+        font-size: 0.875rem;
+        background: rgba(250, 250, 250, 0.1);
+        border: solid 1px rgba(250, 250, 250, 0.5)!important;
+    }
+    @media (max-width: 768px) {
+        .cs-reservation-form input[type="text"], .cs-reservation-form input[type="email"], .cs-reservation-form input[type="url"], .cs-reservation-form input[type="file"], .cs-reservation-form input[type="password"], .cs-reservation-form input[type="number"], .cs-reservation-form input[type="date"], .cs-reservation-form input[type="search"], .cs-reservation-form input[type="tel"], .cs-reservation-form textarea, .cs-reservation-form select {
+            width:  100%;
+        }
+    }
+    
+    .cs-reservation-form select {
+        -webkit-appearance: none !important;
+        width: 100%;
+    }
+    
+    .cs-reservation-form button[type="submit"] {
+        padding: 0 15px;
+        width: 100%;
+        height: var(--field-height);
+        line-height: 1.2;
+        text-align: center;
+    }
+    
+    .cs-reservation-form.style-block .cs-form-wrap {
+        font-size: 0;
+    }
+    
+    .cs-reservation-form.style-block .cs-form-field:not(:first-child) {
+        padding-top: var(--field-space);
+    }
+    
+    .cs-reservation-form.style-block .form-field-col-1-2 {
+        display: inline-block;
+        width: 50%;
+    }
+    
+    .cs-reservation-form.style-block .form-field-col-1-2.cs-adults {
+        padding-right: calc(var(--field-space)/2);
+    }
+    
+    .cs-reservation-form.style-block .form-field-col-1-2.cs-children {
+        padding-left: calc(var(--field-space)/2);
+    }
+    
+    .cs-reservation-form.style-block .form-field-col-1-2 .csf-dropdown {
+        padding: 15px;
+    }
+    
+    .cs-reservation-form.style-block .form-field-col-1-2 .csf-dropdown .cs-form-label {
+        display: none;
+    }
+    
+    .cs-reservation-form.style-block .form-field-col-1-2 .csf-dropdown .csf-dropdown-item {
+        justify-content: center;
+    }
+    
+    .cs-reservation-form.style-block .csf-dropdown {
+        min-width: 100px;
+        width: 100%;
+    }
+    
+    .cs-reservation-form.style-banner .cs-form-wrap {
+        position: relative;
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        margin: 0 calc(0px - var(--field-space)/2);
+        -webkit-box-align: end;
+        -ms-flex-align: end;
+        align-items: flex-end;
+    }
+    
+    .cs-reservation-form.style-banner .cs-form-wrap .cs-form-field {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+        vertical-align: top;
+        padding: 0 calc(var(--field-space)/2);
+    }
+    
+    .cs-reservation-form.style-banner button[type="submit"] {
+        padding: 0 15px;
+        text-align: center;
+        width: 100%;
+    }
+    
+    .cs-reservation-form.style-banner.style-banner-4 {
+        --field-space: 15px;
+    }
+    
+    .cs-reservation-form.style-banner.style-banner-4 .cs-form-wrap {
+        flex-wrap: wrap;
+    }
+    
+    .cs-reservation-form.style-banner.style-banner-4 .cs-form-field {
+        display: block;
+        width: 50%;
+        margin-top: var(--field-space);
+    }
+    
+    .cs-reservation-form.style-banner.style-banner-4 .cs-form-field:nth-child(-n+2) {
+        margin-top: 0;
+    }
+    
+    .cs-reservation-form.style-banner.style-banner-4 .cs-form-field.cs-submit:nth-child(5) {
+        width: 100%;
+    }
+    
+    .cs-reservation-form.style-banner-2 {
+        --field-space: 40px;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-wrap {
+        margin: 0;
+        align-items: center;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-wrap .cs-form-field:not(.cs-submit) {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        align-items: center;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-wrap .field-wrap {
+        flex: 1 1 auto;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-wrap .cs-form-field {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-wrap .cs-form-field.cs-check-out, .cs-reservation-form.style-banner-2 .cs-form-wrap .cs-form-field.cs-guests {
+        padding-left: var(--field-space);
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-icon {
+        width: 20px;
+        height: 25px;
+        margin-right: 25px;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-icon svg {
+        width: 20px;
+        height: auto;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-icon svg path {
+        fill: var(--icon-color);
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-field.cs-guests .cs-form-icon, .cs-reservation-form.style-banner-2 .cs-form-field.cs-guests .cs-form-icon svg {
+        width: 25px;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-field:not(.cs-submit) .field-input-wrap:after {
+        display: none;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-field:not(.cs-submit):after {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        right: 30px;
+        display: block;
+        width: 1px;
+        height: 56px;
+        background: var(--divider-color);
+        content: "";
+        right: 0;
+    }
+    
+    .cs-reservation-form.style-banner-2 .cs-form-field.cs-guests:after {
+        display: none;
+    }
+    
+    .cs-reservation-form.style-banner-2 .field-wrap > .cs-form-label {
+        font-size: 12px;
+        /* font-size: 1.125rem; */
+        line-height: 1.2;
+    }
+    
+    .cs-reservation-form.style-banner-2 input[type="text"], .cs-reservation-form.style-banner-2 input[type="email"], .cs-reservation-form.style-banner-2 input[type="url"], .cs-reservation-form.style-banner-2 input[type="file"], .cs-reservation-form.style-banner-2 input[type="password"], .cs-reservation-form.style-banner-2 input[type="number"], .cs-reservation-form.style-banner-2 input[type="date"], .cs-reservation-form.style-banner-2 input[type="search"], .cs-reservation-form.style-banner-2 input[type="tel"], .cs-reservation-form.style-banner-2 textarea, .cs-reservation-form.style-banner-2 select {
+        padding: 0;
+        height: auto;
+        border: none;
+        line-height: 1.2;
+    }
+    
+    .cs-reservation-form.style-banner-2 button[type="submit"] {
+        min-height: 56px;
+        font-size: 18px;
+        font-size: 1.125rem;
+    }
+    
+    .cs-reservation-form.style-banner-2.inline-label {
+        --field-space: 60px;
+    }
+    
+    .cs-reservation-form.style-banner-2.inline-label .cs-form-icon {
+        margin-right: 15px;
+    }
+    
+    .cs-reservation-form.style-banner-2.inline-label .cs-form-label {
+        left: 0;
+    }
+    
+    .cs-reservation-form.style-banner-2.inline-label .cs-form-field:not(.cs-submit):after {
+        right: 0;
+    }
+    
+    .cs-reservation-form.style-banner-2.inline-label .cs-form-field.cs-check-in, .cs-reservation-form.style-banner-2.inline-label .cs-form-field.cs-check-out {
+        width: 23%;
+    }
+    
+    .cs-reservation-form.style-banner-2.inline-label .cs-form-field.cs-guests {
+        width: 30%;
+    }
+    
+    .cs-reservation-form.style-banner-2.inline-label .cs-form-field.cs-submit {
+        width: 24%;
+    }
+    
+    .cs-reservation-form.style-banner-3 {
+        --field-height: 60px;
+        --field-space: 0px;
+        --btn-radius: 0px;
+    }
+    
+    .cs-reservation-form.style-banner-3 .cs-form-wrap {
+        margin: 0 5px;
+    }
+    
+    .cs-reservation-form.style-banner-3 .cs-form-wrap:before {
+        position: absolute;
+        top: 5px;
+        left: -5px;
+        display: block;
+        width: calc(100% + 10px);
+        height: calc(100% - 10px);
+        border: 1px solid var(--form-bd);
+        content: "";
+        pointer-events: none;
+    }
+    
+    .cs-reservation-form.style-banner-3 .cs-form-wrap .cs-form-field {
+        padding: 0;
+    }
+    
+    .cs-reservation-form.style-banner-3 .cs-form-wrap .button {
+        background: none;
+        color: inherit;
+        border: 1px solid var(--form-bd);
+    }
+    
+    .cs-reservation-form.inline-label .field-wrap > .cs-form-label {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        left: 15px;
+    }
+    
+    .cs-reservation-form.inline-label .field-input-wrap > * {
+        text-align: right;
+        padding-right: 35px;
+    }
+    
+    .cs-reservation-form.inline-label.cs-form-underline .field-wrap > .cs-form-label {
+        left: 0;
+    }
+    
+    .cs-reservation-form.inline-label.cs-form-underline .field-input-wrap > * {
+        padding-right: 25px;
+    }
+    
+    .cs-reservation-form.inline-label.cs-form-underline .cs-form-field:not(.cs-submit) .field-input-wrap:after {
+        right: 0;
+    }
+    
+    .cs-reservation-form.hide-label .field-wrap > .cs-form-label {
+        display: none;
+    }
+    
+    .cs-reservation-form .csf-dropdown {
+        position: absolute;
+        bottom: -12px;
+        left: 0;
+        -webkit-transform: translateY(100%);
+        -ms-transform: translateY(100%);
+        transform: translateY(100%);
+        z-index: -1;
+        display: block;
+        min-width: 320px;
+        background: var(--dropdown-bg);
+        color: var(--dropdown-color);
+        border: 1px solid var(--dropdown-border);
+        padding: 30px;
+        transition: 0.3s;
+        opacity: 0;
+        pointer-events: none;
+        visibility: hidden;
+    }
+    
+    .cs-reservation-form .csf-dropdown.is-open {
+        z-index: 999;
+        opacity: 1;
+        pointer-events: auto;
+        visibility: visible;
+    }
+    
+    .cs-reservation-form .csf-dropdown .csf-dropdown-item, .cs-reservation-form .csf-dropdown .cs-quantity {
+        display: -webkit-flex;
+        display: -ms-flexbox;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .cs-reservation-form .csf-dropdown .csf-dropdown-item:not(:last-child) {
+        margin-bottom: 15px;
+    }
+    
+    .cs-reservation-form .csf-dropdown .cs-quantity .input-text {
+        padding: 0;
+        margin: 0;
+        width: 40px;
+        height: auto;
+        background: none;
+        border: none;
+        text-align: center;
+        color: inherit;
+        font-size: 16px;
+        line-height: 1.2;
+    }
+    
+    .cs-reservation-form .csf-dropdown .cs-quantity .minus, .cs-reservation-form .csf-dropdown .cs-quantity .plus {
+        position: relative;
+        background: none;
+        border: none;
+        box-shadow: none;
+        outline: none;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        color: inherit;
+        text-align: center;
+        line-height: 30px;
+        cursor: pointer;
+    }
+    
+    .cs-reservation-form .csf-dropdown .cs-quantity .minus:before, .cs-reservation-form .csf-dropdown .cs-quantity .minus:after, .cs-reservation-form .csf-dropdown .cs-quantity .plus:before, .cs-reservation-form .csf-dropdown .cs-quantity .plus:after {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        display: block;
+        content: "";
+        background: currentColor;
+    }
+    
+    .cs-reservation-form .csf-dropdown .cs-quantity .minus:before, .cs-reservation-form .csf-dropdown .cs-quantity .plus:before {
+        width: 12px;
+        height: 1px;
+    }
+    
+    .cs-reservation-form .csf-dropdown .cs-quantity .plus:after {
+        width: 1px;
+        height: 12px;
+    }
+    
+    .cs-reservation-form .date-range-picker {
+        position: absolute;
+        pointer-events: none;
+        visibility: hidden;
+        opacity: 0;
+    }
+/* END daterange css */
+/* Added styles on it */
+.screen-reader-text{
+    font-size: 12px!important;
+    text-align: justify!important;
+}
+@media (max-width: 768px) {
+    .cs-form-wrap {
+        width: 100% !important; 
+        display: block!important; 
+    }
+    .cs-form-field{
+        margin-bottom: 5px!important;
+    }
+}
+
 .new {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     height: 600px;
     width: 99vw;
 }
 
-.new span {
-    color: #C5A880;
+.color-primary {
+    color: #b8945e;
 }
 .image  {
     height: 280px;
@@ -174,11 +672,35 @@ content{
     height: 100%;
     width: 100%;
 }
-
+.new .holder{
+    margin: 60px; 
+    margin-bottom:30px;
+    display: flex!important;
+    flex-wrap: wrap;
+}
+.new .head-title{
+    line-height: 1.5;
+}
+.new .head-text{
+    text-align: justify;
+}
 
 p{
     font-size: 15px;
 }
+
+.title-p{
+    font-weight: 700;
+    color: #b8945e;
+    font-size: 18px;
+}
+@media (max-width: 768px) {
+    .title-p{
+        font-size: 18px;
+        text-align: center;
+    }
+}
+
 /* Custom styles for jQuery UI Datepicker */
 .ui-datepicker {
     width: 350px; /* Original width */
@@ -272,10 +794,23 @@ p{
 }
 
 .content-1 {
-    padding: 80px 0 0 70px;
+    padding: 80px 70px 70px 70px;
 }
 .content-1 p{
-    font-size: 12px;
+    font-size: 13px;
+    text-align: justify;
+}
+@media (max-width: 768px) {
+    .content-1 {
+        padding: 20px 3px 10px 3px;
+    }
+    .content-1 h5,button{
+        text-align: center;
+    }
+    .content-1 p{
+        font-size: 14px;
+        margin-top: 17px;
+    }
 }
 .content p{
     font-size: 20px;
@@ -293,10 +828,9 @@ p{
 }
 .ev-container {
     margin: 20px;
-    padding: 20px;
 }
 .ev-container img{
-    height: 400px;
+    height: 78vh;
     object-fit: cover; 
 }
 .about img{
@@ -371,8 +905,6 @@ p{
     bottom: 135px;
     left: 40px;
     font-weight: 500;
-    /* width: 100px;
-    height: 100px; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -382,6 +914,23 @@ p{
     text-decoration: none;
     color: #fcfbfb;
     font-size: 25px;
+}
+@media (max-width: 768px) {
+    .after-det2 .ev-title {
+        position: absolute;
+        bottom: 130px;
+        left: 10px;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        z-index: 1;
+        text-decoration: none;
+        color: #fcfbfb;
+        font-size: 15px;
+    }
 }
 .image:hover .after-det {
     opacity: 1; 
@@ -431,6 +980,26 @@ p{
     text-decoration: none;
     color: #fcfbfb;
     font-size: 30px;
+}
+@media (max-width: 768px) {
+    .link-circle2 {
+        position: absolute;
+        bottom: 30px;
+        right:10px;
+        width: 50px;
+        height: 50px;
+        background-color: rgb(185, 136, 72);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+        z-index: 1;
+        text-decoration: none;
+        color: #fcfbfb;
+        font-size: 20px;
+    }
 }
 
 .link-circle:hover {
@@ -504,20 +1073,84 @@ p{
 .messagebox img{
 width: 50px;
 }
-.box {
-    margin: 10px;
-    box-shadow: 0 0 5px rgba(22, 22, 22, 0.582);
-    height: 200px;
-    border-radius: 5px;
-    border: none;
-    width: 400px;
+@media (max-width: 768px) {
+    .message{
+        margin-top: 220px;
+    }
 }
-.card-header{
-    margin: 10px 5px;
+/* CAROUSEL TESTIMONIALS */
+.testimonial{
+    padding: 20px 20px 20px 90px;
+    margin: 10px 20px 50px 55px;
+    border-left: 2px solid #b5946e;
+    position: relative;
 }
-.card-header .img{
-    margin-right: 10px;
+.testimonial:after{
+    content: "";
+    border-bottom: 25px solid #b5946e;
+    border-left: 25px solid transparent;
+    border-right: 25px solid transparent;
+    position: absolute;
+    bottom: -24px;
+    left: -26px;
 }
+.testimonial .pic{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 2px solid #b5946e;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    left: -50px;
+}
+.testimonial .pic img{
+    width: 100%;
+    height: auto;
+}
+.testimonial .title{
+    font-size: 22px;
+    font-weight: 600;
+    color: #715b33;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin: 0 0 7px 0;
+}
+.testimonial .post{
+    display: block;
+    font-size: 15px;
+    color: #857542;
+    text-transform: capitalize;
+}
+.testimonial .description{
+    font-size: 14px;
+    color: #8d8584;
+    line-height: 28px;
+    text-align: justify;
+}
+.owl-theme .owl-controls{ margin-top: 10px; }
+.owl-theme .owl-controls .owl-page span{
+    width: 35px;
+    height: 15px;
+    border-radius: 0;
+    background: #71334a;
+    opacity: 0.8;
+    transition: all 0.3s ease 0s;
+}
+.owl-theme .owl-controls .owl-page.active span{
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    background: #b5946e;
+}
+@media only screen and (max-width: 479px){
+    .testimonial{
+        padding: 20px 0 20px 60px;
+        margin: 10px 20px 50px 50px;
+    }
+    .testimonial .title{ font-size: 20px; }
+}
+
 footer{
     padding-top: 30px;
     position: relative;
@@ -711,12 +1344,19 @@ margin: 0 auto;
 }
 
 .video-player {
-position: relative;
-width: 100%;
-height: 0;
-padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
-cursor: pointer;
+    position: relative;
+    overflow: hidden; 
+    width: 100%;
+    height: 100%;;
+    cursor: pointer;
 }
+
+@media (max-width: 768px) {
+    .video-player {
+        height: 80vh; 
+    }
+}
+
 
 .video-thumbnail {
 position: absolute;
@@ -728,24 +1368,41 @@ object-fit: cover;
 }
 
 .play-button {
-position: absolute;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background: none;
-border: none;
-cursor: pointer;
-z-index: 2;
-transition: transform 0.2s ease;
-}
+    position: absolute;
+    bottom: 30px;
+    left: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: rgb(185, 136, 72); /* Base button color */
+    border-radius: 50%; /* Round button */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; /* Smooth transition for scale, shadow, and color */
+    z-index: 1;
+    text-decoration: none;
+    color: #fcfbfb; /* Icon color */
+    font-size: 35px; /* Icon size */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  }
+  
+  /* Hover state */
+  .play-button:hover {
+    transform: scale(1.2); /* Button grows bigger */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25), 0 8px 15px rgba(0, 0, 0, 0.15); /* Larger shadow on hover */
+    background-color: rgb(205, 156, 92); /* Slightly lighter color on hover */
+  }
+  
+  /* Optional: Active state for when the button is clicked */
+  .play-button:active {
+    transform: scale(1.1); /* Shrink slightly on click */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Reduce shadow on click */
+  }
 
-.play-button:hover {
-transform: translate(-50%, -50%) scale(1.1);
-}
-
-.play-button svg {
-width: 68px;
-height: 48px;
+.play-button i {
+    margin-top: 5px;
+    margin-left: 5px;
 }
 
 /* About Section */
@@ -760,7 +1417,6 @@ height: 48px;
     gap: 3rem;
     margin-bottom: 3rem;
 }
-
 .founder-image {
     flex: 1;
     max-width: 40%;
@@ -775,6 +1431,20 @@ height: 48px;
 
 .about-content {
     flex: 1.5;
+}
+@media (max-width: 768px) {
+    .about-section {
+        padding: 0 10px;
+    }
+    .about-container {
+        display: block;
+    }
+    .founder-image {
+        flex: 1;
+        width: 100%;
+        max-width: 100%;
+        height: 55vh;
+    }
 }
 
 .section-header {
@@ -837,7 +1507,21 @@ blockquote {
     font-weight: bold;
     color: #333!important;
 }
-
+@media (max-width: 768px) {
+    .quote-container {
+        background-color: rgba(223, 253, 255, 0.184);
+        padding: 20px;
+        margin: 16px 0px 60px 0px;
+    }
+    
+    blockquote {
+        font-style: italic;
+        color: #555;
+        line-height: 1.8;
+        font-size: 15px;
+        margin-bottom: 1.5rem;
+    }
+}
 .vision-container{
     display: flex;
     /* gap: 3rem; */
@@ -861,4 +1545,62 @@ blockquote {
 
 .vision-content {
     width: 50%;
+}
+/* .vision-img{
+    height: 70vh!important;
+    display: flex;
+}
+.vision-img img{
+    min-width: 100%;
+    max-width: 100%;
+    max-height: 100%;
+} */
+
+@media (max-width: 768px) {
+    .vision-container{
+        display: block;
+        /* gap: 3rem; */
+        margin-bottom: 3rem;
+    }
+    .vison-title {
+        display: grid; 
+        place-items: center;
+        width: 100%;
+    }
+    .vision-content {
+        width: 100%;
+    }
+    .vison-title p{
+        padding: 0% 5%;
+    }
+    /* .vision-img{
+        height: 30vh!important;
+    } */
+}
+
+@media (max-width: 768px) {
+    .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    .ab-col-4,.ab-col-8 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+    .loc-col-3, .loc-col-5{
+        flex: 0 0 100%;
+        max-width: 100%;
+        margin-bottom: 10px;
+    }
+    .new .holder {
+        margin: 20px;
+    }
+    .ev-container {
+        margin: 5px;
+        padding: 5px;
+    }
+    .vh80{
+        height: 50vh;
+    }
 }

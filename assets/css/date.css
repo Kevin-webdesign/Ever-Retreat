@@ -4,7 +4,7 @@
   background-color: #f7f5f0;
   border-radius: 4px;
   border: 1px solid #ddd;
-  width: 286px;
+  width: 386px;
   max-width: none;
   padding: 0;
   margin-top: 7px;
@@ -15,6 +15,12 @@
   font-family: arial;
   font-size: 15px;
   line-height: 1em;
+}
+@media (max-width: 768px) {
+  .daterangepicker {
+    width: 280px;
+    max-width: none;
+  }
 }
 
 .daterangepicker:before, .daterangepicker:after {
@@ -173,7 +179,7 @@
 }
 
 .daterangepicker td.available:hover, .daterangepicker th.available:hover {
-  background-color: #e46322;
+  background-color: #b98848;
   color: inherit;
 }
 
@@ -198,9 +204,13 @@
 
 
 .daterangepicker td.active, .daterangepicker td.active:hover {
-  background-color: #e46322;
+  background-color: #b98848;
   border-color: transparent;
   color: #fff;
+}
+.applyBtn{
+  background: #b98848!important;
+  border: solid 2px #9c733e!important;
 }
 
 .daterangepicker th.month {
@@ -315,7 +325,7 @@
 }
 
 .daterangepicker .ranges li:hover {
-  background-color: #e46322;
+  background-color: #b98848;
 }
 
 .daterangepicker .ranges li.active {

@@ -16,9 +16,21 @@
 
     <!-- jQuery UI JS -->
     <script src="../../../assets/js/jquery-ui.min.js"></script>
+
+    <!-- Fonts Added -->
     <link rel="stylesheet" href="../../../assets/fontawesome-free-6.7.2-web/css/fontawesome.min.css">
     <link rel="stylesheet" href="../../../assets/fontawesome-free-6.7.2-web/css/solid.min.css">
     <link rel="stylesheet" href="../../../assets/fontawesome-free-6.7.2-web/css/brands.min.css">
     <link rel="stylesheet" href="../../../assets/bootstrap-icons/bootstrap-icons.css">
+    <!-- Carousel -->
+    <link rel="stylesheet" href="../../../assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="../../../assets/css/owl.theme.min.css">
+    <script src="../../../assets/js/owl.carousel.min.js"></script>
+
+    <!-- date range picker -->
+    <link rel="stylesheet" href="../../../assets/css/date.css">
+
+    <link rel="stylesheet" href="../../../vendor/fancybox/jquery.fancybox.css">
+
 
 </head>

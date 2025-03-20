@@ -58,9 +58,9 @@
                     communities. Together, we will build a future where Rwanda's beauty and culture shine globally, and
                     where every local community thrives."
                 </blockquote>
-                <div class="quote-author">
+                <!-- <div class="quote-author">
                     <span>— IYAMUREMYE Theophile, CEO</span>
-                </div>
+                </div> -->
             </div>
 
             <div class="vision-container">
@@ -86,7 +86,7 @@
                 </div>
                 <div class="vison-title">
                     <div>
-                        <h3>What We Do </h3>
+                        <h3 class="mt-5">What We Do </h3>
                         <p>
                             At Ever Retreat, we design and build luxury villas, lodges, and tourism infrastructure across Rwanda's most strategic locations, such as Lake Kivu, Nyungwe, and Kigali. 
                             Each property is carefully crafted to reflect the unique character of its surroundings, offering our guests a truly immersive experience.

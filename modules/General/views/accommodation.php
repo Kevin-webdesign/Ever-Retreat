@@ -64,7 +64,12 @@
                 border: 0px;
                 border-radius: 0px;
             }
-
+            @media (max-width: 768px) {
+                .accommodation .card {
+                padding: 5px;
+                margin-top: 10px;
+            }
+            }
             .accommodation .text-right {
                 float: right;
             }
@@ -179,10 +184,11 @@
 
             p {
                 font-family: Poppins-Regular;
-                font-size: 14px;
+                font-size: 15px;
                 line-height: 1.7;
                 color: #666666;
                 margin: 0px;
+                text-align: justify;
             }
 
             ul,
@@ -498,11 +504,14 @@
 
             @media (max-width: 576px) {
                 .wrap-contact100 {
-                    padding: 62px 15px 90px 15px;
+                    padding: 5px 1px 5px 1px;
                 }
 
                 .wrap-input100 {
                     padding: 10px 10px 9px 10px;
+                }
+                .wrap-input-phone{
+                    width: 50%;
                 }
             }
 
@@ -894,7 +903,9 @@
                 display: flex;
                 align-items: center;
                 margin-bottom: 10px;
-                height: 55px;
+                height: 55px; 
+                border-radius: 2px;
+                /* border: solid 2px red; */
             }
 
             .word-icon-holder .amenity-icon{
@@ -924,15 +935,66 @@
                 /* justify-content: center; */
                 color:rgb(255, 255, 255)!important;
             }
+            @media (max-width: 768px) {
+                .word-icon-holder {
+                    border-radius: 5px;
+                    margin-left: 40px;
+                    height: 60px;
+                    margin-right: 40px;
+                    padding: 10px;
+                }
+                .word-icon-holder .amenity-icon{
+                    width: 30%;
+                    height: 90%;
+                    margin: 10px;
+                }
+                .word-icon-holder .amenity-icon2{
+                    width: 35%;
+                    height: 60px;
+                    margin: 3px;
+                }
+                .word-icon-holder .amenity-icon2 img{
+                    width: 96%;
+                    height: 90%;
+                    margin: 3%;
+                }
+                .mb-comp{
+                    margin-bottom: 30px;
+                }
+            }
             .border-padding{
                 border-radius: 5px;
             }
+            .master-container{
+                padding: 80px;
+            }
+            @media (max-width: 768px) {
+                .master-container{
+                padding: 30px 10px;
+                }
+                .t-center,.subtitle{
+                    text-align: center;
+                }
+                .col-4{
+                    width: 100%;
+                }
+                .col-4.icn2{
+                    width: 50%;
+                }
+                .icn2>.word-icon-holder {
+                    border-radius: 3px;
+                    margin-left: 4px;
+                    height: 40px;
+                    margin-right: 4px;
+                    padding: 1px;
+                }
+            }
         </style>
-        <div class="container-fluid" style="padding: 80px;">
+        <div class="container-fluid master-container">
             <div class="accommodation">
                 <div class="row">
                     <div class="col-lg-7">
-                        <h5>MASTER</h5>
+                        <h5 class="t-center">MASTER</h5>
                         <p class="subtitle">68 m² / Farm View / 2 Guests</p>
 
                         <div class="room-details">
@@ -947,7 +1009,7 @@
                         </div>
 
                         <div class="mt-4">
-                            <h5>Family Friendly Amenities</h5>
+                            <h5 class="t-center">Family Friendly Amenities</h5>
                             <div class="row det-suit">
                                 <div class="col-4">
                                     <div class="word-icon-holder det-suit-bg">
@@ -977,9 +1039,9 @@
                         </div>
 
                         <div class="mt-4">
-                            <h5>Room Amenities</h5>
+                            <h5 class="t-center mb-comp">Room Amenities</h5>
                             <div class="row">
-                                <div class="col-4 text-center mb-3">
+                                <div class="col-4 icn2 text-center mb-3">
                                     <div class="word-icon-holder">
                                         <div class="amenity-icon2 det-suit-bg border-padding">
                                             <img src="../../../assets/icons/boots.png" alt="boots_icon">
@@ -987,7 +1049,7 @@
                                         <p>Boots</p>
                                     </div>
                                 </div>
-                                <div class="col-4 text-center mb-3">
+                                <div class="col-4 icn2 text-center mb-3">
                                     <div class="word-icon-holder">
                                         <div class="amenity-icon2 det-suit-bg border-padding">
                                             <img src="../../../assets/icons/swimming_costume.png" alt="swimming_costume_icon">
@@ -995,7 +1057,7 @@
                                         <p>Swimming costume</p>
                                     </div>
                                 </div>
-                                <div class="col-4 text-center mb-3">
+                                <div class="col-4 icn2 text-center mb-3">
                                     <div class="word-icon-holder">
                                         <div class="amenity-icon2 det-suit-bg border-padding">
                                             <img src="../../../assets/icons/slippers.png" alt="slippers_icon">
@@ -1003,7 +1065,7 @@
                                         <p>Slippers</p>
                                     </div>
                                 </div>
-                                <div class="col-4 text-center mb-3">
+                                <div class="col-4 icn2 text-center mb-3">
                                     <div class="word-icon-holder">
                                         <div class="amenity-icon2 det-suit-bg border-padding">
                                             <img src="../../../assets/icons/towels.png" alt="towels_icon">
@@ -1011,7 +1073,7 @@
                                         <p>Towels</p>
                                     </div>
                                 </div>
-                                <div class="col-4 text-center mb-3">
+                                <div class="col-4 icn2 text-center mb-3">
                                     <div class="word-icon-holder">
                                         <div class="amenity-icon2 det-suit-bg border-padding">
                                             <img src="../../../assets/icons/welcome-drink.png" alt="welcome-drink_icon">
@@ -1019,7 +1081,7 @@
                                         <p>Welcome Drinks</p>
                                     </div>
                                 </div>
-                                <div class="col-4 text-center mb-3">
+                                <div class="col-4 icn2 text-center mb-3">
                                     <div class="word-icon-holder">
                                         <div class="amenity-icon2 det-suit-bg border-padding">
                                             <img src="../../../assets/icons/shampoo.png" alt="shampoo_icon">
@@ -1027,7 +1089,7 @@
                                         <p>Shampoo</p>
                                     </div>
                                 </div>
-                                <div class="col-4 text-center mb-3">
+                                <div class="col-4 icn2 text-center mb-3">
                                     <div class="word-icon-holder">
                                         <div class="amenity-icon2 det-suit-bg border-padding">
                                             <img src="../../../assets/icons/hair-dryer.png" alt="hair-dryer_icon">
@@ -1035,7 +1097,7 @@
                                         <p>Hair Dryer</p>
                                     </div>
                                 </div>
-                                <div class="col-4 text-center mb-3">
+                                <div class="col-4 icn2 text-center mb-3">
                                     <div class="word-icon-holder">
                                         <div class="amenity-icon2 det-suit-bg border-padding">
                                             <img src="../../../assets/icons/wifi.png" alt="wifi_icon">
@@ -1059,28 +1121,28 @@
                                         <div class="wrap-contact100">
                                             <form class="contact100-form validate-form">
 
-                                                <div class="wrap-input100 validate-input bg1"
+                                                <div class="wrap-input100 wrap-input-phone validate-input bg1"
                                                     data-validate="Please Select Check in Date">
                                                     <span class="label-input100">Check in *</span>
                                                     <input class="input100" type="date" name="checkin"
                                                         placeholder="Enter Check in date">
                                                 </div>
                                                 
-                                                <div class="wrap-input100 validate-input bg1"
+                                                <div class="wrap-input100 wrap-input-phone validate-input bg1"
                                                     data-validate="Please Select Check out Date">
                                                     <span class="label-input100">Check out *</span>
                                                     <input class="input100" type="date" name="checkout"
                                                         placeholder="Enter Check out date">
                                                 </div>
                                                 
-                                                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100"
+                                                <div class="wrap-input100 wrap-input-phone validate-input bg1 rs1-wrap-input100"
                                                     data-validate="Enter Number of Adults and (or) Children">
                                                     <span class="label-input100">Adults *</span>
                                                     <input class="input100" type="number" name="adults"
                                                       min="0" placeholder="Adults">
                                                 </div>
                                                 
-                                                <div class="wrap-input100 bg1 rs1-wrap-input100">
+                                                <div class="wrap-input100 wrap-input-phone bg1 rs1-wrap-input100">
                                                     <span class="label-input100">Child</span>
                                                     <input class="input100" type="number" name="child"
                                                        min="0" placeholder="Child">
@@ -1093,14 +1155,14 @@
                                                         placeholder="Enter Your Name">
                                                 </div>
 
-                                                <div class="wrap-input100 validate-input bg1 rs1-wrap-input100"
+                                                <div class="wrap-input100 wrap-input-phone validate-input bg1 rs1-wrap-input100"
                                                     data-validate="Enter Your Email (e@a.x)">
                                                     <span class="label-input100">Email *</span>
                                                     <input class="input100" type="number" name="email"
                                                         placeholder="Your Email ">
                                                 </div>
 
-                                                <div class="wrap-input100 bg1 rs1-wrap-input100">
+                                                <div class="wrap-input100 wrap-input-phone bg1 rs1-wrap-input100">
                                                     <span class="label-input100">Phone</span>
                                                     <input class="input100" type="text" name="phone"
                                                         placeholder="Phone Number">
@@ -1113,19 +1175,7 @@
                                                         placeholder="Your message here..."></textarea>
                                                 </div>
                                                 <div class="wrap-input100b reservation-forms" style="background-color: white;">
-                                                    <div class="extra-services">
-                                                        <label>
-                                                            <input type="checkbox" checked>
-                                                            Daily room clean
-                                                            <span style="margin-left: auto;">$0/night</span>
-                                                        </label>
-                                                        <label>
-                                                            <input type="checkbox">
-                                                            Daily room clean
-                                                            <span style="margin-left: auto;">$125/person</span>
-                                                        </label>
-                                                    </div>
-                                                    
+                                                                                                      
                                                     <hr class="hr">
                                                     <div class="total-cost">
                                                         Total cost: $786
