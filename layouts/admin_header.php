@@ -9,7 +9,7 @@
     <title>EVERRETREAT - Dashboard</title>
     
     <!-- Favicon -->
-    <link href="../../../assets/img/logo-retreat.png" rel="icon">
+    <link rel="icon" type="image/jpeg" href="../../../assets/image/everretrea-300x300.jpg">
 
     <!-- Custom fonts for this template-->
     <link href="../../../assets/dashboard_assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

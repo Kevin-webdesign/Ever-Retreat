@@ -1114,82 +1114,89 @@
                             <div class="card-body">
                                 <div class="block">
                                     <label class="card-title label"> <i class="h5">Reserve </i><i
-                                            class="text-right t-small">From $2,000/night</i></label>
+                                            class="text-right t-small">From $0/night</i></label>
                                 </div>
                                 <div class="block">
                                     <div class="container-contact100">
                                         <div class="wrap-contact100">
-                                            <form class="contact100-form validate-form">
+                                            <form class="contact100-form validate-form" id="bookingForm">
 
                                                 <div class="wrap-input100 wrap-input-phone validate-input bg1"
                                                     data-validate="Please Select Check in Date">
                                                     <span class="label-input100">Check in *</span>
-                                                    <input class="input100" type="date" name="checkin"
-                                                        placeholder="Enter Check in date">
+                                                    <input class="input100" type="text" id="start" name="checkin"
+                                                        placeholder="Enter Check in date" required>
                                                 </div>
                                                 
                                                 <div class="wrap-input100 wrap-input-phone validate-input bg1"
                                                     data-validate="Please Select Check out Date">
                                                     <span class="label-input100">Check out *</span>
-                                                    <input class="input100" type="date" name="checkout"
-                                                        placeholder="Enter Check out date">
+                                                    <input class="input100" type="text" id="end" name="checkout"
+                                                        placeholder="Enter Check out date" required>
                                                 </div>
                                                 
                                                 <div class="wrap-input100 wrap-input-phone validate-input bg1 rs1-wrap-input100"
                                                     data-validate="Enter Number of Adults and (or) Children">
                                                     <span class="label-input100">Adults *</span>
-                                                    <input class="input100" type="number" name="adults"
-                                                      min="0" placeholder="Adults">
+                                                    <input class="input100" type="number" name="adults" id="adults"
+                                                      min="1" placeholder="2" required>
                                                 </div>
                                                 
                                                 <div class="wrap-input100 wrap-input-phone bg1 rs1-wrap-input100">
-                                                    <span class="label-input100">Child</span>
-                                                    <input class="input100" type="number" name="child"
-                                                       min="0" placeholder="Child">
+                                                    <span class="label-input100">Child <small class="text-danger">(under 11yrs Only)</small></span>
+                                                    <input class="input100" type="number" name="child" id="child"
+                                                       min="0" placeholder="1" required>
                                                 </div>
                                                 
                                                 <div class="wrap-input100 validate-input bg1"
                                                     data-validate="Please Enter Your Names">
                                                     <span class="label-input100">NAMES *</span>
-                                                    <input class="input100" type="text" name="names"
-                                                        placeholder="Enter Your Name">
+                                                    <input class="input100" type="text" name="names" id="names"
+                                                        placeholder="Enter Your Name" required>
                                                 </div>
 
                                                 <div class="wrap-input100 wrap-input-phone validate-input bg1 rs1-wrap-input100"
                                                     data-validate="Enter Your Email (e@a.x)">
                                                     <span class="label-input100">Email *</span>
-                                                    <input class="input100" type="number" name="email"
-                                                        placeholder="Your Email ">
+                                                    <input class="input100" type="email" name="email" id="email"
+                                                        placeholder="Your Email " required>
                                                 </div>
 
                                                 <div class="wrap-input100 wrap-input-phone bg1 rs1-wrap-input100">
                                                     <span class="label-input100">Phone</span>
-                                                    <input class="input100" type="text" name="phone"
-                                                        placeholder="Phone Number">
+                                                    <input class="input100" type="text" name="phone" id="phone"
+                                                        placeholder="Phone Number" required>
                                                 </div>
 
                                                 <div class="wrap-input100 validate-input bg0 rs1-alert-validate"
                                                     data-validate="Please Type Your Message">
                                                     <span class="label-input100">Message</span>
-                                                    <textarea class="input100" name="message"
+                                                    <textarea class="input100" name="message" id="message"
                                                         placeholder="Your message here..."></textarea>
                                                 </div>
                                                 <div class="wrap-input100b reservation-forms" style="background-color: white;">
                                                                                                       
                                                     <hr class="hr">
                                                     <div class="total-cost">
-                                                        Total cost: $786
+                                                        <span class="cost-left" style="float:left;"> Total cost:</span>  <span class="cost-right">$0</span>
                                                     </div>
                                                 </div>
 
                                                 <div class="container-contact100-form-btn">
-                                                    <button class="contact100-form-btn">
+                                                    <button type="submit" class="contact100-form-btn">
                                                         <span style="color: white !important;">
                                                             Book Your Stay Now
                                                             <i class="fa fa-long-arrow-right m-l-7"
                                                                 aria-hidden="true"></i>
                                                         </span>
                                                     </button>
+                                                    <div class="take_to_email" style="display:none;">
+                                                        <input class="input100" type="text" name="addition_rate" id="addition_rate" placeholder="Addition Rate" required>
+                                                        <input class="input100" type="text" name="base_rate" id="base_rate" placeholder="Base Rate" required>
+                                                        <input class="input100" type="text" name="addedGuest" id="addedGuest" placeholder="addedGuest" required>
+                                                        <input class="input100" type="text" name="total_amount" id="total_amount" placeholder="total_amount" required>
+                                                    </div>
+                                                    <div class="invalid-feedbacks" id="emailError"></div>
                                                 </div>
                                             </form>
                                         </div>
@@ -1237,8 +1244,230 @@
                 totalCostElement.textContent = `Total cost: $${totalCost}`;
             }
         });
+
+
+
+        $(function() {
+            var start = $('#start');
+            var end = $('#end');
+
+            $('#start').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                },
+                minDate: new Date() // Disable past dates
+            });
+            $('#end').daterangepicker({
+                autoUpdateInput: false,
+                locale: {
+                    cancelLabel: 'Clear'
+                },
+                minDate: new Date() // Disable past dates
+            });
+
+            $('input').on('apply.daterangepicker', function(ev, picker) {
+                start.val(picker.startDate.format('YYYY-MM-DD'));
+                end.val(picker.endDate.format('YYYY-MM-DD'));
+            });
+
+            $('input').on('cancel.daterangepicker', function(ev, picker) {
+                $(this).val('');
+            });
+        });
     </script>
 
+    <!-- PERFORM BOOKING -->
+    <script>
+        $(document).ready(function () {
+            // Form submission logic
+            $('#bookingForm').on('submit', function (e) {
+                e.preventDefault();
+
+                // Check if there's any error before submitting
+                if ($('#emailError').text() === '') {
+                    let rand = Math.floor(100000 + Math.random() * 900000);
+                    let bookingCode = 'EVBN'+rand;
+                    console.log("Booking code",bookingCode);
+                    let formData = {
+                        bookingCode: bookingCode,
+                        checkin: $('#start').val(),
+                        checkout: $('#end').val(),
+                        adults: $('#adults').val(),
+                        child: $('#child').val(),
+                        names: $('#names').val(),
+                        email: $('#email').val(),
+                        phone: $('#phone').val(),
+                        message: $('#message').val(),
+                        addition_rate: $('#addition_rate').val(),
+                        base_rate: $('#base_rate').val(),
+                        addedGuest: $('#addedGuest').val(),
+                        total_amount: $('#total_amount').val()
+                    };
+                    console.log('checkin:'+formData.checkin+', phone:'+formData.phone+', email:'+formData.email+', checkout:'+formData.checkout+', adults:'+formData.adults+' child:'+
+                    formData.child+' message:'+formData.message+' base_rate:'+formData.base_rate+' addition_rate:'+formData.addition_rate+ 
+                    ' addedGuest:'+formData.addedGuest+' total_amount:'+formData.total_amount);
+                    $.ajax({
+                        type: 'POST',
+                        url: '../../Booking/api/bookingApi.php?action=booking',
+                        data: formData,
+                        dataType: 'json',
+                        success: function (response) {
+                            if (response.success) {
+                                // Use SweetAlert for success message
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'BOOKING REQUEST SENT!',
+                                    text: response.message,
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                }).then(() => {
+                                    window.location.href = 'accommodation.php'; // Redirect after success
+                                });
+                            } else {
+                                // Use SweetAlert for error message
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: response.message
+                                });
+                            }
+                        },
+                        error: function(xhr, status, error) {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error!',
+                                text: 'Something went wrong. Please try again. '+status+' '+error
+                            });
+                        }
+                    });
+                } else {
+                    // Notify the user about the error using SweetAlert
+                    Swal.fire({
+                        icon: 'warning',
+                        title: 'EMPTY FORM FIELDS',
+                        text: 'Please Fill all Required Fields.'
+                    });
+                }
+            });
+        });
+
+        // CONTROL BOOKING
+        $(document).ready(function() {
+            // Fetch price data when the page loads
+            fetchPrice();
+
+            // Set initial values and constraints
+            $('#adults').attr('min', 1);
+            $('#child').attr('min', 0);
+
+            // Variables to store price settings
+            let baseCost = 0;
+            let additionCost = 0;
+
+            // Function to fetch price from the API
+            function fetchPrice() {
+                fetch('../../PriceSetting/api/priceSettingApi.php?action=fetchPrice')
+                    .then(response => response.json())
+                    .then(data => {
+                        // console.log("data ", data);
+            
+                        // Check if data is an object and has the expected properties
+                        if (data && typeof data === "object" && "cost" in data && "addition" in data) {
+                            // console.log("pricedata ", data);
+                            
+                            // Store cost and addition values
+                            baseCost = parseFloat(data.cost || 0);
+                            additionCost = parseFloat(data.addition || 0);
+                            
+                            // Update the display with base rate
+                            $('.text-right.t-small').text(`From $${baseCost.toFixed(0)}/night`);
+                            
+                            // Calculate initial total
+                            calculateTotal();
+                        } else {
+                            console.log("condition not met");
+                        }
+                    })
+                    .catch(error => console.error('Error fetching price:', error));
+            }
+                
+
+            // Event listeners for input fields and date selection
+            $('#adults, #child').on('input', validatePeopleCount);
+            $('#start, #end').on('change', calculateTotal);
+
+            // Function to validate people count
+            function validatePeopleCount() {
+                let adults = parseInt($('#adults').val()) || 0;
+                let children = parseInt($('#child').val()) || 0;
+                let totalPeople = adults + children;
+
+                // Ensure adults is at least 1
+                if (adults < 1) $('#adults').val(1);
+
+                // Ensure children is at least 0
+                if (children < 0) $('#child').val(0);
+
+                // Check if total exceeds 10
+                // if (totalPeople > 10) {
+                //     if ($('#adults').is(':focus')) {
+                //         $('#adults').val(Math.max(1, 10 - children));
+                //     } else if ($('#child').is(':focus')) {
+                //         $('#child').val(Math.max(0, 10 - adults));
+                //     }
+                // }
+
+                // Calculate total cost after validation
+                calculateTotal();
+            }
+
+            // Function to calculate total cost
+            function calculateTotal() {
+                let adults = parseInt($('#adults').val()) || 1;
+                let children = parseInt($('#child').val()) || 0;
+                let totalPeople = adults;
+                // let totalPeople = adults + children;
+
+                // Get date values
+                let startDate = new Date($('#start').val());
+                let endDate = new Date($('#end').val());
+
+                // Calculate number of nights
+                let nights = 1;
+                if (!isNaN(startDate.getTime()) && !isNaN(endDate.getTime())) {
+                    nights = Math.max(1, Math.ceil((endDate - startDate) / (1000 * 60 * 60 * 24)));
+                }
+
+                // Calculate cost: base cost for 3 people, additional cost for extra people
+                let totalCost = baseCost;
+                if (totalPeople > 3) {
+                    totalCost += (totalPeople - 3) * additionCost;
+                }
+
+                // Multiply by number of nights
+                totalCost *= nights;
+
+                // Update the total cost display
+                $('.cost-right').text(`$${totalCost.toFixed(0)}`);
+                var total_amount = totalCost;
+                var addedGuest = (totalPeople > 3)? (totalPeople - 3) : 0;
+                var addition_rate = additionCost;
+                var base_rate = baseCost;
+                $('#addition_rate').val(addition_rate);
+                $('#base_rate').val(base_rate);
+                $('#addedGuest').val(addedGuest);
+                $('#total_amount').val(total_amount);
+                // console.log("total cost => ",total_amount);
+                // console.log("additional Guests => ",addedGuest);
+                // console.log("addition Rate => ",addition_rate);
+                // console.log("base Rate => ",base_rate);
+            }
+        });
+
+        
+
+    </script>
 </body>
 
 </html>

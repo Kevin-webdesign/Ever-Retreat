@@ -194,7 +194,7 @@ class AuthenticationController
             $mail->SMTPAuth = true;
             $mail->Username = 'abaremy1997@gmail.com'; // Your Gmail address
             $mail->Password = 'tdkkisnekobxueuo'; // Your Gmail app password
-            $mail->SMTPSecure = 'ssl';                            // Enable TLS encryption, `ssl` also accepted
+            $mail->SMTPSecure = 'ssl';      // Enable TLS encryption, `ssl` also accepted
             $mail->Port = 465; 
     
             // Recipients

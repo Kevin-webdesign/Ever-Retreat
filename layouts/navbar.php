@@ -166,7 +166,7 @@
             </ul>
 
             <!-- Right-aligned Links -->
-            <ul class="navbar-nav ms-auto" style="font-size: 13px!important;">
+            <ul class="navbar-nav ms-auto right-nav" style="font-size: 13px!important;">
                 <li class="nav-item">
                     <a class="nav-link" href="#">Partnership</a>
                 </li>

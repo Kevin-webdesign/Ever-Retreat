@@ -13,6 +13,16 @@
 body {
     overflow-x: hidden;
 }
+.right-nav{
+    align-items: center;
+}
+@media (max-width: 768px) {
+    .right-nav{
+        align-items: flex-start;
+        padding-left: 10px;
+    }
+    
+}
 .video-overlay{
     background-color: #1e1e1e81;
     width: 100vw;
@@ -61,6 +71,12 @@ content{
     justify-content: center;
     margin: 6px 0px;
 }
+.map-row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0px 0px;
+}
 @media (max-width: 768px) {
     .mafoto.location-row{
         display: flex;
@@ -68,7 +84,23 @@ content{
         justify-content: center;
         margin: -6px 0px;
     }
+    .map-row{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        /* margin: -6px 0px; */
+    }
 }
+.globe-bg{
+    padding: 50px 20px 0px 20px;
+    overflow: hidden;
+    background: 
+        url('../image/globe.jpg') center/cover no-repeat,
+        linear-gradient(to right, rgba(238, 238, 234, 0.9), rgba(245,245,245,0.9));
+    background-blend-mode: overlay;
+    z-index: -1;
+}
+
 .loc-col-3{
     flex:0 0 auto;
     width:24%;
@@ -83,7 +115,7 @@ content{
 
 .loc-col-5{
     flex:0 0 auto;
-    width:41.66666667%;
+    width:45.66666667%;
 }
 .loc-col-6{
     flex:0 0 auto;
@@ -91,11 +123,19 @@ content{
 }
 .loc-col-7{
     flex:0 0 auto;
-    width:52.33333333%
+    width:54.33333333%
 }
 .loc-col-8{
     flex:0 0 auto;
     width:58.33333333%
+}
+.loc-col-10{
+    flex:0 0 auto;
+    width:78.33333333%
+}
+.loc-col-12{
+    flex:0 0 auto;
+    width:99.66666%
 }
 .ab-col-4{
     flex:0 0 auto;
@@ -115,9 +155,24 @@ content{
 .marg-50{
     margin: 50px;
 }
+.marg-40{
+    margin: 40px;
+}
+.marg-30{
+    margin: 30px;
+}
+.marg-20{
+    margin: 20px;
+}
+.marg-10{
+    margin: 10px;
+}
 @media (max-width: 768px) {
     .marg-60,.marg-50{
         margin: 10px;
+    }
+    .marg-20, .marg-30, .marg-10{
+        margin: 2px;
     }
 }
 .about-img img{
@@ -190,7 +245,9 @@ content{
 .more-btn{
     background-color: #1E1E1E !important;
 }
-
+.book-now-btn.send-contact {
+    color: #ffffff;
+}
 .book-now-btn:hover {
     background-color: #6b573a;
 }
@@ -1273,19 +1330,21 @@ body {
 
 .contact-form {
     background-color: #faf7f2;
-    padding: 40px;
+    padding: 30px;
 }
 
-.contact-form h2 {
+.contact-form h2,h4 {
     font-weight: 600;
     margin-bottom: 30px;
+    text-align: center;
 }
 
 .c-form-control {
     border: 1px solid #d0a85c;
     padding: 12px;
-    margin-bottom: 20px;
+    /* margin: 15px; */
     border-radius: 0;
+    width: 100%;
 }
 
 textarea.c-form-control {
@@ -1304,7 +1363,12 @@ textarea.c-form-control {
 .btn-submit:hover {
     background-color: #b08d3f;
 }
-
+.myContactForm>.row>* {
+    flex-shrink: 0;
+    padding: 0px 10px 10px 0px;
+    padding-left: 0;
+    margin-top: 0;
+}
 .contact-info-card {
     text-align: center;
     padding: 30px 20px;
@@ -1588,7 +1652,7 @@ blockquote {
         max-width: 100%;
         margin-bottom: 10px;
     }
-    .loc-col-3, .loc-col-5{
+    .loc-col-3, .loc-col-5, .loc-col-6, .loc-col-7, .loc-col-8, .loc-col-10, .loc-col-12{
         flex: 0 0 100%;
         max-width: 100%;
         margin-bottom: 10px;

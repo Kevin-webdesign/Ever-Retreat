@@ -85,7 +85,7 @@
     <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Category:</h6>
-        <a class="collapse-item" href="messages.php">Messages</a>
+        <a class="collapse-item" href="../../Contactus/views/messages.php">Messages</a>
         <!-- <a class="collapse-item" href="404.php">Programs</a> -->
         <div class="collapse-divider"></div>
       </div>

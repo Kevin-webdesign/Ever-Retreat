@@ -3,7 +3,7 @@
 
 <?php include('../../../layouts/admin_header.php'); ?>
 
-<body style="background:url('../../../assets/img/hotelbglogin.jpg');background-position: center; background-size: cover;">
+<body style="background:url('../../../assets/image/luxurious-hotel-login.jpg');background-position: center; background-size: cover;">
 
    <div class="container">
 
@@ -16,7 +16,7 @@
                <div class="card-body p-0">
                   <!-- Nested Row within Card Body -->
                   <div class="row">
-                     <div class="col-lg-4 d-none d-lg-block bg-login-image"></div>
+                     <div class="col-lg-4 d-none d-lg-block bg-login-image" style="background:url('../../../assets/image/cyber1.jpg');background-position: center; background-size: cover;"></div>
                      <div class="col-lg-8">
                         <div class="p-5">
                            <div class="text-center">
@@ -49,10 +49,10 @@
                            </form>
                            <hr>
                            <div class="text-center">
-                              <a class="small" href="forgotPassword.php">Forgot Password?</a>
+                              <a class="small" href="../../Authentication/views/forgotPassword.php">Forgot Password?</a>
                            </div>
                            <div class="text-center">
-                              <a class="small" href="index.php">Go to Everretreat Home Page!</a>
+                              <a class="small" href="../../General/views/index.php">Go to Everretreat Home Page!</a>
                            </div>
                         </div>
                      </div>
