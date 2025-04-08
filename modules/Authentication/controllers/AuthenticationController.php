@@ -7,9 +7,6 @@ require_once '../../../helpers/JWTHandler.php';  // Include your JWTHandler clas
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../../../vendor/phpmailer/phpmailer/src/Exception.php';
-require '../../../vendor/phpmailer/phpmailer/src/phpmailer.php';
-require '../../../vendor/phpmailer/phpmailer/src/SMTP.php';
 
 class AuthenticationController
 {

@@ -169,7 +169,7 @@
 }
 
 .mailbox-sidebar {
-    width: 250px;
+    width: 180px;
     flex-shrink: 0;
 }
 
@@ -436,6 +436,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 14px;
 }
 
 .mailbox-subject {
@@ -444,6 +445,7 @@
     text-overflow: ellipsis;
     white-space: nowrap;
     padding-right: 10px;
+    font-size: 14px;
 }
 
 .mailbox-date {

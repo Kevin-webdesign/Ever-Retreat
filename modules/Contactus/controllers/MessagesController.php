@@ -59,13 +59,13 @@ class MessagesController {
             }
             
             // Truncate message for display
-            $message['subject_preview'] = mb_strlen($message['subject']) > 80 
-                ? mb_substr($message['subject'], 0, 80) . '...' 
+            $message['subject_preview'] = mb_strlen($message['subject']) > 20 
+                ? mb_substr($message['subject'], 0, 20) . '...' 
                 : $message['subject'];
                 
             // Add the message preview (first 80 chars)    
-            $message['message_preview'] = mb_strlen($message['message']) > 80 
-                ? mb_substr($message['message'], 0, 80) . '...' 
+            $message['message_preview'] = mb_strlen($message['message']) > 38 
+                ? mb_substr($message['message'], 0, 38) . '...' 
                 : $message['message'];
         }
         

@@ -1,3 +1,17 @@
+<?php
+    require_once '../../../config/database.php';
+
+    // Initialize database
+    $db = Database::getInstance();
+
+    // Fetch all dynamic content
+    $hero = $db->query("SELECT * FROM homepage_hero LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+    $testimonials = $db->query("SELECT * FROM testimonials WHERE is_active = TRUE ORDER BY display_order")->fetchAll(PDO::FETCH_ASSOC);
+    $accommodation = $db->query("SELECT * FROM accommodations WHERE is_active = TRUE ORDER BY display_order LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+    $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY display_order")->fetchAll(PDO::FETCH_ASSOC);
+    $aboutUs = $db->query("SELECT * FROM about_us LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+    $premiumFeatures = $db->query("SELECT * FROM premium_features LIMIT 1")->fetch(PDO::FETCH_ASSOC);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -74,20 +88,17 @@
     <!-- Navbar -->
     <?php include("../../../layouts/navbar.php"); ?>
 
-
-
     <!-- Hero Section -->
     <div class="hero-content text-white text-center vh-100">
         <!-- Video Background -->
         <div class="video-background">
             <video autoplay muted loop playsinline>
-                <source src="../../../assets/video/EverRetreatInvestment.mp4" type="video/mp4">
+                <source src="../../../assets/video/<?php echo htmlspecialchars($hero['video_path']); ?>" type="video/mp4">
             </video>
         </div>
         <div class="container" id="Booking">
-            <h1 class="display-4 mb-4">B&P Ever Retreat Beach Villa</h1>
-            <p class="lead mb-5">Welcome to our Master Suite, where time slows down and the elegance of simplicity
-                flourishes.</p>
+            <h1 class="display-4 mb-4"><?php echo htmlspecialchars($hero['title']); ?></h1>
+            <p class="lead mb-5"><?php echo htmlspecialchars($hero['subtitle']); ?></p>
 
             <!-- Centered Booking Form at Bottom -->
             <div class="row justify-content-center">
@@ -174,48 +185,50 @@
                 <div class="row">
                     <div class="col-md-6">
                         <p class="title-p">About us</p>
-                        <h5 class="head-title"><b>Welcome to <span class="color-primary">Everretreat</span>, The Best
-                                Destination for Tranquility</b>
-                        </h5>
-                        <a href="../../../modules/General/views/aboutus.php" class="btn book-now-btn text-white">More
-                            About us &nbsp;&nbsp;<i class="bi bi-arrow-right"></i></a>
+                        <h5 class="head-title"><b><?php echo $aboutUs['main_title']; ?></b></h5>
+                        <a href="<?php echo htmlspecialchars($aboutUs['button_link']); ?>" class="btn book-now-btn text-white">
+                            <?php echo htmlspecialchars($aboutUs['button_text']); ?> &nbsp;&nbsp;<i class="bi bi-arrow-right"></i>
+                        </a>
                     </div>
                     <div class="col-md-6">
-                        <p class="head-text">There are two types of travelers: trend-seekers and those chasing the
-                            unexpected. Our accommodations
-                            offer the best of both - luxury and discovery.</p>
+                        <p class="head-text"><?php echo htmlspecialchars($aboutUs['description']); ?></p>
                         <hr>
                         <div class="row d-flex">
                             <div class="col-md">
-                                <h1>150k +</h1>
-                                <p>Guests Served</p>
+                                <h1><?php echo htmlspecialchars($aboutUs['stats_value_1']); ?></h1>
+                                <p><?php echo htmlspecialchars($aboutUs['stats_text_1']); ?></p>
                             </div>
                             <div class="col-md">
-                                <h1>24</h1>
-                                <p>Villas & Resorts</p>
+                                <h1><?php echo htmlspecialchars($aboutUs['stats_value_2']); ?></h1>
+                                <p><?php echo htmlspecialchars($aboutUs['stats_text_2']); ?></p>
                             </div>
                             <div class="col-md">
-                                <h1>06 +</h1>
-                                <p>Years of Experience</p>
+                                <h1><?php echo htmlspecialchars($aboutUs['stats_value_3']); ?></h1>
+                                <p><?php echo htmlspecialchars($aboutUs['stats_text_3']); ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="location-row ev-container">
-
                 <!-- HTML Structure -->
                 <div class="ab-col-4 margin-right-img">
                     <div class="video-player">
-                        <img src="../../../assets/image/first.jpg" alt="Video Thumbnail" class="video-thumbnail">
-                        <a href="../../../assets/video/Ever-short-vid.mp4" class="play-button js-fancybox"
-                            data-fancybox>
+                        <?php if (!empty($aboutUs['image_path'])): ?>
+                        <img src="../../../assets/image/<?php echo htmlspecialchars($aboutUs['image_path']); ?>" alt="About Us Image" class="video-thumbnail">
+                        <?php endif; ?>
+                        <?php if (!empty($aboutUs['video_path'])): ?>
+                        <a href="../../../assets/video/<?php echo htmlspecialchars($aboutUs['video_path']); ?>" class="play-button js-fancybox" data-fancybox>
                             <i class="bi bi-play-fill"></i>
                         </a>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="ab-col-8 about-img">
-                    <img src="../../../assets/image/second.jpg" alt="">
+                    <!-- You can add another image here if needed -->
+                    <?php if (!empty($aboutUs['image_path_right'])): ?>
+                        <img src="../../../assets/image/<?php echo htmlspecialchars($aboutUs['image_path_right']); ?>" alt="">
+                    <?php endif; ?>
                 </div>
             </div>
             <div class="location-row text-center mt-5 marg-50">
@@ -223,36 +236,26 @@
                     <p class="title-p"><span>Our Accommodation</span></p>
                     <h4 style="font-weight: bold;">Find the Perfect Space for Your Stay</h4>
                     <div class="content">
-                        <p style="font-size: 12px">
-                            The resort offers a total of 139 suites and villas and a wide range of facilities, services,
-                            and activities to <br>its guests in an effort to provide a peaceful and tranquil
-                            environment.
+                        <p style="font-size: 16px">
+                            The resort offers a total of 139 suites and villas and a wide range of facilities, services, and activities to
+                            its guests in an effort to provide a peaceful and tranquil environment
                         </p>
                     </div>
                 </div>
             </div>
             <div class="location-row">
                 <div class="col-md-6 vh80">
-                    <img class="img-responsive" src="../../../assets/image/firstb.png">
+                    <?php if (!empty($accommodation['image_path'])): ?>
+                    <img class="img-responsive" src="../../../assets/image/<?php echo htmlspecialchars($accommodation['image_path']); ?>">
+                    <?php endif; ?>
                 </div>
                 <div class="col-md-6">
                     <div class="content-1">
-                        <h5><b>B&P Beach Villa</b></h5>
-                        <p>
-                            Welcome to our Master Suite, where time slows down
-                            and the elegance of simplicity flourishes. Our Master Suite accommodates
-                            up to two guests, featuring a luxurious jacuzzi with
-                            a stunning view of Lake Kivu. This 45-square-meter
-                            retreat offers a serene escape, complete with a king-sized
-                            pillow top bed and a bathroom with both a tub and shower.
-                            Indulge in our top-notch amenities, including a flat-screen TV with
-                            satellite channels, wireless internet, Elenis bath amenities, a hair
-                            dryer, and cozy bathrobe and slippers. Enjoy the convenience of a
-                            work desk and chair, 24-hour room service, and air conditioning.
-                            Experience unparalleled comfort and tranquility in our Master Suite.</p>
-                        <button class="btn more-btn text-white">Discover More <i
-                                class="fas fa-long-arrow-alt-right"></i>
-                        </button>
+                        <h5><b><?php echo htmlspecialchars($accommodation['title']); ?></b></h5>
+                        <p><?php echo htmlspecialchars($accommodation['description']); ?></p>
+                        <a href="<?php echo htmlspecialchars($accommodation['button_link']); ?>" class="btn more-btn text-white">
+                            <?php echo htmlspecialchars($accommodation['button_text']); ?> <i class="fas fa-long-arrow-alt-right"></i>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -263,122 +266,40 @@
                 </div>
             </div>
             <div class="content mafoto location-row">
-                <div class="image loc-col-3 margin-right-img">
+                <?php foreach ($locations as $location): ?>
+                <div class="image loc-col-<?php echo ($location['display_order'] == 2 || $location['display_order'] == 4) ? '5' : '3'; ?> margin-right-img margin-btm-img">
                     <div class="img">
-                        <img src="../../../assets/image/kigali.jpg" alt="Kigali" class="img-fluid">
+                        <?php if (!empty($location['image_path'])): ?>
+                        <img src="../../../assets/image/<?php echo htmlspecialchars($location['image_path']); ?>" alt="<?php echo htmlspecialchars($location['name']); ?>" class="img-fluid">
+                        <?php endif; ?>
                         <div class="details">
-                            <h6>Kigali</h6>
-                            <p>The heart of modern Rwanda</p>
+                            <h6><?php echo htmlspecialchars($location['name']); ?></h6>
+                            <p><?php echo htmlspecialchars($location['tagline']); ?></p>
                         </div>
                         <div class="after-det text-white">
-                            <h6>Kigali</h6>
-                            <p>Kigali pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
+                            <h6><?php echo htmlspecialchars($location['name']); ?></h6>
+                            <p><?php echo htmlspecialchars($location['description']); ?></p>
                         </div>
-                        <a href="../../../modules/General/views/location_kigali.php" class="link-circle">
+                        <a href="<?php echo htmlspecialchars($location['link']); ?>" class="link-circle">
                             <i class="fa fa-arrow-right diagonal"></i>
                         </a>
                     </div>
                 </div>
-                <div class="image loc-col-5 margin-right-img">
-                    <div class="img">
-                        <img src="../../../assets/image/rubavu.jpg" alt="rubavu" class="img-fluid">
-                        <div class="details">
-                            <a href=""></a>
-                            <h6>Rubavu</h6>
-                            <p>The Serenity of Lake Kivu</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Rubavu</h6>
-                            <p>Rubavu, offers an unmatched sense of the tranquility .</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_rubavu.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="image loc-col-3">
-                    <div class="img">
-                        <img src="../../../assets/image/musanze.jpg" alt="musanze" class="img-fluid">
-                        <div class="details">
-                            <h6>Musanze</h6>
-                            <p>The Call of the Mountains</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Musanze</h6>
-                            <p>Musanze, surrounded by misty volcanic peaks, calls to adventurers and nature lovers
-                                alike.</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_musanze.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content location-row">
-                <div class="image loc-col-5 margin-right-img">
-                    <div class="img">
-                        <img src="../../../assets/image/nyungwe.jpg" alt="nyungwe" class="img-fluid">
-                        <div class="details">
-                            <h6>Nyungwe</h6>
-                            <p>The Soul of Tradition</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Nyungwe</h6>
-                            <p>Nyungwe Forest, a timeless sanctuary, offers breathtaking beauty and rich biodiversity.
-                            </p>
-                        </div>
-                        <a href="../../../modules/General/views/location_nyungwe.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="image loc-col-3 margin-right-img">
-                    <div class="img">
-                        <img src="../../../assets/image/nyanza.jpg" alt="Nyanza" class="img-fluid">
-                        <div class="details">
-                            <a href=""></a>
-                            <h6>Nyanza</h6>
-                            <p>The Trail of Kings</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Nyanza</h6>
-                            <p>Nyanza, Tradition thrives through cultural experiences.</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_nyanza.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="image loc-col-3">
-                    <div class="img">
-                        <img src="../../../assets/image/huye.jpg" alt="musanze" class="img-fluid">
-                        <div class="details">
-                            <h6>Huye</h6>
-                            <p>The Wisdom of the History</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Huye</h6>
-                            <p>Huye is where history and innovation meet. Sit with local elders under ancient trees,
-                                hearing tales of Rwanda's journey through time.</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_huye.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
-        <div class="row mt-4 " style="position: relative;">
-            <div class="col-md-12 elevetor1">
-
-            </div>
+        <!-- premium feature -->
+        <div class="row mt-4 mb-2" style="position: relative;">
+            <div class="col-md-12 elevetor1"></div>
             <div class="col-md-12 elevetor2">
                 <div class="img">
-                    <img src="../../../assets/image/dsc_9633.jpg" alt="fresh">
+                    <?php if (!empty($premiumFeatures['image_path'])): ?>
+                    <img src="../../../assets/image/<?php echo htmlspecialchars($premiumFeatures['image_path']); ?>" alt="fresh">
+                    <?php endif; ?>
                     <div class="after-det2 d-flex">
-                        <h4 class="ev-title">Elevate Your stay with Premium <br>Features and Services</h4>
+                        <h4 class="ev-title"><?php echo htmlspecialchars($premiumFeatures['title']); ?></h4>
                     </div>
-                    <a href="#" class="link-circle2">
+                    <a href="<?php echo htmlspecialchars($premiumFeatures['link']); ?>" class="link-circle2">
                         <i class="bi bi-arrow-up-right"></i>
                     </a>
                 </div>
@@ -394,57 +315,32 @@
             <div class="row">
                 <div class="col-md-12">
                     <div id="testimonial-slider" class="owl-carousel">
+                        <?php foreach ($testimonials as $testimonial): ?>
                         <div class="testimonial">
                             <div class="pic">
-                                <img src="../../../assets/img/profile2.jpg">
+                                <?php if (!empty($testimonial['photo_path'])): ?>
+                                <img src="../../../assets/img/<?php echo htmlspecialchars($testimonial['photo_path']); ?>">
+                                <?php endif; ?>
                             </div>
-                            <h3 class="title">Williamson</h3>
-                            <span class="post">Customer</span>
+                            <h3 class="title"><?php echo htmlspecialchars($testimonial['name']); ?></h3>
+                            <span class="post"><?php echo htmlspecialchars($testimonial['title']); ?></span>
                             <p class="description">
-                                Staying at Ever Retreat was an unforgettable experience.
-                                The attention to detail in the architecture, the serene environment, and the commitment
-                                to sustainability made it stand out from any other place I’ve visited in Rwanda. It’s
-                                not just a retreat; it’s a movement towards responsible tourism.
-                                I left feeling refreshed and deeply inspired by the vision behind this place. Highly
-                                recommended for anyone looking to escape the ordinary!
+                                <?php echo htmlspecialchars($testimonial['content']); ?>
                             </p>
                         </div>
-
-                        <div class="testimonial">
-                            <div class="pic">
-                                <img src="../../../assets/img/Pamela.jpg">
-                            </div>
-                            <h3 class="title">Pamella</h3>
-                            <span class="post">Customer</span>
-                            <p class="description">
-                                Ever Retreat is truly a hidden gem! From the moment I arrived, I felt an overwhelming
-                                sense of peace and connection with nature.
-                                The eco-friendly design is breathtaking, blending luxury with sustainability in a way
-                                I’ve never experienced before.
-                                The staff were incredibly warm, and it was inspiring to see how the retreat empowers the
-                                local community.
-                                This is more than just a getaway—it’s a meaningful experience that leaves a lasting
-                                impact. I can’t wait to return.
-                            </p>
-                        </div>
+                        <?php endforeach; ?>
                     </div>
                 </div>
             </div>
         </div>
-        <?php
-        include("../../../layouts/footer.php");
-        ?>
+        <?php include("../../../layouts/footer.php"); ?>
     </div>
 
     <!-- ADDING JAVASCRIPTS -->
     <?php include("../../../layouts/scripts.php"); ?>
 
     <!-- TEST POP UP VIDEO -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script> -->
-
     <script>
-
         $(document).ready(function() {
             $("[data-fancybox]").fancybox({
               // Core settings
@@ -485,18 +381,6 @@
     </script>
 
     <script>
-        // document.addEventListener('DOMContentLoaded', function () {
-        //     const playButtons = document.querySelectorAll('.play-button');
-
-        //     playButtons.forEach(button => {
-        //         button.addEventListener('click', function () {
-        //             const videoId = this.getAttribute('data-video-id');
-        //             const youtubeUrl = `https://www.youtube.com/watch?v=${videoId}`;
-        //             window.open(youtubeUrl, '_blank');
-        //         });
-        //     });
-        // });
-
         $(document).ready(function () {
             $("#testimonial-slider").owlCarousel({
                 items: 2,
@@ -587,5 +471,4 @@
     </script>
 
 </body>
-
 </html>

@@ -1,7 +1,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../Authentication/views/dashboard.php">
     <div class="sidebar-brand-icon" style="background:white;">
       <!-- <a href="" class="text-decoration-none align-self-center">
         <img class="logo m-0" style="height:80px;width:80px;" src="../img/logo.png" alt="logo.png">
@@ -16,7 +16,7 @@
 
   <!-- Nav Item - Dashboard -->
   <li class="nav-item active">
-      <a class="nav-link" href="index.php">
+      <a class="nav-link" href="../../Authentication/views/dashboard.php">
           <i class="fas fa-fw fa-tachometer-alt"></i>
           <span>Dashboard</span></a>
   </li>
@@ -39,7 +39,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Users:</h6>
-            <a class="collapse-item" href="users.php">Accounts</a>
+            <a class="collapse-item" href="../../Authentication/views/users.php">Accounts</a>
         </div>
     </div>
   </li>
@@ -55,14 +55,12 @@
       data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Site Utilities:</h6>
-          <a class="collapse-item" href="bookings.php">Applications</a>
-          <a class="collapse-item" href="gallery.php">Gallery</a>
-          <a class="collapse-item" href="homeSlider.php">Home Slider</a>
-          <a class="collapse-item" href="news.php">News</a>
-          <a class="collapse-item" href="overview.php">Overview</a>
-          <a class="collapse-item" href="partners.php">Partners</a>
-          <a class="collapse-item" href="team.php">Team</a>
-          <a class="collapse-item" href="testimonial.php">Testimonials</a>
+          <a class="collapse-item" href="../../Dashboard/views/homepage.php">Homepage</a>
+          <a class="collapse-item" href="../../Dashboard/views/locations.php">Locations</a>
+          <a class="collapse-item" href="../../Dashboard/views/gallery.php">Gallery</a>
+          <a class="collapse-item" href="../../Dashboard/videosManager.php">Site Videos</a>
+          <a class="collapse-item" href="../../Dashboard/views/partners.php">Partners</a>
+          <a class="collapse-item" href="../../Dashboard/views/testimonials.php">Testimonials</a>
       </div>
     </div>
   </li>
@@ -86,7 +84,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Category:</h6>
         <a class="collapse-item" href="../../Contactus/views/messages.php">Messages</a>
-        <!-- <a class="collapse-item" href="404.php">Programs</a> -->
+        <a class="collapse-item" href="../../Contactus/views/subscribers.php">Subscribers</a>
         <div class="collapse-divider"></div>
       </div>
     </div>

@@ -10,9 +10,32 @@ header('Content-Type: application/json');
 // Initialize JWT handler
 $jwt = new JWTHandler();
 
-$action = $_GET['action'] ?? '';
+// $action = $_GET['action'] ?? '';
+$action = isset($_GET['action']) ? $_GET['action'] : (isset($_POST['action']) ? $_POST['action'] : '');
 
 switch ($action) {
+        
+    case 'login':
+        $authController = new AuthenticationController();
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
+    
+        // Call the login method to verify credentials
+        $result = $authController->loginUser($username, $password);
+    
+        if ($result['success']) {
+            echo json_encode([
+                'success' => true, 
+                'message' => 'Login successful.', 
+                'roleid' => $result['roleid'],   
+                'status' => $result['status'],   
+                'rights' => $result['rights']   // ✅ Send rights as an array
+            ]);
+        } else {
+            echo json_encode(['success' => false, 'message' => $result['message']]);
+        }
+        exit;
+
     case 'register':
         $authController = new AuthenticationController();
         $firstname = $_POST['firstname'] ?? '';
@@ -58,27 +81,6 @@ switch ($action) {
 
         if ($result['success']) {
             echo json_encode(['success' => true, 'message' => $result['message']]);
-        } else {
-            echo json_encode(['success' => false, 'message' => $result['message']]);
-        }
-        exit;
-        
-    case 'login':
-        $authController = new AuthenticationController();
-        $username = $_POST['username'] ?? '';
-        $password = $_POST['password'] ?? '';
-    
-        // Call the login method to verify credentials
-        $result = $authController->loginUser($username, $password);
-    
-        if ($result['success']) {
-            echo json_encode([
-                'success' => true, 
-                'message' => 'Login successful.', 
-                'roleid' => $result['roleid'],   
-                'status' => $result['status'],   
-                'rights' => $result['rights']   // ✅ Send rights as an array
-            ]);
         } else {
             echo json_encode(['success' => false, 'message' => $result['message']]);
         }

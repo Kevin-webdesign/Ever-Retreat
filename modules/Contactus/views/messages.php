@@ -96,18 +96,18 @@ if ($decodedToken === false) {
                                             <ul class="mailbox-nav">
                                                 <li class="mailbox-nav-item active">
                                                     <a href="#" class="mailbox-nav-link mailbox-folder" data-status="">
-                                                        <i class="fa fa-inbox"></i> Inbox 
+                                                        <i class="fa fa-inbox"></i> &nbsp; Inbox 
                                                         <span class="mailbox-label mailbox-label-primary mailbox-pull-right" id="inbox-count">12</span>
                                                     </a>
                                                 </li>
                                                 <li class="mailbox-nav-item">
                                                     <a href="#" class="mailbox-nav-link mailbox-folder" data-status="starred">
-                                                        <i class="fa fa-star"></i> Starred
+                                                        <i class="bx bx-star"></i> &nbsp; Starred
                                                     </a>
                                                 </li>
                                                 <li class="mailbox-nav-item">
                                                     <a href="#" class="mailbox-nav-link mailbox-folder" data-status="trash">
-                                                        <i class="fa fa-trash"></i> Trash
+                                                        <i class="bx bxs-trash"></i> &nbsp; Trash
                                                     </a>
                                                 </li>
                                             </ul>
@@ -130,11 +130,11 @@ if ($decodedToken === false) {
                                         <div class="mailbox-box-body no-padding">
                                             <div class="mailbox-controls">
                                                 <!-- Check all button -->
-                                                <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm checkbox-toggle"><i class="fa fa-square"></i></button>
                                                 <div class="mailbox-btn-group">
+                                                    <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm checkbox-toggle" style="display:flex;align-items: center;"><i class="bx bx-square" style="font-size:14px;"></i></button>
                                                     <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm" id="delete-selected"><i class="fa fa-trash"></i></button>
+                                                    <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm" id="refresh-mail"><i class="fa fa-spinner"></i></button>
                                                 </div>
-                                                <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm" id="refresh-mail"><i class="fa fa-spinner"></i></button>
                                                 <div class="mailbox-pull-right">
                                                     <span id="pagination-info">1-20/200</span>
                                                     <div class="mailbox-btn-group">
@@ -189,11 +189,11 @@ if ($decodedToken === false) {
                                         
                                         <div class="mailbox-box-footer no-padding">
                                             <div class="mailbox-controls">
-                                                <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm checkbox-toggle"><i class="fa fa-square"></i></button>
                                                 <div class="mailbox-btn-group">
+                                                    <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm checkbox-toggle" style="display:flex;align-items: center;"><i class="bx bx-square" style="font-size:14px;"></i></button>
                                                     <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm"><i class="fa fa-trash"></i></button>
+                                                    <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm"><i class="fa fa-spinner"></i></button>
                                                 </div>
-                                                <button class="mailbox-btn mailbox-btn-default mailbox-btn-sm"><i class="fa fa-spinner"></i></button>
                                                 <div class="mailbox-pull-right">
                                                     <span id="pagination-info2">1-20/200</span>
                                                     <div class="mailbox-btn-group">
@@ -349,14 +349,14 @@ if ($decodedToken === false) {
                 } else {
                     messages.forEach(function(message) {
                         const isStarred = message.is_starred == 1;
-                        const starClass = isStarred ? 'fa-star mailbox-star' : 'fa-star-o mailbox-star-o';
+                        const starClass = isStarred ? 'bxs-star mailbox-star' : 'bx-star mailbox-star-o';
                         const isNew = message.status === 'New';
                         const rowClass = isNew ? 'font-weight-bold' : '';
                         
                         tableContent += `
                         <tr class="${rowClass}">
                             <td><input type="checkbox" data-id="${message.id}"></td>
-                            <td class="mailbox-star"><a href="#" class="star-message" data-id="${message.id}"><i class="fa ${starClass}"></i></a></td>
+                            <td class="mailbox-star"><a href="#" class="star-message" data-id="${message.id}"><i class="bx ${starClass}"></i></a></td>
                             <td class="mailbox-name">${message.names}</td>
                             <td class="mailbox-subject">${message.subject_preview} - ${message.message_preview}</td>
                             <td class="mailbox-date">${message.time_ago}</td>
@@ -398,8 +398,8 @@ if ($decodedToken === false) {
             
             // Check all
             $('.checkbox-toggle').on('click', function() {
-                const checked = $(this).find('i').hasClass('fa-square-o') || $(this).find('i').hasClass('fa-square');
-                $(this).find('i').toggleClass('fa-square fa-check-square-o');
+                const checked = $(this).find('i').hasClass('bx-square');
+                $(this).find('i').toggleClass('bx-square bx-check-square');
                 $('#mailbox-messages input[type="checkbox"]').prop('checked', checked);
             });
             

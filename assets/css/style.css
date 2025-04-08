@@ -61,6 +61,37 @@ body {
     overflow: hidden;
 }
 
+.video-background2 {
+    position: static;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 50vh;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.video-background2 .top_image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.video-background2 video{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    overflow: hidden;
+}
+
 content{
     gap: 30px;
 }
@@ -111,6 +142,9 @@ content{
 }
 .margin-right-img{
     margin-right: 1%;
+}
+.margin-btm-img{
+    margin-bottom: 1%;
 }
 
 .loc-col-5{
@@ -204,8 +238,27 @@ content{
 .hero-content p {
     font-size: 16px;
 }
+.hero-content2 {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; 
+    align-items: center; 
+    text-align: center;
+    padding-bottom: 30px;
+    z-index: 10;
+}
+
+.hero-content2 h1 {
+    font-weight: 900;
+    font-size: 60px;
+}
 @media (max-width: 768px) {
     .hero-content h1 {
+        font-weight: 900;
+        font-size: 32px;
+    }
+    .hero-content2 h1 {
         font-weight: 900;
         font-size: 32px;
     }
@@ -1305,6 +1358,10 @@ border-radius: 50%;
     font-weight: 500;
 }
 
+.container-top2{
+    position: absolute;
+    top: 20%;
+}
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -1668,3 +1725,213 @@ blockquote {
         height: 50vh;
     }
 }
+
+/* GALLERY */
+#gallery {
+    display: grid;
+    /* height: calc(100vh - 10px); */
+    /* height: calc(100vh - 10px); */
+    grid-template: repeat(6, 1fr)/repeat(6, 1fr);
+    grid-gap: 0.5em;
+}
+
+@media (max-width: 800px) {
+    #gallery {
+        display: flex;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    #gallery > div {
+        width: 100%;
+        margin: 1%;
+    }
+}
+
+@media (max-width: 800px) and (max-width: 350px) {
+    #gallery > div {
+        width: 98%;
+    }
+}
+
+#gallery > div:nth-child(6n+1) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+#gallery > div:nth-child(2) {
+    grid-column: span 3;
+    grid-row: span 3;
+}
+
+#gallery > div:nth-child(4) {
+    grid-column: span 1;
+    grid-row: span 2;
+}
+
+#gallery > div > a {
+    opacity: 0;
+    position: absolute;
+    color: #045168;
+    background-color: #ffffff;
+    font: bold 14px "Helvetica";
+    text-shadow: 0 -1px 5px #fff, -1px 0px 5px #fff, 0 1px 5px #fff, 1px 0px 5px #fff;
+    padding: 2rem;
+    mix-blend-mode: difference;
+    width: 100%;
+    height: 100%;
+    transition: all ease 1s;
+}
+
+#gallery > div > img {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+    transition: all ease 1s;
+}
+
+#gallery > div:hover img {
+    filter: blur(4px);
+}
+
+#gallery > div:hover a {
+    opacity: 1;
+}
+
+#gallery > div {
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#gallery div,
+#gallery a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+}
+
+[id^=lightbox-] {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    opacity: 0;
+    transition: opacity 450ms ease-in-out;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+[id^=lightbox-]:target {
+    opacity: 1;
+    pointer-events: inherit;
+}
+
+[id^=lightbox-]:target img {
+    filter: blur(0);
+}
+
+[id^=lightbox-] .content {
+    max-width: 90%;
+    position: relative;
+    color: #fff;
+}
+
+[id^=lightbox-] .content:hover > a.close {
+    opacity: 1;
+    transform: scale(1, 1);
+}
+
+[id^=lightbox-] .content:hover > .title {
+    opacity: 1;
+    transform: translateY(-3px);
+}
+
+[id^=lightbox-] .content:hover > .title::after {
+    opacity: 1;
+}
+
+[id^=lightbox-] .content > * {
+    transition: all 450ms ease-in-out;
+}
+
+[id^=lightbox-] .title {
+    display: block;
+    margin: 0;
+    padding: 1em;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    transform: translateY(50%);
+    font-size: 1.5em;
+    opacity: 0;
+}
+
+[id^=lightbox-] .title::after {
+    content: " ";
+    background-color: rgba(0, 0, 0, 0.4);
+    bottom: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all 350ms ease-in-out 250ms;
+    opacity: 0;
+    transform-origin: bottom;
+    mix-blend-mode: soft-light;
+}
+
+[id^=lightbox-] img {
+    max-height: 90vh;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    filter: blur(50px);
+}
+
+[id^=lightbox-] a.close {
+    width: 2em;
+    height: 2em;
+    position: absolute;
+    right: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: scale(0, 0);
+    opacity: 0;
+    transform-origin: right top;
+    text-decoration: none;
+    color: #fff;
+}
+
+[id^=lightbox-] a.close::after {
+    content: "X";
+}
+
+.gallery-header {
+    text-align: center;
+    margin: 30px 0;
+}
+
+.gallery-header h1 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+}
+
+.gallery-header p {
+    color: #666;
+    font-size: 1.0rem;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.vh-50{height:50vh!important}
+/* END GALLERY */
