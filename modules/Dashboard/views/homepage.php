@@ -246,12 +246,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
     elseif ($action === 'update_location') {
         $id = $_POST['id'] ?? 0;
         $name = $_POST['name'] ?? '';
+        $title = $_POST['title'] ?? '';
         $tagline = $_POST['tagline'] ?? '';
         $description = $_POST['description'] ?? '';
+        $fullDescription = $_POST['full_description'] ?? '';
+        $inspiredUs = $_POST['inspired_us'] ?? '';
+        $loveAbout = $_POST['love_about'] ?? '';
         $link = $_POST['link'] ?? '#';
         $displayOrder = $_POST['display_order'] ?? 0;
+        $isActive = isset($_POST['is_active']) ? 1 : 0;
         
-        // Handle image upload
+        // Handle main image upload
         $imagePath = null;
         if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
             $uploadDir = '../../../assets/image/';
@@ -280,13 +285,101 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action'])) {
             }
         }
         
-        if ($imagePath) {
-            $stmt = $db->prepare("UPDATE locations SET name = ?, tagline = ?, description = ?, link = ?, display_order = ?, image_path = ? WHERE id = ?");
-            $result = $stmt->execute([$name, $tagline, $description, $link, $displayOrder, $imagePath, $id]);
-        } else {
-            $stmt = $db->prepare("UPDATE locations SET name = ?, tagline = ?, description = ?, link = ?, display_order = ? WHERE id = ?");
-            $result = $stmt->execute([$name, $tagline, $description, $link, $displayOrder, $id]);
+        // Handle second image upload
+        $imagePath2 = null;
+        if (isset($_FILES['image2']) && $_FILES['image2']['error'] == 0) {
+            $uploadDir = '../../../assets/image/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            
+            $fileName = 'location2_' . time() . '_' . basename($_FILES['image2']['name']);
+            $targetFilePath = $uploadDir . $fileName;
+            $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+            
+            $allowTypes = array('jpg', 'jpeg', 'png', 'gif');
+            if (in_array($fileType, $allowTypes)) {
+                if (move_uploaded_file($_FILES['image2']['tmp_name'], $targetFilePath)) {
+                    // Get current image to delete it
+                    $current = $db->prepare("SELECT image_path2 FROM locations WHERE id = ?");
+                    $current->execute([$id]);
+                    $location = $current->fetch(PDO::FETCH_ASSOC);
+                    
+                    if ($location && !empty($location['image_path2']) && file_exists($uploadDir . $location['image_path2'])) {
+                        unlink($uploadDir . $location['image_path2']);
+                    }
+                    
+                    $imagePath2 = $fileName;
+                }
+            }
         }
+        
+        // Handle third image upload
+        $imagePath3 = null;
+        if (isset($_FILES['image3']) && $_FILES['image3']['error'] == 0) {
+            $uploadDir = '../../../assets/image/';
+            if (!file_exists($uploadDir)) {
+                mkdir($uploadDir, 0755, true);
+            }
+            
+            $fileName = 'location3_' . time() . '_' . basename($_FILES['image3']['name']);
+            $targetFilePath = $uploadDir . $fileName;
+            $fileType = strtolower(pathinfo($targetFilePath, PATHINFO_EXTENSION));
+            
+            $allowTypes = array('jpg', 'jpeg', 'png', 'gif');
+            if (in_array($fileType, $allowTypes)) {
+                if (move_uploaded_file($_FILES['image3']['tmp_name'], $targetFilePath)) {
+                    // Get current image to delete it
+                    $current = $db->prepare("SELECT image_path3 FROM locations WHERE id = ?");
+                    $current->execute([$id]);
+                    $location = $current->fetch(PDO::FETCH_ASSOC);
+                    
+                    if ($location && !empty($location['image_path3']) && file_exists($uploadDir . $location['image_path3'])) {
+                        unlink($uploadDir . $location['image_path3']);
+                    }
+                    
+                    $imagePath3 = $fileName;
+                }
+            }
+        }
+        
+        // Get current values for fields we're not updating
+        $current = $db->prepare("SELECT image_path, image_path2, image_path3 FROM locations WHERE id = ?");
+        $current->execute([$id]);
+        $currentData = $current->fetch(PDO::FETCH_ASSOC);
+        
+        $stmt = $db->prepare("UPDATE locations SET 
+            name = ?, 
+            title = ?,
+            tagline = ?,
+            description = ?,
+            full_description = ?,
+            inspired_us = ?,
+            love_about = ?,
+            link = ?,
+            display_order = ?,
+            is_active = ?,
+            image_path = ?,
+            image_path2 = ?,
+            image_path3 = ?
+            WHERE id = ?");
+        
+        $result = $stmt->execute([
+            $name, 
+            $title,
+            $tagline,
+            $description,
+            $fullDescription,
+            $inspiredUs,
+            $loveAbout,
+            $link,
+            $displayOrder,
+            $isActive,
+            $imagePath ?? $currentData['image_path'],
+            $imagePath2 ?? $currentData['image_path2'],
+            $imagePath3 ?? $currentData['image_path3'],
+            $id
+        ]);
         
         if ($result) {
             $message = "Location updated successfully.";
@@ -709,9 +802,11 @@ $premiumFeatures = $db->query("SELECT * FROM premium_features LIMIT 1")->fetch(P
                                     <thead>
                                         <tr>
                                             <th>Name</th>
+                                            <th>Title</th>
                                             <th>Tagline</th>
                                             <th>Image</th>
                                             <th>Order</th>
+                                            <th>Active</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -719,6 +814,7 @@ $premiumFeatures = $db->query("SELECT * FROM premium_features LIMIT 1")->fetch(P
                                         <?php foreach ($locations as $location): ?>
                                         <tr>
                                             <td><?php echo htmlspecialchars($location['name']); ?></td>
+                                            <td><?php echo htmlspecialchars($location['title']); ?></td>
                                             <td><?php echo htmlspecialchars($location['tagline']); ?></td>
                                             <td>
                                                 <?php if (!empty($location['image_path'])): ?>
@@ -726,14 +822,23 @@ $premiumFeatures = $db->query("SELECT * FROM premium_features LIMIT 1")->fetch(P
                                                 <?php endif; ?>
                                             </td>
                                             <td><?php echo htmlspecialchars($location['display_order']); ?></td>
+                                            <td><?php echo $location['is_active'] ? 'Yes' : 'No'; ?></td>
                                             <td>
                                                 <button class="btn btn-sm btn-info edit-location" 
                                                         data-id="<?php echo $location['id']; ?>"
                                                         data-name="<?php echo htmlspecialchars($location['name']); ?>"
+                                                        data-title="<?php echo htmlspecialchars($location['title']); ?>"
                                                         data-tagline="<?php echo htmlspecialchars($location['tagline']); ?>"
                                                         data-description="<?php echo htmlspecialchars($location['description']); ?>"
+                                                        data-full_description="<?php echo htmlspecialchars($location['full_description']); ?>"
+                                                        data-inspired_us="<?php echo htmlspecialchars($location['inspired_us']); ?>"
+                                                        data-love_about="<?php echo htmlspecialchars($location['love_about']); ?>"
                                                         data-link="<?php echo htmlspecialchars($location['link']); ?>"
-                                                        data-order="<?php echo $location['display_order']; ?>">
+                                                        data-order="<?php echo $location['display_order']; ?>"
+                                                        data-is_active="<?php echo $location['is_active']; ?>"
+                                                        data-image_path="<?php echo !empty($location['image_path']) ? '../../../assets/image/'.htmlspecialchars($location['image_path']) : ''; ?>"
+                                                        data-image_path2="<?php echo !empty($location['image_path2']) ? '../../../assets/image/'.htmlspecialchars($location['image_path2']) : ''; ?>"
+                                                        data-image_path3="<?php echo !empty($location['image_path3']) ? '../../../assets/image/'.htmlspecialchars($location['image_path3']) : ''; ?>">
                                                     Edit
                                                 </button>
                                             </td>
@@ -989,7 +1094,7 @@ $premiumFeatures = $db->query("SELECT * FROM premium_features LIMIT 1")->fetch(P
 
     <!-- Edit Location Modal -->
     <div class="modal fade" id="editLocationModal" tabindex="-1" role="dialog" aria-labelledby="editLocationModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <form method="post" enctype="multipart/form-data">
                     <input type="hidden" name="action" value="update_location">
@@ -1001,31 +1106,75 @@ $premiumFeatures = $db->query("SELECT * FROM premium_features LIMIT 1")->fetch(P
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div class="form-group">
-                            <label>Name</label>
-                            <input type="text" name="name" id="edit_location_name" class="form-control" required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" name="name" id="edit_location_name" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Title</label>
+                                    <input type="text" name="title" id="edit_location_title" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tagline</label>
+                                    <input type="text" name="tagline" id="edit_location_tagline" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea name="description" id="edit_location_description" class="form-control" rows="3" required></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Full Description</label>
+                                    <textarea name="full_description" id="edit_location_full_description" class="form-control" rows="3"></textarea>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>What Inspired Us</label>
+                                    <textarea name="inspired_us" id="edit_location_inspired_us" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>What We Love About</label>
+                                    <textarea name="love_about" id="edit_location_love_about" class="form-control" rows="3"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label>Link</label>
+                                    <input type="text" name="link" id="edit_location_link" class="form-control" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Display Order</label>
+                                    <input type="number" name="display_order" id="edit_location_order" class="form-control" min="0">
+                                </div>
+                                <div class="form-group form-check">
+                                    <input type="checkbox" name="is_active" id="edit_location_is_active" class="form-check-input" value="1">
+                                    <label class="form-check-label" for="edit_location_is_active">Active</label>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label>Tagline</label>
-                            <input type="text" name="tagline" id="edit_location_tagline" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Description</label>
-                            <textarea name="description" id="edit_location_description" class="form-control" rows="3" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Link</label>
-                            <input type="text" name="link" id="edit_location_link" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Current Image</label>
-                            <div id="current_location_image"></div>
-                            <label>Change Image (Optional)</label>
-                            <input type="file" name="image" class="form-control-file">
-                        </div>
-                        <div class="form-group">
-                            <label>Display Order</label>
-                            <input type="number" name="display_order" id="edit_location_order" class="form-control" min="0">
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Main Image</label>
+                                    <div id="current_location_image"></div>
+                                    <input type="file" name="image" class="form-control-file">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Second Image</label>
+                                    <div id="current_location_image2"></div>
+                                    <input type="file" name="image2" class="form-control-file">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Third Image</label>
+                                    <div id="current_location_image3"></div>
+                                    <input type="file" name="image3" class="form-control-file">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -1077,23 +1226,42 @@ $premiumFeatures = $db->query("SELECT * FROM premium_features LIMIT 1")->fetch(P
             $('.edit-location').click(function() {
                 var id = $(this).data('id');
                 var name = $(this).data('name');
+                var title = $(this).data('title');
                 var tagline = $(this).data('tagline');
                 var description = $(this).data('description');
+                var fullDescription = $(this).data('full_description');
+                var inspiredUs = $(this).data('inspired_us');
+                var loveAbout = $(this).data('love_about');
                 var link = $(this).data('link');
                 var order = $(this).data('order');
-                var imagePath = $(this).closest('tr').find('img').attr('src');
+                var isActive = $(this).data('is_active');
+                var imagePath = $(this).data('image_path');
+                var imagePath2 = $(this).data('image_path2');
+                var imagePath3 = $(this).data('image_path3');
                 
                 $('#edit_location_id').val(id);
                 $('#edit_location_name').val(name);
+                $('#edit_location_title').val(title);
                 $('#edit_location_tagline').val(tagline);
                 $('#edit_location_description').val(description);
+                $('#edit_location_full_description').val(fullDescription);
+                $('#edit_location_inspired_us').val(inspiredUs);
+                $('#edit_location_love_about').val(loveAbout);
                 $('#edit_location_link').val(link);
                 $('#edit_location_order').val(order);
+                $('#edit_location_is_active').prop('checked', isActive == 1);
                 
-                // Display current image if exists
-                $('#current_location_image').html('');
+                // Display current images if they exist
+                $('#current_location_image, #current_location_image2, #current_location_image3').html('');
+                
                 if (imagePath) {
-                    $('#current_location_image').html('<img src="' + imagePath + '" width="100">');
+                    $('#current_location_image').html('<img src="' + imagePath + '" width="100" class="mb-2">');
+                }
+                if (imagePath2) {
+                    $('#current_location_image2').html('<img src="' + imagePath2 + '" width="100" class="mb-2">');
+                }
+                if (imagePath3) {
+                    $('#current_location_image3').html('<img src="' + imagePath3 + '" width="100" class="mb-2">');
                 }
                 
                 $('#editLocationModal').modal('show');

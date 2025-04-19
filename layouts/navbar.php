@@ -29,11 +29,11 @@
                             <ul class="navigation">
                                 <h2>Social &amp; culture</h2>
                                 <li><a class="dropdown-item" href="../../General/views/museum.php"
-                                        data-target="ever">Ever
-                                        Retreat Museum</a></li>
-                                <li><a class="dropdown-item" href="../../General/views/Craft.php"
+                                        data-target="ever">Ever Retreat Museum</a></li>
+                                <li><a class="dropdown-item" href="../../General/views/craft.php"
                                         data-target="community">Community Empowerment</a></li>
-                                <li><a class="dropdown-item" href="#" data-target="advarture">Adventure</a></li>
+                                <li><a class="dropdown-item" href="../../General/views/adventure.php" 
+                                        data-target="advarture">Adventure</a></li>
                             </ul>
                             <div class="content-section">
                                 <!-- Default content -->
@@ -41,8 +41,7 @@
                                     <div class="description d-flex">
                                         <div class="text">
                                             <p><b>Welcome to Social & Culture</b></p>
-                                            <p>Explore our rich cultural heritage and social initiatives that make
-                                                Ever Retreat unique.</p>
+                                            <p>Ever Retreat offers a rich social and cultural experience, blending luxury hospitality with authentic local traditions. Guests can engage in community-driven activities, including cultural performances, traditional cuisine, and guided heritage tours, fostering a deep connection with local communities. Through eco-friendly and socially responsible tourism, Ever Retreat promotes sustainability while preserving cultural heritage, ensuring an immersive and meaningful retreat experience.</p>
                                         </div>
                                         <div class="nav-image">
                                             <img src="../../../assets/image/nyanza.jpg" alt="Default Image 1">
@@ -53,37 +52,33 @@
                                 <div id="ever" class="content-item">
                                     <div class="description d-flex">
                                         <div class="text">
-                                            <p><b>Why invest in Ever Retreat?</b></p>
-                                            <p>Experience ultimate luxury and tranquility in our master suite,
-                                                featuring a private balcony that offers stunning views of our serene
-                                                garden and lively farm.</p>
+                                            <p><b>Ever Retreat Museum</b></p>
+                                            <p>The Ever Retreat Museum is a cultural and historical hub that showcases the rich heritage, traditions, and natural beauty of the retreat’s surroundings. It features artifacts, local crafts, historical exhibits, and interactive displays, offering guests an immersive experience in the region’s history and lifestyle. Through guided tours, storytelling sessions, and cultural workshops, the museum fosters a deeper appreciation for local communities while promoting sustainable and responsible tourism.</p>
                                         </div>
                                         <div class="nav-image">
-                                            <img src="../../../assets/image/first.webp" alt="Why Invest">
+                                            <img src="../../../assets/image/first.webp" alt="Social and Culture">
                                         </div>
                                     </div>
                                 </div>
                                 <div id="community" class="content-item">
                                     <div class="description d-flex">
                                         <div class="text">
-                                            <p><b>Where to invest in Ever Retreat?</b></p>
-                                            <p>Discover prime locations in Ever Retreat that offer the best
-                                                opportunities for investment and growth.</p>
+                                            <p><b>Community Empowerment</b></p>
+                                            <p>Ever Retreat is committed to uplifting local communities through sustainable tourism and social initiatives. We create job opportunities, support local businesses, and promote cultural heritage by integrating community-driven experiences into our retreats. Through education, skills training, and eco-friendly projects, we empower residents to thrive while preserving their traditions, ensuring a positive and lasting impact</p>
                                         </div>
                                         <div class="nav-image">
-                                            <img src="../../../assets/image/first.jpg" alt="Where to Invest">
+                                            <img src="../../../assets/image/craft1.jpg" alt="Social and Culture">
                                         </div>
                                     </div>
                                 </div>
                                 <div id="advarture" class="content-item">
                                     <div class="description d-flex">
                                         <div class="text">
-                                            <p><b>How to invest in Ever Retreat?</b></p>
-                                            <p>Learn about the simple steps to invest in Ever Retreat and secure
-                                                your future with us.</p>
+                                            <p><b>Adventure</b></p>
+                                            <p>Ever Retreat offers thrilling adventure experiences that blend nature, excitement, and exploration. Guests can enjoy hiking, zip-lining, water sports, wildlife safaris, and guided nature treks, immersing themselves in breathtaking landscapes. Designed for both relaxation and adrenaline seekers, our adventures promote eco-friendly tourism while creating unforgettable memories.</p>
                                         </div>
                                         <div class="nav-image">
-                                            <img src="../../../assets/image/dsc_9633.jpg" alt="How to Invest">
+                                            <img src="../../../assets/image/craft3.jpg" alt="How to Invest">
                                         </div>
                                     </div>
                                 </div>
@@ -100,11 +95,11 @@
                         <div class="dropdown-content d-flex">
                             <ul class="navigation">
                                 <h2>Investment</h2>
-                                <li><a class="dropdown-item" href="#" data-target="why">Why invest in Ever
+                                <li><a class="dropdown-item" href="../../General/views/why.php" data-target="why">Why invest in Ever
                                         Retreat?</a></li>
-                                <li><a class="dropdown-item" href="#" data-target="where">Where to invest in Ever
+                                <li><a class="dropdown-item" href="../../General/views/where.php" data-target="where">Where to invest in Ever
                                         Retreat?</a></li>
-                                <li><a class="dropdown-item" href="#" data-target="how">How to invest in Ever
+                                <li><a class="dropdown-item" href="../../General/views/how.php" data-target="how">How to invest in Ever
                                         Retreat?</a></li>
                             </ul>
                             <div class="content-section">

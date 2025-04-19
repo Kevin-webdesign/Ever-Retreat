@@ -1,3 +1,13 @@
+<?php
+    require_once '../../../config/database.php';
+
+    // Initialize database
+    $db = Database::getInstance();
+
+    // Fetch all dynamic content
+    $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY display_order")->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,106 +41,26 @@
                 </div>
             </div>
             <div class="content location-row">
-                <div class="image loc-col-3 margin-right-img">
-                    <div class="img">
-                        <img src="../../../assets/image/kigali.jpg" alt="Kigali" class="img-fluid">
-                        <div class="details">
-                            <h6>Kigali</h6>
-                            <p>The heart of modern Rwanda</p>
+                <?php foreach ($locations as $location): ?>
+                    <div class="image loc-col-<?php echo ($location['display_order'] == 2 || $location['display_order'] == 4) ? '5' : '3'; ?> margin-right-img margin-btm-img">
+                        <div class="img">
+                            <?php if (!empty($location['image_path'])): ?>
+                            <img src="../../../assets/image/<?php echo htmlspecialchars($location['image_path']); ?>" alt="<?php echo htmlspecialchars($location['name']); ?>" class="img-fluid">
+                            <?php endif; ?>
+                            <div class="details">
+                                <h6><?php echo htmlspecialchars($location['name']); ?></h6>
+                                <p><?php echo htmlspecialchars($location['tagline']); ?></p>
+                            </div>
+                            <div class="after-det text-white">
+                                <h6><?php echo htmlspecialchars($location['name']); ?></h6>
+                                <p><?php echo htmlspecialchars($location['description']); ?></p>
+                            </div>
+                            <a href="../../../modules/General/views/location_x.php?id=<?php echo $location['id']; ?>" class="link-circle">
+                                <i class="fa fa-arrow-right diagonal"></i>
+                            </a>
                         </div>
-                        <div class="after-det text-white">
-                            <h6>Kigali</h6>
-                            <p>Kigali pulses with Rwanda's dynamic transformation, where modernity meets culture.</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_kigali.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
                     </div>
-                </div>
-                <div class="image loc-col-5 margin-right-img">
-                    <div class="img">
-                        <img src="../../../assets/image/rubavu.jpg" alt="rubavu" class="img-fluid">
-                        <div class="details">
-                            <a href=""></a>
-                            <h6>Rubavu</h6>
-                            <p>The Serenity of Lake Kivu</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Rubavu</h6>
-                            <p>Rubavu, offers an unmatched sense of the tranquility .</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_rubavu.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="image loc-col-3">
-                    <div class="img">
-                        <img src="../../../assets/image/musanze.jpg" alt="musanze" class="img-fluid">
-                        <div class="details">
-                            <h6>Musanze</h6>
-                            <p>The Call of the Mountains</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Musanze</h6>
-                            <p>Musanze, surrounded by misty volcanic peaks, calls to adventurers and nature lovers alike.</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_musanze.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="content location-row">
-                <div class="image loc-col-5 margin-right-img">
-                    <div class="img">
-                        <img src="../../../assets/image/nyungwe.jpg" alt="nyungwe" class="img-fluid">
-                        <div class="details">
-                            <h6>Nyungwe</h6>
-                            <p>The Soul of Tradition</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Nyungwe</h6>
-                            <p>Nyungwe Forest, a timeless sanctuary, offers breathtaking beauty and rich biodiversity.</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_nyungwe.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="image loc-col-3 margin-right-img">
-                    <div class="img">
-                        <img src="../../../assets/image/nyanza.jpg" alt="Nyanza" class="img-fluid">
-                        <div class="details">
-                            <a href=""></a>
-                            <h6>Nyanza</h6>
-                            <p>The Trail of Kings</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Nyanza</h6>
-                            <p>Nyanza, Tradition thrives through cultural experiences.</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_nyanza.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="image loc-col-3">
-                    <div class="img">
-                        <img src="../../../assets/image/huye.jpg" alt="musanze" class="img-fluid">
-                        <div class="details">
-                            <h6>Huye</h6>
-                            <p>The Wisdom of the History</p>
-                        </div>
-                        <div class="after-det text-white">
-                            <h6>Huye</h6>
-                            <p>Huye is where history and innovation meet. Sit with local elders under ancient trees, hearing tales of Rwanda's journey through time.</p>
-                        </div>
-                        <a href="../../../modules/General/views/location_huye.php" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
-                    </div>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
         <?php

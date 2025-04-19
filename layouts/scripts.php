@@ -21,7 +21,7 @@
             // Optional: Add CSS to show it's clickable
             $('.copy p').css({
                 'cursor': 'pointer',
-                'text-decoration': 'underline'
+                'text-decoration': 'none'
             });
         });
     </script>

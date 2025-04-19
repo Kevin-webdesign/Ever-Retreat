@@ -32,7 +32,7 @@
         <hr />
         <div class="d-flex icons">
             <div class="copy">
-                <P>&copy; Copyright Everretreat
+                <P style="text-decoration: none;">&copy; Copyright Everretreat
                     <script>
                         document.write(new Date().getFullYear());
                     </script>

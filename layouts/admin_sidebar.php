@@ -56,7 +56,7 @@
       <div class="bg-white py-2 collapse-inner rounded">
           <h6 class="collapse-header">Site Utilities:</h6>
           <a class="collapse-item" href="../../Dashboard/views/homepage.php">Homepage</a>
-          <a class="collapse-item" href="../../Dashboard/views/locations.php">Locations</a>
+          <a class="collapse-item" href="../../Dashboard/views/tourism_social_mngt.php">Investment & Social</a>
           <a class="collapse-item" href="../../Dashboard/views/gallery.php">Gallery</a>
           <a class="collapse-item" href="../../Dashboard/videosManager.php">Site Videos</a>
           <a class="collapse-item" href="../../Dashboard/views/partners.php">Partners</a>

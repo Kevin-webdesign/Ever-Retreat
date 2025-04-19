@@ -83,6 +83,61 @@
           text-align: center;
         }
         /* Custom FancyBox styling for videos */
+        .modal-lg {
+            max-width: 800px;
+        }
+        
+        .modal-content {
+            /* border-radius: 4px; */
+            border: none;
+        }
+        
+        .modal-header {
+            background-color: #b8a060;
+            color: white;
+            border-bottom: none;
+        }
+        
+        .modal-title {
+            font-weight: bold;
+            font-size: 15px;
+        }
+        
+        .btn-close {
+            color: white;
+        }
+        
+        .wrap-input100b {
+            margin-top: 15px;
+        }
+        
+        /* Fix for the booking modal to be properly styled */
+        #bookingModal .wrap-contact100 {
+            padding: 20px 0;
+        }
+        
+        #bookingModal .container-contact100 {
+            min-height: auto;
+        }
+        
+        #bookingModal .bg1 {
+            background-color: #f7f7f7;
+            margin-bottom: 15px;
+        }
+        
+        #bookingModal .bg0 {
+            background-color: #f7f7f7;
+        }
+
+        #bookingFormPopup input, 
+        #bookingFormPopup textarea {
+            color: #b8a060!important;
+        }
+        .label-input100{
+            font-size: 13px;
+            padding-left: 10px;
+            padding-right: 20px;
+        }
         
     </style>
     <!-- Navbar -->
@@ -165,7 +220,7 @@
                                 </div>
                                 <div class="cs-form-field cs-submit">
                                     <div class="field-wrap">
-                                        <button class="button book-now-btn2" role="button" style="z-index: 0;" type="submit">
+                                        <button class="button book-now-btn2" id="book_now" role="button" style="z-index: 0;" type="submit">
                                             <span class="btn-text">Book Now</span>
                                         </button>
                                     </div>
@@ -267,24 +322,24 @@
             </div>
             <div class="content mafoto location-row">
                 <?php foreach ($locations as $location): ?>
-                <div class="image loc-col-<?php echo ($location['display_order'] == 2 || $location['display_order'] == 4) ? '5' : '3'; ?> margin-right-img margin-btm-img">
-                    <div class="img">
-                        <?php if (!empty($location['image_path'])): ?>
-                        <img src="../../../assets/image/<?php echo htmlspecialchars($location['image_path']); ?>" alt="<?php echo htmlspecialchars($location['name']); ?>" class="img-fluid">
-                        <?php endif; ?>
-                        <div class="details">
-                            <h6><?php echo htmlspecialchars($location['name']); ?></h6>
-                            <p><?php echo htmlspecialchars($location['tagline']); ?></p>
+                    <div class="image loc-col-<?php echo ($location['display_order'] == 2 || $location['display_order'] == 4) ? '5' : '3'; ?> margin-right-img margin-btm-img">
+                        <div class="img">
+                            <?php if (!empty($location['image_path'])): ?>
+                            <img src="../../../assets/image/<?php echo htmlspecialchars($location['image_path']); ?>" alt="<?php echo htmlspecialchars($location['name']); ?>" class="img-fluid">
+                            <?php endif; ?>
+                            <div class="details">
+                                <h6><?php echo htmlspecialchars($location['name']); ?></h6>
+                                <p><?php echo htmlspecialchars($location['tagline']); ?></p>
+                            </div>
+                            <div class="after-det text-white">
+                                <h6><?php echo htmlspecialchars($location['name']); ?></h6>
+                                <p><?php echo htmlspecialchars($location['description']); ?></p>
+                            </div>
+                            <a href="../../../modules/General/views/location_x.php?id=<?php echo $location['id']; ?>" class="link-circle">
+                                <i class="fa fa-arrow-right diagonal"></i>
+                            </a>
                         </div>
-                        <div class="after-det text-white">
-                            <h6><?php echo htmlspecialchars($location['name']); ?></h6>
-                            <p><?php echo htmlspecialchars($location['description']); ?></p>
-                        </div>
-                        <a href="<?php echo htmlspecialchars($location['link']); ?>" class="link-circle">
-                            <i class="fa fa-arrow-right diagonal"></i>
-                        </a>
                     </div>
-                </div>
                 <?php endforeach; ?>
             </div>
         </div>
@@ -334,6 +389,107 @@
             </div>
         </div>
         <?php include("../../../layouts/footer.php"); ?>
+    </div>
+
+    <!-- Add this HTML code at the end of your body tag but before the scripts -->
+    <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="bookingModalLabel">Complete Your Booking</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-contact100">
+                        <div class="wrap-contact100">
+                            <form class="contact100-form validate-form" id="bookingFormPopup">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="wrap-input100 validate-input bg1" data-validate="Please Select Check in Date">
+                                            <span class="label-input100">Check in *</span>
+                                            <input class="input100 form-control" type="text" id="startPopup" name="checkin" placeholder="Enter Check in date" required readonly>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="wrap-input100 validate-input bg1" data-validate="Please Select Check out Date">
+                                            <span class="label-input100">Check out *</span>
+                                            <input class="input100 form-control" type="text" id="endPopup" name="checkout" placeholder="Enter Check out date" required readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="wrap-input100 validate-input bg1" data-validate="Enter Number of Adults">
+                                            <span class="label-input100">Adults *</span>
+                                            <input class="input100 form-control" type="number" name="adults" id="adultsPopup" min="1" placeholder="2" required>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-6">
+                                        <div class="wrap-input100 bg1">
+                                            <span class="label-input100">Child <small class="text-danger">(under 12yrs Only)</small></span>
+                                            <input class="input100 form-control" type="number" name="child" id="kidsPopup" min="0" placeholder="1" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="wrap-input100 validate-input bg1" data-validate="Please Enter Your Names">
+                                    <span class="label-input100">Names *</span>
+                                    <input class="input100 form-control" type="text" name="names" id="namesPopup" placeholder="Enter Your Name" required>
+                                </div>
+    
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="wrap-input100 validate-input bg1" data-validate="Enter Your Email (e@a.x)">
+                                            <span class="label-input100">Email *</span>
+                                            <input class="input100 form-control" type="email" name="email" id="emailPopup" placeholder="Your Email " required>
+                                        </div>
+                                    </div>
+    
+                                    <div class="col-md-6">
+                                        <div class="wrap-input100 bg1">
+                                            <span class="label-input100">Phone</span>
+                                            <input class="input100 form-control" type="text" name="phone" id="phonePopup" placeholder="Phone Number" required>
+                                        </div>
+                                    </div>
+                                </div>
+    
+                                <div class="wrap-input100 validate-input bg0" data-validate="Please Type Your Message">
+                                    <span class="label-input100">Message</span>
+                                    <textarea class="input100 form-control" name="message" id="messagePopup" placeholder="Your message here..."></textarea>
+                                </div>
+                                
+                                <div class="wrap-input100b reservation-forms" style="background-color: white;">
+                                    <hr class="hr">
+                                    <div class="total-cost">
+                                        <span class="cost-left" style="float:left;"> Total cost: &nbsp;</span>  
+                                        <span class="cost-right-popup">$0</span>
+                                    </div>
+                                </div>
+    
+                                <div class="container-contact100-form-btn">
+                                    <button type="submit" class="contact100-form-btn btn book-now-btn text-white">
+                                        <span style="color: white !important;">
+                                            Book Your Stay Now
+                                            <i class="fa fa-long-arrow-right m-l-7" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                    <div class="take_to_email" style="display:none;">
+                                        <input class="input100" type="text" name="addition_rate" id="addition_rate_popup" placeholder="Addition Rate" required>
+                                        <input class="input100" type="text" name="base_rate" id="base_rate_popup" placeholder="Base Rate" required>
+                                        <input class="input100" type="text" name="addedGuest" id="addedGuest_popup" placeholder="addedGuest" required>
+                                        <input class="input100" type="text" name="total_amount" id="total_amount_popup" placeholder="total_amount" required>
+                                    </div>
+                                    <div class="invalid-feedbacks" id="emailErrorPopup"></div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- ADDING JAVASCRIPTS -->
@@ -469,6 +625,9 @@
             });
         });
     </script>
+
+    <!-- booking scripts -->
+    <script src="../../../assets/js/booking.js"></script>
 
 </body>
 </html>
