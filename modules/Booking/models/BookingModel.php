@@ -6,12 +6,14 @@ class BookingModel {
         $this->db = $db;
     }
 
-    // Create a new user (for registration)
-    public function recordBooking($bookingCode, $checkin, $checkout, $adults, $child, $names, $email, $phone, $message) {
-        $query = "INSERT INTO booking (bookingCode, checkin, checkout, adults, child, names, email, phone, message) VALUES 
-        (:bookingCode, :checkin, :checkout, :adults, :child, :names, :email, :phone, :message)";
+    // Updated to include villa field
+    public function recordBooking($bookingCode, $villa, $checkin, $checkout, $adults, $child, $names, $email, $phone, $message) {
+        $query = "INSERT INTO booking (bookingCode, villa, checkin, checkout, adults, child, names, email, phone, message) VALUES 
+        (:bookingCode, :villa, :checkin, :checkout, :adults, :child, :names, :email, :phone, :message)";
+        
         $stmt = $this->db->prepare($query);
         $stmt->bindParam(':bookingCode', $bookingCode, PDO::PARAM_STR);
+        $stmt->bindParam(':villa', $villa, PDO::PARAM_STR);
         $stmt->bindParam(':checkin', $checkin, PDO::PARAM_STR);
         $stmt->bindParam(':checkout', $checkout, PDO::PARAM_STR);
         $stmt->bindParam(':adults', $adults, PDO::PARAM_STR);
@@ -27,7 +29,4 @@ class BookingModel {
             return false; 
         }
     }    
-
-    
 }
-?>

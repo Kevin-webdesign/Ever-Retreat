@@ -232,12 +232,17 @@ content{
 }
 
 .hero-content h1 {
-    font-weight: 900;
-    font-size: 60px;
+    font-weight: 700;
+    font-size: 75px;
+    font-family: 'Lufga', sans-serif;
+    margin-bottom:8px!important
 }
 
 .hero-content p {
-    font-size: 16px;
+    font-size: 14px;
+    text-shadow: 1px 1px 2px black,
+    0 0 1em rgb(0, 0, 0);
+    margin-bottom:86px!important
 }
 .hero-content2 {
     min-height: 50vh;
@@ -271,11 +276,12 @@ content{
 .booking-form {
     background: rgba(255, 255, 255, 0.1) !important;
     backdrop-filter: blur(10px);
-    border-radius: 8px;
+    border-radius: 0px;
     width: 100%;
     max-width: 1200px;
     padding: 10px 100px;
-    margin-top: 10px;
+    margin-top: 50px;
+    margin-bottom: 30px;
 }
 
 .book-now-btn {
@@ -298,6 +304,8 @@ content{
 }
 .more-btn{
     background-color: #1E1E1E !important;
+    font-size: 13px;
+    font-weight: 300;
 }
 .book-now-btn.send-contact {
     color: #ffffff;
@@ -371,6 +379,7 @@ content{
         font-size: 0.875rem;
         background: rgba(250, 250, 250, 0.1);
         border: solid 1px rgba(250, 250, 250, 0.5)!important;
+        margin-right: 10px;
     }
     @media (max-width: 768px) {
         .cs-reservation-form input[type="text"], .cs-reservation-form input[type="email"], .cs-reservation-form input[type="url"], .cs-reservation-form input[type="file"], .cs-reservation-form input[type="password"], .cs-reservation-form input[type="number"], .cs-reservation-form input[type="date"], .cs-reservation-form input[type="search"], .cs-reservation-form input[type="tel"], .cs-reservation-form textarea, .cs-reservation-form select {
@@ -434,6 +443,7 @@ content{
         display: -webkit-flex;
         display: -ms-flexbox;
         display: flex;
+        flex-wrap: wrap;
         margin: 0 calc(0px - var(--field-space)/2);
         -webkit-box-align: end;
         -ms-flex-align: end;
@@ -443,7 +453,7 @@ content{
     .cs-reservation-form.style-banner .cs-form-wrap .cs-form-field {
         position: relative;
         display: inline-block;
-        width: 100%;
+        max-width: 30%;
         vertical-align: top;
         padding: 0 calc(var(--field-space)/2);
     }
@@ -624,6 +634,9 @@ content{
         background: none;
         color: inherit;
         border: 1px solid var(--form-bd);
+        font-family: "Inter Tight", sans-serif;
+        font-size: 14px;
+        font-weight: 600;
     }
     
     .cs-reservation-form.inline-label .field-wrap > .cs-form-label {
@@ -633,11 +646,18 @@ content{
         -ms-transform: translateY(-50%);
         transform: translateY(-50%);
         left: 15px;
+        font-family: "Inter Tight", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 200;
+        font-style: normal;
+        font-size: 13px;
+        opacity: 0.7;
     }
     
     .cs-reservation-form.inline-label .field-input-wrap > * {
         text-align: right;
         padding-right: 35px;
+        color: rgba(0, 0, 0, 0.806);
     }
     
     .cs-reservation-form.inline-label.cs-form-underline .field-wrap > .cs-form-label {
@@ -802,14 +822,13 @@ p{
 }
 
 .title-p{
-    font-weight: 700;
+    font-weight: 400;
     color: #b8945e;
-    font-size: 18px;
+    font-size: 16px;
 }
 @media (max-width: 768px) {
     .title-p{
-        font-size: 18px;
-        text-align: center;
+        font-size: 15px;
     }
 }
 

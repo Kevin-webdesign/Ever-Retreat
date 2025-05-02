@@ -60,22 +60,22 @@ class BookingController
             $mail->isSMTP();
             $mail->Host       = 'mail.everretreat.com';     
             $mail->SMTPAuth   = true;
-            $mail->Username   = 'info@everretreat.com';    
-            $mail->Password   = 'Everretreat@2025';       
+            $mail->Username   = 'reservation@everretreat.com';    
+            $mail->Password   = 'everretreat@2025';       
             $mail->SMTPSecure = 'ssl';
             $mail->Port       = 465;
             
             // $mail->SMTPDebug = 2; 
             
             // Recipients
-            $mail->setFrom('info@everretreat.com', 'EVER RETREAT');
-            $mail->addAddress('iradukundaericmbabazi@gmail.com', $bookingData['names']);  // Guest email iradukundaericmbabazi@gmail.com
-            $mail->addBCC('info.abaremy@gmail.com');        // BCC to your booking department
+            $mail->setFrom($bookingData['email'], $bookingData['names']);
+            $mail->addAddress('reservation@everretreat.com', 'Ever retreat');  // Guest email iradukundaericmbabazi@gmail.com
+            $mail->addBCC('iradukundaericmbabazi@gmail.com');        // BCC to your booking department info@everretreat.com
             $mail->addBCC('info@everretreat.com');
             
             // Content
             $mail->isHTML(true);
-            $mail->Subject = 'NEW BOOKING - #' . $bookingData['bookingCode'];
+            $mail->Subject = 'New Booking - #' . $bookingData['bookingCode'];
             
             // Calculate days between dates
             $checkin = new DateTime($bookingData['checkin']);

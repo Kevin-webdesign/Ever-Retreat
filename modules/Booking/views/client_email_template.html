@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+    <style type="text/css">
+        /* Base styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #333333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Main container */
+        .email-container {
+            max-width: 550px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        /* Header section */
+        .header {
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
+            color: #43a99b;
+        }
+        
+        .header p {
+            margin: 5px 0 0;
+            font-size: 15px;
+            color: #333;
+        }
+        
+        /* Divider line */
+        .divider {
+            height: 1px;
+            background-color: #43a99b;
+            margin: 0 20px;
+        }
+        
+        /* Content section */
+        .content {
+            padding: 20px;
+        }
+        
+        .section-title {
+            color: #43a99b;
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .booking-details {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .booking-details tr {
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .booking-details tr:last-child {
+            border-bottom: none;
+        }
+        
+        .booking-details td {
+            padding: 8px 0;
+        }
+        
+        .label {
+            font-weight: 500;
+            color: #555;
+            width: 40%;
+            vertical-align: top;
+        }
+        
+        .value {
+            color: #333;
+            text-align: right;
+        }
+        
+        .message-section {
+            margin-top: 20px;
+        }
+        
+        .message-title {
+            color: #43a99b;
+            margin-bottom: 10px;
+            font-size: 18px;
+            font-weight: 500;
+        }
+        
+        .message-content {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .contact-info {
+            margin-top: 25px;
+            background-color: #43a99b;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 5px;
+        }
+        
+        .contact-info a {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .footer img {
+            max-width: 150px;
+            margin-top: 10px;
+        }
+        
+        /* Email link color */
+        .email-link {
+            color: #43a99b;
+            text-decoration: none;
+        }
+        
+        /* Responsive adjustments */
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100%;
+                border-radius: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Booking Confirmation</h1>
+            <p>Thank you for booking with EverRetreat, {GUEST_NAME}.</p>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <div class="content">
+            <h2 class="section-title">Your Booking Details</h2>
+            
+            <table class="booking-details" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td class="label">Villa:</td>
+                    <td class="value">{VILLA_NAME}</td>
+                </tr>
+                <tr>
+                    <td class="label">Name:</td>
+                    <td class="value">{GUEST_NAME}</td>
+                </tr>
+                <tr>
+                    <td class="label">Email:</td>
+                    <td class="value"><a href="mailto:{GUEST_EMAIL}" class="email-link">{GUEST_EMAIL}</a></td>
+                </tr>
+                <tr>
+                    <td class="label">Phone:</td>
+                    <td class="value">{GUEST_PHONE}</td>
+                </tr>
+                <tr>
+                    <td class="label">Check-In Date:</td>
+                    <td class="value">{CHECK_IN}</td>
+                </tr>
+                <tr>
+                    <td class="label">Check-Out Date:</td>
+                    <td class="value">{CHECK_OUT}</td>
+                </tr>
+                <tr>
+                    <td class="label">Number of Adults:</td>
+                    <td class="value">{ADULTS}</td>
+                </tr>
+                <tr>
+                    <td class="label">Number of Kids:</td>
+                    <td class="value">{CHILDREN}</td>
+                </tr>
+                <tr>
+                    <td class="label">Total Days:</td>
+                    <td class="value">{NIGHTS}</td>
+                </tr>
+                <tr>
+                    <td class="label">Total Amount:</td>
+                    <td class="value">{TOTAL_AMOUNT}$</td>
+                </tr>
+            </table>
+            
+            <div class="message-section">
+                <h3 class="message-title">Additional Message</h3>
+                <div class="message-content">
+                    <p>{GUEST_MESSAGE}</p>
+                </div>
+            </div>
+            
+            <div class="contact-info">
+                <p>We look forward to welcoming you! For any inquiries, feel free to contact us at<br>
+                <a href="mailto:{COMPANY_EMAIL}">{COMPANY_EMAIL}</a></p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Best Regards,<br>
+               The EverRetreat Team</p>
+            
+            <img src="https://everretreat.com/assets/image/logo-retreat.png" alt="EverRetreat Logo">
+        </div>
+    </div>
+</body>
+</html>

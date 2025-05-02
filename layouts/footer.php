@@ -39,7 +39,7 @@
                 </P>
             </div>
             <div class="links">
-                <i class="fab fa-facebook"></i>
+                <i class="fab fa-facebook" style="color:white;"></i>
                 <i class="fab fa-instagram"></i>
                 <i class="fab fa-x-twitter"></i>
                 <i class="fab fa-youtube"></i>

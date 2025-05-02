@@ -25,7 +25,7 @@
                         Social & culture
                     </a>
                     <div class="dropdown-menu custom-dropdown drop1" aria-labelledby="navbarDropdown">
-                        <div class="dropdown-content d-flex">
+                        <div class="dropdown-content">
                             <ul class="navigation">
                                 <h2>Social &amp; culture</h2>
                                 <li><a class="dropdown-item" href="../../General/views/museum.php"

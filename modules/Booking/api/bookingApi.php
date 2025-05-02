@@ -17,6 +17,7 @@ switch ($action) {
     case 'booking':
         $bookings = new BookingController();
         $bookingCode = $_POST['bookingCode'] ?? '';
+        $villa = $_POST['villa'] ?? 'Ever Retreat'; // Added villa parameter with default
         $checkin = $_POST['checkin'] ?? '';
         $checkout = $_POST['checkout'] ?? '';
         $adults = $_POST['adults'] ?? '';
@@ -30,8 +31,8 @@ switch ($action) {
         $addedGuest = $_POST['addedGuest'] ?? '';
         $total_amount = $_POST['total_amount'] ?? '';
 
-        // Call the register method and check if the registration is successful
-        $result = $bookings->recordBookingController($bookingCode,$checkin, $checkout, $adults, $child, $names, $email, $phone, $message, $addition_rate, $base_rate, $addedGuest, $total_amount);
+        // Call the recordBookingController method with new villa parameter
+        $result = $bookings->recordBookingController($bookingCode, $villa, $checkin, $checkout, $adults, $child, $names, $email, $phone, $message, $addition_rate, $base_rate, $addedGuest, $total_amount);
 
         if ($result['success']) {
             echo json_encode(['success' => true, 'message' => $result['message']]);
@@ -40,9 +41,7 @@ switch ($action) {
         }
         exit;
     
-
     default:
         echo json_encode(['success' => false, 'message' => 'Invalid action.']);
         break;
 }
-

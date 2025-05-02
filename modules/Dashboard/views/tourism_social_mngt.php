@@ -106,7 +106,7 @@ if ($decodedToken === false) {
             <!-- End of Footer -->
         </div>
     </div>
-
+    
     <!-- All your existing modals (keep them as is) -->
     <?php include('../static/admin_modals.php'); ?>
 

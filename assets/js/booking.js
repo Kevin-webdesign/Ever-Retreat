@@ -47,7 +47,8 @@ $(document).ready(function() {
         const kids = childMatch ? parseInt(childMatch[1]) : 0;
         
         $('#adultsPopup').val(adults);
-        $('#kidsPopup').val(kids);
+        $('#childPopup').val(kids);
+        console.log("kids ", kids);
         
         // Calculate initial total
         calculateTotal();
@@ -125,7 +126,7 @@ $(document).ready(function() {
                 checkin: $('#startPopup').val(),
                 checkout: $('#endPopup').val(),
                 adults: $('#adultsPopup').val(),
-                child: $('#kidsPopup').val(),
+                child: $('#childPopup').val(),
                 names: $('#namesPopup').val(),
                 email: $('#emailPopup').val(),
                 phone: $('#phonePopup').val(),

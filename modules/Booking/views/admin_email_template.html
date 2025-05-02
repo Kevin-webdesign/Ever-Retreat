@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Booking Alert</title>
+    <style type="text/css">
+        /* Base styles */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #333333;
+            background-color: #f9f9f9;
+        }
+        
+        /* Main container */
+        .email-container {
+            max-width: 550px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        /* Header section */
+        .header {
+            background-color: #103432;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        
+        /* Content section */
+        .content {
+            padding: 20px;
+        }
+        
+        .section-title {
+            background-color: #f5f5f5;
+            padding: 12px 15px;
+            font-weight: 600;
+            color: #43a99b;
+            border-bottom: 1px solid #e1e1e1;
+            margin-top: 20px;
+            margin-bottom: 0;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .section-content {
+            padding: 15px;
+            border: 1px solid #e1e1e1;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 20px;
+        }
+        
+        .booking-details {
+            width: 100%;
+        }
+        
+        .booking-details td {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e1e1e1;
+        }
+        
+        .booking-details tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .label {
+            font-weight: 500;
+            color: #555;
+            width: 40%;
+        }
+        
+        .value {
+            text-align: right;
+        }
+        
+        .total-row {
+            font-weight: 700;
+            border-top: 2px solid #e1e1e1;
+            margin-top: 10px;
+            padding-top: 10px;
+        }
+        
+        .message-box {
+            background-color: #f9f8f4;
+            border-left: 4px solid #43a99b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .admin-link {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #43a99b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>NEW BOOKING ALERT</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear Admin,</p>
+            
+            <p>A new booking has been made on EVER RETREAT. Below are the booking details:</p>
+            
+            <h3 class="section-title">Reservation Details</h3>
+            <div class="section-content">
+                <table class="booking-details" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="label">Booking Reference:</td>
+                        <td class="value">#{BOOKING_ID}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Villa:</td>
+                        <td class="value">{VILLA_NAME}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Names:</td>
+                        <td class="value">{GUEST_NAME}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Email:</td>
+                        <td class="value">{GUEST_EMAIL}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Phone:</td>
+                        <td class="value">{GUEST_PHONE}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Check-in Date:</td>
+                        <td class="value">{CHECK_IN}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Check-out Date:</td>
+                        <td class="value">{CHECK_OUT}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Number of Nights:</td>
+                        <td class="value">{NIGHTS}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Guests:</td>
+                        <td class="value">{ADULTS} Adults, {CHILDREN} Children</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3 class="section-title">Payment Summary</h3>
+            <div class="section-content">
+                <table class="booking-details" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="label">Base Rate:</td>
+                        <td class="value">${BASE_RATE}/night</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Additional Guests:</td>
+                        <td class="value">{EXTRA_GUESTS} × ${ADDITION_RATE}</td>
+                    </tr>
+                    <tr class="total-row">
+                        <td class="label">Total Amount:</td>
+                        <td class="value">${TOTAL_AMOUNT}</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="message-box">
+                <strong>Special Requests:</strong>
+                <p>{GUEST_MESSAGE}</p>
+            </div>
+            
+            <div class="admin-link">
+                <a href="{MANAGE_BOOKING_URL}" class="button">View Full Reservation Details</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
