@@ -47,7 +47,7 @@ unset($section);
     <?php include("../../../layouts/navbar.php"); ?>
     <!-- End navbar -->
 
-    <div class="hero-content2 text-white text-center vh-90">
+    <!-- <div class="hero-content2 text-white text-center vh-90">
         <div class="video-background2" style="border: solid 2p red; height: 100%;">
             <div class="gallery-pic vh-100"
                 style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../../assets/image/<?php echo htmlspecialchars($page['hero_image']); ?>) no-repeat center center; background-size:cover;">
@@ -55,6 +55,17 @@ unset($section);
         </div>
         <div class="container-top">
             <h1 class="display-4"><?php echo htmlspecialchars($page['title']); ?></h1>
+        </div>
+    </div> -->
+      <div class="hero-content text-white text-center vh-100">
+        <!-- Video Background -->
+        <div class="video-background">
+            <video autoplay muted loop playsinline>
+                <source src="../../../assets/video/EverRetreatTourism.mp4" type="video/mp4">
+            </video>
+        </div>
+        <div class="container-top">
+            <h1 class="display-4">Craft</h1> 
         </div>
     </div>
 

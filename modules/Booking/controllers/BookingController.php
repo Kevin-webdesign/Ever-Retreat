@@ -74,8 +74,9 @@ class BookingController
             
             // Recipients
             $mail->setFrom($bookingData['email'], $bookingData['names']);
-            $mail->addAddress('reservation@everretreat.com', 'Ever retreat');  
-            $mail->addBCC('iradukundaericmbabazi@gmail.com');        
+            // $mail->addAddress('reservation@everretreat.com', 'Ever retreat');  
+            $mail->addAddress('info.abaremy@gmail.com', 'Ever retreat');  
+            // $mail->addBCC('iradukundaericmbabazi@gmail.com');        
             $mail->addBCC('info@everretreat.com');
             
             // Content

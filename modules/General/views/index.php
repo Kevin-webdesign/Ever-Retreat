@@ -370,6 +370,7 @@
         @media (min-width: 768px) and (max-width: 1024px) {
             .booking-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 3px;
             }
             
             .book-btn-container {
@@ -378,18 +379,19 @@
         }
         
         /* For mobile view */
-        @media (max-width: 767px) {
-            .booking-grid {
-                grid-template-columns: 1fr;
-                gap: 10px;
-            }
+        @media (max-width: 768px) {
             
             .booking-form {
                 padding: 15px;
+                /* height: 250px; */
+                /* width: 60%; */
             }
             
             .booking-field {
-                height: 45px;
+                height: 42px;
+            }
+            .book-btn-container{
+                /* width: 510px; */
             }
             
             .booking-label {
@@ -417,6 +419,24 @@
                 -webkit-transform: translateY(58%);
                 -ms-transform: translateY(58%);
                 transform: translateY(58%);
+            }
+        }
+        @media (max-width: 576px) {
+            .book-btn-container{
+                width: 460px;
+            }
+        }
+        @media (max-width: 480px) {
+            .book-btn-container{
+                width: 100%;
+            }
+            .booking-grid {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 5px;
+            }
+            .booking-field {
+                width: 49%;
             }
         }
         /* RESERVATION FORM STYLE */
@@ -581,6 +601,37 @@
             padding-left: 0px
             }
         }
+        @media screen and (max-width: 992px){
+            .pd-left {
+            padding-left: 0px
+            }
+        }
+        @media screen and (max-width: 768px){
+            .pd-left {
+            padding-left: 0px
+            }
+        }
+        @media screen and (max-width: 576px){
+            .pd-left {
+            padding-left: 0px
+            }
+        }
+
+        .spinner-border {
+            display: inline-block;
+            width: 1rem;
+            height: 1rem;
+            vertical-align: text-bottom;
+            border: 0.25em solid currentColor;
+            border-right-color: transparent;
+            border-radius: 50%;
+            animation: spinner-border .75s linear infinite;
+        }
+        
+        @keyframes spinner-border {
+            to { transform: rotate(360deg); }
+        }
+            
     </style>
     <!-- Navbar -->
     <?php include("../../../layouts/navbar.php"); ?>
@@ -685,23 +736,23 @@
                         <p class="head-text"><?php echo htmlspecialchars($aboutUs['description']); ?></p>
                         <hr>
                         <div class="row d-flex">
-                            <div class="col-md">
-                                <h1><?php echo htmlspecialchars($aboutUs['stats_value_1']); ?></h1>
-                                <p><?php echo htmlspecialchars($aboutUs['stats_text_1']); ?></p>
+                            <div class="col-md rating_div">
+                                <h1 class="rating_head"><?php echo htmlspecialchars($aboutUs['stats_value_1']); ?></h1>
+                                <p class="rating_text"><?php echo htmlspecialchars($aboutUs['stats_text_1']); ?></p>
                             </div>
-                            <div class="col-md">
-                                <h1><?php echo htmlspecialchars($aboutUs['stats_value_2']); ?></h1>
-                                <p><?php echo htmlspecialchars($aboutUs['stats_text_2']); ?></p>
+                            <div class="col-md rating_div">
+                                <h1 class="rating_head"><?php echo htmlspecialchars($aboutUs['stats_value_2']); ?></h1>
+                                <p class="rating_text"><?php echo htmlspecialchars($aboutUs['stats_text_2']); ?></p>
                             </div>
-                            <div class="col-md">
-                                <h1><?php echo htmlspecialchars($aboutUs['stats_value_3']); ?></h1>
-                                <p><?php echo htmlspecialchars($aboutUs['stats_text_3']); ?></p>
+                            <div class="col-md rating_div">
+                                <h1 class="rating_head"><?php echo htmlspecialchars($aboutUs['stats_value_3']); ?></h1>
+                                <p class="rating_text"><?php echo htmlspecialchars($aboutUs['stats_text_3']); ?></p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="location-row ev-container">
+            <div class="location-row2 ev-container">
                 <!-- HTML Structure -->
                 <div class="ab-col-4 margin-right-img">
                     <div class="video-player">

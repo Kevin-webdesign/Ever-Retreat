@@ -25,5 +25,7 @@
     <link href="../../../assets/dashboard_assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <link href="../../../assets/dashboard_assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
     
+    <!-- Custom styles for this page -->
+    <link href="../../../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
 </head>

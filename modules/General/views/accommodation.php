@@ -474,13 +474,13 @@
                     margin: 10px;
                 }
                 .word-icon-holder .amenity-icon2{
-                    width: 35%;
-                    height: 60px;
+                    width: 28%;
+                    height: 40px;
                     margin: 3px;
                 }
                 .word-icon-holder .amenity-icon2 img{
                     width: 96%;
-                    height: 90%;
+                    /* height: 90%; */
                     margin: 3%;
                 }
                 .mb-comp{
@@ -689,7 +689,21 @@
             }
         }
             /* END RESERVATION FORM STYLE */
+            .spinner-border {
+                display: inline-block;
+                width: 1rem;
+                height: 1rem;
+                vertical-align: text-bottom;
+                border: 0.25em solid currentColor;
+                border-right-color: transparent;
+                border-radius: 50%;
+                animation: spinner-border .75s linear infinite;
+            }
             
+            @keyframes spinner-border {
+                to { transform: rotate(360deg); }
+            }
+                
         </style>
         <div class="container-fluid master-container">
             <div class="accommodation">
@@ -1006,6 +1020,16 @@
             $('#bookingForm').on('submit', function (e) {
                 e.preventDefault();
 
+                // Show loading SweetAlert
+                Swal.fire({
+                    title: 'Processing your booking',
+                    html: 'Please wait while we process your request...',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                
                 // Check if there's any error before submitting
                 if ($('#emailError').text() === '') {
                     let rand = Math.floor(100000 + Math.random() * 900000);

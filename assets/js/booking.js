@@ -115,6 +115,16 @@ $(document).ready(function() {
     // Handle popup form submission
     $('#bookingFormPopup').on('submit', function(e) {
         e.preventDefault();
+
+        // Show loading SweetAlert
+        Swal.fire({
+            title: 'Processing your booking',
+            html: 'Please wait while we process your request...',
+            allowOutsideClick: false,
+            didOpen: () => {
+                Swal.showLoading();
+            }
+        });
         
         // Check if there's any error before submitting
         if ($('#emailErrorPopup').text() === '') {

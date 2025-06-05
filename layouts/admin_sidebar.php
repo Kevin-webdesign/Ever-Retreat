@@ -61,6 +61,7 @@
           <a class="collapse-item" href="../../Dashboard/videosManager.php">Site Videos</a>
           <a class="collapse-item" href="../../Dashboard/views/partners.php">Partners</a>
           <a class="collapse-item" href="../../Dashboard/views/testimonials.php">Testimonials</a>
+          <a class="collapse-item" href="../../Dashboard/views/tourism_packages_mngt.php">Tourism Packages</a>
       </div>
     </div>
   </li>

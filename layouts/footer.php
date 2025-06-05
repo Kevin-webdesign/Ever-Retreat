@@ -22,9 +22,10 @@
                     news and free insight </b>
             </p>
 
-            <form action="">
-                <input type="email" name="email" placeholder="email">
-                <button>Subscribe</button>
+            <form action="" id="subscribe-form">
+                <input type="email" name="email" id="subscriber_email" placeholder="email" required>
+                <button type="submit" id="subscribe">Subscribe</button>
+                <div id="subscribe-message" style="display:none; margin-top:5px;"></div>
             </form>
 
 

@@ -24,4 +24,64 @@
                 'text-decoration': 'none'
             });
         });
+        // Subscription form handling
+        $(document).ready(function() {
+            $('#subscribe-form').on('submit', function(e) {
+                e.preventDefault();
+                const email = $('#subscriber_email').val();
+                
+                // Validate email
+                if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Invalid Email',
+                        text: 'Please enter a valid email address'
+                    });
+                    return;
+                }
+                
+                // Show loading
+                Swal.fire({
+                    title: 'Subscribing...',
+                    allowOutsideClick: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                
+                $.ajax({
+                    url: '../../Newsletter/api/newsletterApi.php',
+                    type: 'POST',
+                    data: { email: email, action: 'subscribe' },
+                    dataType: 'json',
+                    success: function(response) {
+                        Swal.close();
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Subscribed!',
+                                text: response.message,
+                                timer: 2000
+                            });
+                            $('#subscriber_email').val('');
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Subscription Failed',
+                                text: response.message
+                            });
+                        }
+                    },
+                    error: function() {
+                        Swal.close();
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: 'An error occurred. Please try again.'
+                        });
+                    }
+                });
+            });
+        });
+            
     </script>
