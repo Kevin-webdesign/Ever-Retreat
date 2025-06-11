@@ -29,6 +29,7 @@
 
     <!-- date range picker -->
     <link rel="stylesheet" href="../../../assets/css/date.css">
+    <!-- <link rel="stylesheet" href="../../../assets/css/select2.min.css"> -->
 
     <link rel="stylesheet" href="../../../vendor/fancybox/jquery.fancybox.css">
 

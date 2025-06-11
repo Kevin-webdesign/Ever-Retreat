@@ -171,8 +171,19 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
                         </div>
                         <div class="form-group">
                             <label for="travelFromCountry">Which Country are you travelling from</label>
-                            <input type="text" id="travelFromCountry" name="travelFromCountry" placeholder="Type here..." required>
+                            <div class="custom-select">
+                                <input type="text" id="travelFromCountryInput" name="travelFromCountry" 
+                                       placeholder="Type or select a country..." required
+                                       autocomplete="off" readonly
+                                       onfocus="showCountryDropdown()">
+                                <div id="countryDropdown" class="country-dropdown">
+                                    <input type="text" class="country-search" placeholder="Search countries..." 
+                                           oninput="filterCountries()">
+                                    <div class="country-list"></div>
+                                </div>
+                            </div>
                         </div>
+                            
                         <div class="form-group">
                             <label for="startDate">Do you have a travel start date in mind?</label>
                             <input type="date" id="startDate" name="startDate">
@@ -296,8 +307,7 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
     </div>
 
     <!-- ADDING JAVASCRIPTS -->
-    <?php include("../../../layouts/scripts.php"); ?>
-
+    <?php include("../../../layouts/scripts.php"); ?>               
     <script>
         function showSection(sectionId) {
             // Hide all sections
@@ -379,11 +389,15 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
         document.getElementById('travelForm').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            // Show loading state
-            const submitBtn = this.querySelector('.submit-btn');
-            const originalText = submitBtn.textContent;
-            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...';
-            submitBtn.disabled = true;
+            // Show loading SweetAlert
+            Swal.fire({
+                title: 'Processing your request',
+                html: 'Please wait while we submit your travel inquiry...',
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            });
 
             // Get all form data including checkboxes
             const formData = new FormData(this);
@@ -399,9 +413,8 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
                     data[key] = value;
                 }
             });
-
-            // close FORM to show the result from submission
             closeModal();
+
             // Submit via AJAX
             $.ajax({
                 type: 'POST',
@@ -410,13 +423,20 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
                 contentType: 'application/json', // Important for JSON data
                 dataType: 'json',
                 success: function (response) {
+                    Swal.close(); // Close the loading dialog
+                    
                     if (response.success) {
                         Swal.fire({
                             icon: 'success',
                             title: 'Success!',
-                            text: response.message
+                            text: response.message,
+                            showConfirmButton: false,
+                            timer: 1500
+                        }).then(() => {
+                            // Close the modal and reset form
+                            closeModal();
+                            document.getElementById('travelForm').reset();
                         });
-                        document.getElementById('travelForm').reset();
                     } else {
                         Swal.fire({
                             icon: 'error',
@@ -426,6 +446,8 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
                     }
                 },
                 error: function(xhr, status, error) {
+                    Swal.close(); // Close the loading dialog
+                    
                     let errorMessage = 'Something went wrong. Please try again.';
                     
                     // Try to parse the error response
@@ -443,10 +465,6 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
                         title: 'Error!',
                         text: errorMessage
                     });
-                },
-                complete: function() {
-                    submitBtn.innerHTML = originalText;
-                    submitBtn.disabled = false;
                 }
             });
         }); // END HANDLE FORM SUBMISSION
@@ -682,7 +700,121 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
             }, 100);
         });
 
-        
+        // COUNTRIES SELECT 
+        // List of all countries
+        const countries = [
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", 
+            "Antigua and Barbuda", "Argentina", "Armenia", "Australia", "Austria",
+            "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados",
+            "Belarus", "Belgium", "Belize", "Benin", "Bhutan",
+            "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Brunei",
+            "Bulgaria", "Burkina Faso", "Burundi", "Côte d'Ivoire", "Cabo Verde",
+            "Cambodia", "Cameroon", "Canada", "Central African Republic", "Chad",
+            "Chile", "China", "Colombia", "Comoros", "Congo (Congo-Brazzaville)",
+            "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czechia (Czech Republic)",
+            "Democratic Republic of the Congo", "Denmark", "Djibouti", "Dominica", 
+            "Dominican Republic", "Ecuador", "Egypt", "El Salvador", 
+            "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia",
+            "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany",
+            "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guinea-Bissau",
+            "Guyana", "Haiti", "Holy See", "Honduras", "Hungary", "Iceland", 
+            "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy",
+            "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati",
+            "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho",
+            "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg",
+            "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta",
+            "Marshall Islands", "Mauritania", "Mauritius", "Mexico", "Micronesia",
+            "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique",
+            "Myanmar (Burma)", "Namibia", "Nauru", "Nepal", "Netherlands",
+            "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Korea",
+            "North Macedonia", "Norway", "Oman", "Pakistan", "Palau",
+            "Palestine State", "Panama", "Papua New Guinea", "Paraguay", "Peru",
+            "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia",
+            "Rwanda", "Saint Kitts and Nevis", "Saint Lucia", 
+            "Saint Vincent and the Grenadines", "Samoa", "San Marino",
+            "Sao Tome and Principe", "Saudi Arabia", "Senegal", "Serbia",
+            "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia",
+            "Solomon Islands", "Somalia", "South Africa", "South Korea",
+            "South Sudan", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden",
+            "Switzerland", "Syria", "Tajikistan", "Tanzania", "Thailand", "Timor-Leste",
+            "Togo", "Tonga", "Trinidad and Tobago", "Tunisia", "Turkey",
+            "Turkmenistan", "Tuvalu", "Uganda", "Ukraine", "United Arab Emirates",
+            "United Kingdom", "United States of America", "Uruguay", "Uzbekistan",
+            "Vanuatu", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+        ];
+
+        let selectedCountry = '';
+
+        function showCountryDropdown() {
+            const dropdown = document.getElementById('countryDropdown');
+            const input = document.getElementById('travelFromCountryInput');
+            
+            if (dropdown.style.display === 'block') {
+                dropdown.style.display = 'none';
+                input.blur();
+            } else {
+                dropdown.style.display = 'block';
+                populateCountryList(countries);
+                document.querySelector('.country-search').focus();
+            }
+        }
+
+        function populateCountryList(countryArray) {
+            const countryList = document.querySelector('.country-list');
+            countryList.innerHTML = '';
+            
+            countryArray.forEach(country => {
+                const item = document.createElement('div');
+                item.className = 'country-item';
+                item.textContent = country;
+                item.onclick = function() {
+                    selectCountry(country);
+                };
+                countryList.appendChild(item);
+            });
+        }
+
+        function selectCountry(country) {
+            const input = document.getElementById('travelFromCountryInput');
+            input.value = country;
+            selectedCountry = country;
+            document.getElementById('countryDropdown').style.display = 'none';
+            
+            // Highlight selected item
+            const items = document.querySelectorAll('.country-item');
+            items.forEach(item => {
+                item.classList.remove('selected');
+                if (item.textContent === country) {
+                    item.classList.add('selected');
+                }
+            });
+        }
+
+        function filterCountries() {
+            const searchTerm = document.querySelector('.country-search').value.toLowerCase();
+            const filteredCountries = countries.filter(country => 
+                country.toLowerCase().includes(searchTerm)
+            );
+            populateCountryList(filteredCountries);
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('countryDropdown');
+            const input = document.getElementById('travelFromCountryInput');
+            
+            if (!dropdown.contains(event.target) && event.target !== input) {
+                dropdown.style.display = 'none';
+            }
+        });
+
+        // Handle keyboard navigation
+        document.getElementById('travelFromCountryInput').addEventListener('keydown', function(e) {
+            const dropdown = document.getElementById('countryDropdown');
+            if (e.key === 'ArrowDown' && dropdown.style.display !== 'block') {
+                showCountryDropdown();
+            }
+        });
     </script>
 </body>
 </html>

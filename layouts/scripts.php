@@ -11,6 +11,8 @@
     <!-- VIDEO PLAYER -->
     <script src="../../../vendor/fancybox/jquery.fancybox.min.js"></script>
     <!-- <script src="../../../assets/js/hs.fancybox.js"></script> -->
+     
+    <!-- <script src="../../../assets/js/select2.min.js"></script>     -->
 
     <script>
         $(document).ready(function() {

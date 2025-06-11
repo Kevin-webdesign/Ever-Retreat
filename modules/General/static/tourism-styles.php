@@ -755,5 +755,55 @@
             border: 1px solid #f5c6cb;
         }
 
+        /* custom select */
+        .custom-select {
+            position: relative;
+            width: 100%;
+        }
+        .custom-select input[type="text"] {
+            width: 100%;
+        }
+        
+        .country-dropdown {
+            display: none;
+            position: absolute;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            font-size: 12px;
+        }
+        
+        .country-search {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-bottom: 1px solid #ddd;
+            outline: none;
+            font-size: 12px;
+        }
+        
+        .country-list {
+            max-height: 250px;
+            overflow-y: auto;
+        }
+        
+        .country-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        .country-item:hover {
+            background-color: #f5f5f5;
+        }
+        
+        .country-item.selected {
+            background-color: #e9f7fe;
+        }
 
-    </style>
+</style>

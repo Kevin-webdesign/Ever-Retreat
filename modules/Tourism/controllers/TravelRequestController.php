@@ -66,7 +66,7 @@ class TravelRequestController {
             $mail->Port       = 465;
             
             // Recipients
-            $mail->setFrom($requestData['email'], $requestData['first_name'] . ' ' . $requestData['last_name']);
+            $mail->setFrom('reservation@everretreat.com', 'Ever Retreat Travel' . ' - ' . $requestData['last_name']);
             $mail->addAddress('info@everretreat.com', 'Ever Retreat Travel');
             $mail->addBCC('info.abaremy@gmail.com');
             
