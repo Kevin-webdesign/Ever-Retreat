@@ -130,6 +130,13 @@ if ($decodedToken === false) {
                             <input type="number" class="form-control" id="packageDuration" name="duration_days" min="1" required>
                         </div>
                         <div class="form-group">
+                            <label for="packageRegion">Region</label>
+                            <select class="form-control" id="packageRegion" name="region" required>
+                                <option value="rwanda">Rwanda</option>
+                                <option value="east_africa">East Africa</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="packageOrder">Display Order</label>
                             <input type="number" class="form-control" id="packageOrder" name="display_order" min="0">
                         </div>
@@ -179,6 +186,13 @@ if ($decodedToken === false) {
                         <div class="form-group">
                             <label for="editPackageDuration">Duration (Days)</label>
                             <input type="number" class="form-control" id="editPackageDuration" name="duration_days" min="1" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPackageRegion">Region</label>
+                            <select class="form-control" id="editPackageRegion" name="region" required>
+                                <option value="rwanda">Rwanda</option>
+                                <option value="east_africa">East Africa</option>
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="editPackageOrder">Display Order</label>
@@ -327,5 +341,22 @@ if ($decodedToken === false) {
     
     <!-- Custom JavaScript for Packages Management -->
     <script src="../static/tourism_packages_management.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Initialize DataTable
+            $('#packagesTable').DataTable({
+                responsive: true,
+                pageLength: 10, // Show 10 rows per page
+                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]], // Page size options
+                columnDefs: [
+                    { orderable: false, targets: [0, 7] },
+                    { searchable: false, targets: [0, 7] }
+                ]
+            });
+    
+        });
+        
+    </script>
+
 </body>
 </html>

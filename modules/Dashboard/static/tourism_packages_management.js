@@ -1,4 +1,5 @@
 $(document).ready(function() {
+    
     // Initialize
     loadPackages();
     
@@ -78,20 +79,20 @@ $(document).ready(function() {
         packages.forEach(package => {
             html += `
                 <tr data-package-id="${package.id}">
-                    <td>${package.id}</td>
+                    <td><small>${package.id}</small></td>
                     <td>
                         <img src="../../../assets/image/${escapeHtml(package.main_image)}" 
                              class="img-thumbnail" style="max-width: 100px; max-height: 60px;">
                     </td>
-                    <td>${escapeHtml(package.title)}</td>
-                    <td>${package.duration_days} days</td>
+                    <td><small>${escapeHtml(package.title)}</small></td>
+                    <td><small>${package.duration_days} days </small></td>
                     <td>
-                        <span class="badge ${package.is_active ? 'badge-success' : 'badge-secondary'}">
+                        <span class="badge ${package.is_active ? 'badge-success' : 'badge-secondary'}" style="font-size: 11px;padding: 2px 10px;">
                             ${package.is_active ? 'Active' : 'Inactive'}
                         </span>
                     </td>
-                    <td>${package.display_order}</td>
-                    <td>${new Date(package.updated_at).toLocaleString()}</td>
+                    <td><small>${package.display_order}</small></td>
+                    <td><small>${new Date(package.updated_at).toLocaleString()}</small></td>
                     <td>
                         <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
                             <button class="btn btn-sm btn-info view-package-days" data-package-id="${package.id}">
@@ -192,6 +193,7 @@ $(document).ready(function() {
                     $('#editPackageTitle').val(response.package.title);
                     $('#editPackageDescription').val(response.package.short_description);
                     $('#editPackageDuration').val(response.package.duration_days);
+                    $('#editPackageRegion').val(response.package.region);
                     $('#editPackageOrder').val(response.package.display_order);
                     $('#editPackageActive').prop('checked', response.package.is_active);
                     $('#currentPackageImage').attr('src', '../../../assets/image/' + response.package.main_image);

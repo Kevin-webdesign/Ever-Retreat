@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Travel Request</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            color: #333333;
+            background-color: #f9f9f9;
+        }
+        
+        .email-container {
+            max-width: 550px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e0e0e0;
+        }
+        
+        .header {
+            background-color: #103432;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 500;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .section-title {
+            background-color: #f5f5f5;
+            padding: 12px 15px;
+            font-weight: 600;
+            color: #43a99b;
+            border-bottom: 1px solid #e1e1e1;
+            margin-top: 20px;
+            margin-bottom: 0;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .section-content {
+            padding: 15px;
+            border: 1px solid #e1e1e1;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            margin-bottom: 20px;
+        }
+        
+        .details-table {
+            width: 100%;
+        }
+        
+        .details-table td {
+            padding: 8px 0;
+            border-bottom: 1px dashed #e1e1e1;
+        }
+        
+        .details-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .label {
+            font-weight: 500;
+            color: #555;
+            width: 40%;
+        }
+        
+        .value {
+            text-align: right;
+        }
+        
+        .message-box {
+            background-color: #f9f8f4;
+            border-left: 4px solid #43a99b;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .admin-link {
+            text-align: center;
+            margin: 25px 0;
+        }
+        
+        .button {
+            display: inline-block;
+            padding: 10px 25px;
+            background-color: #43a99b;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>NEW TRAVEL REQUEST</h1>
+        </div>
+        
+        <div class="content">
+            <p>Dear Admin,</p>
+            
+            <p>A new travel request has been submitted on EVER RETREAT. Below are the request details:</p>
+            
+            <h3 class="section-title">Traveler Details</h3>
+            <div class="section-content">
+                <table class="details-table" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="label">Request Reference:</td>
+                        <td class="value">#{REQUEST_CODE}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Full Name:</td>
+                        <td class="value">{FULL_NAME}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Email:</td>
+                        <td class="value">{EMAIL}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Phone:</td>
+                        <td class="value">{PHONE}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Traveling From:</td>
+                        <td class="value">{TRAVEL_FROM}</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <h3 class="section-title">Travel Details</h3>
+            <div class="section-content">
+                <table class="details-table" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="label">Start Date:</td>
+                        <td class="value">{START_DATE}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">End Date:</td>
+                        <td class="value">{END_DATE}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Number of Nights:</td>
+                        <td class="value">{NIGHTS}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Selected Activities:</td>
+                        <td class="value">{ACTIVITIES}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Gorilla Treks:</td>
+                        <td class="value">{GORILLA_TREKS}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">Budget Range:</td>
+                        <td class="value">{BUDGET_RANGE}</td>
+                    </tr>
+                    <tr>
+                        <td class="label">How They Heard About Us:</td>
+                        <td class="value">{HEAR_ABOUT_US}</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="message-box">
+                <strong>Special Requests:</strong>
+                <p>{SPECIAL_REQUESTS}</p>
+            </div>
+            
+            <div class="admin-link">
+                <a href="{MANAGE_REQUEST_URL}" class="button">View Full Request Details</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

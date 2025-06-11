@@ -4,11 +4,22 @@ require_once '../../../config/database.php';
 // Initialize database
 $db = Database::getInstance();
 
+// Get selected region from query parameter
+$selectedRegion = $_GET['region'] ?? 'rwanda';
+$validRegions = ['rwanda', 'east_africa'];
+if (!in_array($selectedRegion, $validRegions)) {
+    $selectedRegion = 'rwanda';
+}
+
+// Fetch all active packages for the selected region
+$packages = $db->prepare("SELECT * FROM tourism_packages 
+                         WHERE is_active = TRUE AND region = ? 
+                         ORDER BY display_order");
+$packages->execute([$selectedRegion]);
+$packages = $packages->fetchAll(PDO::FETCH_ASSOC);
+
 // Fetch all dynamic content
 $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY display_order")->fetchAll(PDO::FETCH_ASSOC);
-
-// Fetch all active packages
-$packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE ORDER BY display_order")->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -81,13 +92,27 @@ $packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE OR
                 <div class="section-header">
                     <span>Packages</span>
                     <h2>Explore Our Exquisite Tourism Packages</h2>
+                    
+                    <!-- Region Filter -->
+                    <div class="region-filter mb-4 ">
+                        <div class="button-group-2" id="locationGroup">
+                            <button class="btn-2  <?php echo $selectedRegion === 'rwanda' ? 'active' : ''; ?>"
+                             onclick="filterPackages('rwanda')" data-value="rwanda">
+                                Rwanda
+                            </button>
+                            <button class="btn-2  <?php echo $selectedRegion === 'east_africa' ? 'active' : ''; ?>"
+                                onclick="filterPackages('east_africa')" data-value="east-africa">
+                                East Africa
+                            </button>
+                        </div>
+                    </div>
                 </div>
                 <div class="packages-grid">
                     <?php foreach ($packages as $package): ?>
                         <div class="package-card">
                             <div class="package-image">
                                 <img src="../../../assets/image/<?php echo htmlspecialchars($package['main_image']); ?>"
-                                    alt="<?php echo htmlspecialchars($package['title']); ?>">
+                                    alt="<?php echo htmlspecialchars($package['title']); ?>" class="img-fluid">
                             </div>
                             <div class="package-content">
                                 <div class="package-data">
@@ -117,15 +142,14 @@ $packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE OR
         </div>
 
         <!-- Travel Expert Modal -->
-        <div id="expertModal" class="modal">
+        <div id="expertModal" class="modal-expert">
+            <div class="modal-overlay" onclick="closeModal()"></div>
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Speak To A Travel Specialist</h2>
                     <button class="close-btn" onclick="closeModal()">&times;</button>
                 </div>
-                <p style="margin-bottom: 30px; color: #666;">Please share with us a little information about your travel
-                    requirements. One of our travel consultants will then reach out to begin sculpting your journey of a
-                    lifetime!</p>
+                <p style="margin-bottom: 10px; color: #666;">Please share with us a little information about your travel requirements. One of our travel consultants will then reach out to begin sculpting your journey of a lifetime!</p>
 
                 <form id="travelForm">
                     <div class="form-grid">
@@ -142,20 +166,24 @@ $packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE OR
                             <input type="email" id="email" name="email" placeholder="Type here..." required>
                         </div>
                         <div class="form-group">
-                            <label for="country">Which Country are you travelling from</label>
-                            <input type="text" id="country" name="country" placeholder="Type here..." required>
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Type here...">
+                        </div>
+                        <div class="form-group">
+                            <label for="travelFromCountry">Which Country are you travelling from</label>
+                            <input type="text" id="travelFromCountry" name="travelFromCountry" placeholder="Type here..." required>
                         </div>
                         <div class="form-group">
                             <label for="startDate">Do you have a travel start date in mind?</label>
                             <input type="date" id="startDate" name="startDate">
                         </div>
                         <div class="form-group">
-                            <label for="nights">How many nights would you like to travel for?</label>
-                            <input type="number" id="nights" name="nights" placeholder="Type here..." min="1">
+                            <label for="endDate">Do you have a travel end date in mind?</label>
+                            <input type="date" id="endDate" name="endDate">
                         </div>
                         <div class="form-group">
-                            <label for="endDate">Do you have a travel start date in mind?</label>
-                            <input type="date" id="endDate" name="endDate">
+                            <label for="nights">How many nights would you like to travel for?</label>
+                            <input type="number" id="nights" name="nights" placeholder="Type here..." min="1">
                         </div>
                     </div>
 
@@ -228,12 +256,34 @@ $packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE OR
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="gorillaTreks">How many Gorilla Treks Would You Like to Book</label>
-                            <input type="number" id="gorillaTreks" name="gorillaTreks" placeholder="Type here..."
-                                min="0">
+                            <input type="number" id="gorillaTreks" name="gorillaTreks" placeholder="Type here..." min="0">
                         </div>
                         <div class="form-group">
-                            <label for="travelCountry">Which Country are you travelling from</label>
-                            <input type="text" id="travelCountry" name="travelCountry" placeholder="Type here...">
+                            <label for="budgetRange">Budget Range</label>
+                            <select id="budgetRange" name="budgetRange">
+                                <option value="">Select budget range...</option>
+                                <option value="under_1000">Under $1,000</option>
+                                <option value="1000_2500">$1,000 - $2,500</option>
+                                <option value="2500_5000">$2,500 - $5,000</option>
+                                <option value="5000_10000">$5,000 - $10,000</option>
+                                <option value="over_10000">Over $10,000</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="hearAboutUs">How Did You Hear About Us</label>
+                            <select id="hearAboutUs" name="hearAboutUs">
+                                <option value="">Select option...</option>
+                                <option value="google">Google Search</option>
+                                <option value="social_media">Social Media</option>
+                                <option value="friend_referral">Friend/Family Referral</option>
+                                <option value="travel_blog">Travel Blog</option>
+                                <option value="advertisement">Advertisement</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialRequests">Special Requests or Comments</label>
+                            <input type="text" id="specialRequests" name="specialRequests" placeholder="Any special requirements...">
                         </div>
                     </div>
 
@@ -242,12 +292,8 @@ $packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE OR
             </div>
         </div>
 
-
-        <?php
-        include("../../../layouts/footer.php");
-        ?>
+        <?php include("../../../layouts/footer.php"); ?>
     </div>
-
 
     <!-- ADDING JAVASCRIPTS -->
     <?php include("../../../layouts/scripts.php"); ?>
@@ -271,14 +317,26 @@ $packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE OR
             event.target.classList.add('active');
         }
 
+        /* =========== EXPERT MODAL START ============*/
         function showModal() {
-            document.getElementById('expertModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            console.log('showModal called'); // Debug log
+            const modal = document.getElementById('expertModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                console.log('Modal should be visible now'); // Debug log
+            } else {
+                console.error('Modal element not found');
+            }
         }
 
         function closeModal() {
-            document.getElementById('expertModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+            console.log('closeModal called'); // Debug log
+            const modal = document.getElementById('expertModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         }
 
         // Close modal when clicking outside
@@ -288,29 +346,7 @@ $packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE OR
             }
         });
 
-        // Handle form submission
-        document.getElementById('travelForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // Get form data
-            const formData = new FormData(this);
-            const data = {};
-
-            // Convert FormData to regular object
-            for (let [key, value] of formData.entries()) {
-                if (key === 'activities[]') {
-                    if (!data.activities) data.activities = [];
-                    data.activities.push(value);
-                } else {
-                    data[key] = value;
-                }
-            }
-
-            console.log('Form submitted with data:', data);
-            alert('Thank you for your interest! We will contact you soon.');
-            closeModal();
-            this.reset();
-        });
+        
 
         // Close modal with Escape key
         document.addEventListener('keydown', function (e) {
@@ -319,7 +355,104 @@ $packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE OR
             }
         });
 
-        // New function to load package details via AJAX
+        // Auto-calculate nights based on dates
+        document.getElementById('startDate').addEventListener('change', calculateNights);
+        document.getElementById('endDate').addEventListener('change', calculateNights);
+
+        function calculateNights() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            if (startDate && endDate) {
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                const timeDiff = end.getTime() - start.getTime();
+                const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                
+                if (nights > 0) {
+                    document.getElementById('nights').value = nights;
+                }
+            }
+        }
+
+        // Handle form submission
+        document.getElementById('travelForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // Show loading state
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...';
+            submitBtn.disabled = true;
+
+            // Get all form data including checkboxes
+            const formData = new FormData(this);
+            
+            // Convert FormData to a plain object
+            const data = {};
+            formData.forEach((value, key) => {
+                // Handle checkboxes (arrays)
+                if (key === 'activities[]') {
+                    if (!data.activities) data.activities = [];
+                    data.activities.push(value);
+                } else {
+                    data[key] = value;
+                }
+            });
+
+            // close FORM to show the result from submission
+            closeModal();
+            // Submit via AJAX
+            $.ajax({
+                type: 'POST',
+                url: '../../Tourism/api/travelRequestApi.php?action=submit_request',
+                data: JSON.stringify(data), // Send as JSON string
+                contentType: 'application/json', // Important for JSON data
+                dataType: 'json',
+                success: function (response) {
+                    if (response.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success!',
+                            text: response.message
+                        });
+                        document.getElementById('travelForm').reset();
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: response.message
+                        });
+                    }
+                },
+                error: function(xhr, status, error) {
+                    let errorMessage = 'Something went wrong. Please try again.';
+                    
+                    // Try to parse the error response
+                    try {
+                        const response = JSON.parse(xhr.responseText);
+                        if (response.message) {
+                            errorMessage = response.message;
+                        }
+                    } catch (e) {
+                        errorMessage = xhr.responseText || error;
+                    }
+                    
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: errorMessage
+                    });
+                },
+                complete: function() {
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                }
+            });
+        }); // END HANDLE FORM SUBMISSION
+        /* ==== END EXPERT MODAL =========================== */
+
+        // Package details modal functions
         function showPackageDetails(packageId) {
             // Show loading state
             $('#package-details-container').html('<div class="loading-spinner">Loading package details...</div>');
@@ -378,12 +511,178 @@ $packages = $db->query("SELECT * FROM tourism_packages WHERE is_active = TRUE OR
         
         // Handle booking button click
         function handleBooking() {
-            // You can implement booking logic here
-            // For now, just show the travel expert modal
             showModal();
+        }
+
+        // Region filtering functions
+        function filterPackages(region) {
+            // Update URL without reloading the page
+            const url = new URL(window.location.href);
+            url.searchParams.set('region', region);
+            window.history.pushState({}, '', url);
+            
+            // Highlight active button
+            document.querySelectorAll('.region-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Reload packages via AJAX
+            fetchPackages(region);
+        }
+        
+        function fetchPackages(region) {
+            // Show loading state
+            const packagesGrid = document.querySelector('.packages-grid');
+            packagesGrid.innerHTML = '<div class="loading-spinner">Loading packages...</div>';
+            
+            // Fetch packages for the selected region
+            fetch(`../static/get_packages.php?region=${region}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && data.packages && data.packages.length > 0) {
+                        renderPackages(data.packages);
+                    } else {
+                        packagesGrid.innerHTML = '<div class="alert alert-info">No packages found for this region.</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    packagesGrid.innerHTML = '<div class="alert alert-danger">Failed to load packages. Please try again.</div>';
+                });
+        }
+        
+        function renderPackages(packages) {
+            const packagesGrid = document.querySelector('.packages-grid');
+            let html = '';
+            
+            packages.forEach(package => {
+                html += `
+                    <div class="package-card">
+                        <div class="package-image">
+                            <img src="../../../assets/image/${escapeHtml(package.main_image)}" 
+                                 alt="${escapeHtml(package.title)}" class="img-fluid">
+                        </div>
+                        <div class="package-content">
+                            <div class="package-data">
+                                <h3>${escapeHtml(package.title)}</h3>
+                                <p>${escapeHtml(package.short_description)}</p>
+                            </div>
+                            <div class="package-link">
+                                <button class="package-btn" onclick="showPackageDetails(${package.id})">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            packagesGrid.innerHTML = html;
+        }
+        
+        function escapeHtml(unsafe) {
+            if (!unsafe) return '';
+            return unsafe.toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
         }
     </script>
 
-</body>
+    <script>
+        class MinimalButtonGroup {
+            constructor(groupElement) {
+                this.group = groupElement;
+                this.buttons = Array.from(this.group.querySelectorAll('.btn-2'));
+                this.activeIndex = this.buttons.findIndex(btn => btn.classList.contains('active'));
+                
+                this.init();
+                this.updateSlider();
+            }
 
+            init() {
+                this.buttons.forEach((btn, index) => {
+                    btn.addEventListener('click', () => this.selectButton(index));
+                });
+            }
+
+            selectButton(index) {
+                if (index === this.activeIndex) return;
+
+                // Update active states
+                this.buttons[this.activeIndex].classList.remove('active');
+                this.buttons[index].classList.add('active');
+                this.activeIndex = index;
+
+                // Update slider position
+                this.updateSlider();
+
+                // Emit change event
+                const selectedValue = this.buttons[index].dataset.value;
+                this.group.dispatchEvent(new CustomEvent('change', {
+                    detail: { 
+                        value: selectedValue, 
+                        index: index,
+                        button: this.buttons[index]
+                    }
+                }));
+            }
+
+            updateSlider() {
+                const activeButton = this.buttons[this.activeIndex];
+                const groupRect = this.group.getBoundingClientRect();
+                const buttonRect = activeButton.getBoundingClientRect();
+                
+                const offsetLeft = buttonRect.left - groupRect.left - 4;
+                const buttonWidth = buttonRect.width;
+                
+                this.group.style.setProperty('--slider-left', `${offsetLeft}px`);
+                this.group.style.setProperty('--slider-width', `${buttonWidth}px`);
+            }
+        }
+
+        // Initialize the button group
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add CSS custom properties for slider animation
+            const style = document.createElement('style');
+            style.textContent = `
+                .button-group::before {
+                    left: var(--slider-left, 4px);
+                    width: var(--slider-width, 70px);
+                }
+            `;
+            document.head.appendChild(style);
+
+            const group = document.getElementById('locationGroup');
+            const buttonGroup = new MinimalButtonGroup(group);
+            
+            // Listen for changes
+            group.addEventListener('change', (e) => {
+                console.log('Selected:', e.detail.value);
+            });
+        });
+
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const group = document.getElementById('locationGroup');
+                if (group.buttonGroup) {
+                    group.buttonGroup.updateSlider();
+                }
+            }, 100);
+        });
+
+        
+    </script>
+</body>
 </html>

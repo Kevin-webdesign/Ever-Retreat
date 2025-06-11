@@ -1,10 +1,212 @@
-<!-- TOURISM BEFORE EDITED EVERY THING TO BE RETRIEVED IN DATABASE -->
+<style>
+    /* EXPERT MODAL STYLES */
+        .modal-expert {
+            display: none;
+            position: fixed;
+            z-index: 1200;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color:rgba(247, 247, 247, 1);
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-expert.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background:rgba(255, 255, 255, .3);
+            border-radius: 2px;
+            padding: 30px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .modal-header h2 {
+            margin: 0;
+            color: #333;
+            font-size: 24px;
+        }
+
+        .close-btn-2 {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn-2:hover {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color:rgb(175, 140, 76);
+            box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.1);
+        }
+
+        .activities-section {
+            margin: 30px 0;
+        }
+
+        .activities-section h3 {
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
+            transition: background-color 0.3s ease;
+        }
+
+        .activity-item:hover {
+            background: #e9ecef;
+        }
+
+        .activity-item input[type="checkbox"] {
+            margin-right: 10px;
+            width: 18px;
+            height: 18px;
+            accent-color:rgb(175, 135, 76);
+        }
+
+        .activity-item label {
+            cursor: pointer;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg,rgb(196, 159, 103),rgb(175, 141, 89));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg,rgb(197, 161, 106), #b8945e);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(175, 140, 76, 0.3);
+        }
+        .loading-spinner {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+
+        .success-message {
+            background: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error-message {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            border: 1px solid #f5c6cb;
+        }
+</style>
+
 
 <?php
 require_once '../../../config/database.php';
 
 // Initialize database
 $db = Database::getInstance();
+
+// Get selected region from query parameter
+$selectedRegion = $_GET['region'] ?? 'rwanda';
+$validRegions = ['rwanda', 'east_africa'];
+if (!in_array($selectedRegion, $validRegions)) {
+    $selectedRegion = 'rwanda';
+}
+
+// Fetch all active packages for the selected region
+$packages = $db->prepare("SELECT * FROM tourism_packages 
+                         WHERE is_active = TRUE AND region = ? 
+                         ORDER BY display_order");
+$packages->execute([$selectedRegion]);
+$packages = $packages->fetchAll(PDO::FETCH_ASSOC);
 
 // Fetch all dynamic content
 $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY display_order")->fetchAll(PDO::FETCH_ASSOC);
@@ -26,7 +228,7 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
         <!-- Video Background -->
         <div class="video-background">
             <video autoplay muted loop playsinline>
-                <source src="../../../assets/video/EverRetreatTourism.mp4" type="video/mp4">
+                <source src="../../../assets/video/hero_1746553018_Video @.mp4" type="video/mp4">
             </video>
         </div>
         <div class="container-top">
@@ -40,7 +242,7 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
     </div>
 
     <div class="new mb-5">
-        <div id="destinations" class="content-section-tourism">
+        <div id="destinations" class="content-section-tourism active">
             <div class="row d-flex ">
                 <div class="section-header">
                     <span>Our Location</span>
@@ -75,622 +277,68 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
         </div>
 
         <!-- Packages Section -->
-        <!-- Packages Section -->
-        <div id="packages" class="content-section-tourism active">
+        <div id="packages" class="content-section-tourism">
             <div class="container">
                 <div class="section-header">
                     <span>Packages</span>
                     <h2>Explore Our Exquisite Tourism Packages</h2>
-                </div>
-                <div class="packages-grid">
-                    <!-- Package 1 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 1">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>8 Days of Exploring a thousand hills</h3>
-                                <p>An in-depth look at Innovate Hub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package1')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Package 2 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1518548419970-58e3b4079ab2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 2">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>5 Days Exploring Rwanda's amazing primates</h3>
-                                <p>An in-depth look at InnovaHIub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package2')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Package 3 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 3">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>6 Day hiking vacation</h3>
-                                <p>An in-depth look at innovatethub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package3')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Package 4 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 4">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>3 Days Akagera and Umva Muhazi</h3>
-                                <p>An in-depth look at innovatethub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package4')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Package 5 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1580654712603-eb43273aff33?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 5">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>3 Gorilla Trekking and Lake kivu (Rubavu)</h3>
-                                <p>An in-depth look at innovatethub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package5')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Package 6 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1470115636492-6d2b56f9146d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 6">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>3 Days Nyungwe National Park & Tea Plantation</h3>
-                                <p>An in-depth look at innovatethub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package6')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Package 7 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1475483768296-6163e08872a1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 7">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>Mountain Gorilla Adventure</h3>
-                                <p>An in-depth look at innovateltub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package7')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Package 8 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1505228395891-9a51e7e86bf6?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 8">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>2-Day Escape to Umva Muhazi</h3>
-                                <p>An in-depth look at innovateltub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package8')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Package 9 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1503917988258-f87a78e3c995?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 9">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>2 Days SAFARI Vacation</h3>
-                                <p>An in-depth look at innovatiet/ub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package9')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Package 10 -->
-                    <div class="package-card">
-                        <div class="package-image">
-                            <img src="https://images.unsplash.com/photo-1483729558449-99ef09a8c325?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80"
-                                alt="Package 10">
-                        </div>
-                        <div class="package-content">
-                            <div class="package-data">
-                                <h3>5 Days Exploring Landscapes of Rwanda</h3>
-                                <p>An in-depth look at innovatiet/ub's impact in supporting</p>
-                            </div>
-                            <div class="package-link">
-                                <button class="package-btn" onclick="showPackageDetails('package10')">View
-                                    Details</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Package Details Modals -->
-        <div id="packageModal" class="package-modal">
-            <div class="modal-contents package-modal-content">
-                <button class="close-btn" onclick="closePackageModal()">&times;</button>
-
-                <!-- Package 1 Details -->
-                <div id="package1-details" class="package-details">
-                    <div class="package-details-holder">
-                        <!-- Left Navigation -->
-                        <div class="left-nav">
-                            <div class="nav-title">8 Days of Exploring a thousand hills</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Kigali City Tour</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Transfer to Akagera</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 3: Full-Day Safari in Akagera</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 4: Transfer to Umva Muhazi</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 5: Return to Kigali</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 6: Transfer to Volcanoes National Park</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 7: Gorilla Trekking or Golden Monkey Trek</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 8: Return to Kigali & Departure</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <!-- Right Content Area -->
-                        <div class="right-content">
-                            <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                                alt="Beautiful landscape view" class="content-image">
-    
-                            <div class="content-details">
-                                <p class="details-text">
-                                    Upon arrival in Kigali, explore the capital by visiting the Kigali Genocide Memorial,
-                                    Nyamirambo, and the Kimironko Market, with an appreciation for Rwandan art at the Inema
-                                    Arts Center. Experience the vibrant culture and rich history of this beautiful city,
-                                    known as the cleanest in Africa.
-                                </p>
-    
-                                <button class="action-button" onclick="handleBooking()">
-                                    Book Your Stay Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Package 2 Details -->
-                <div id="package2-details" class="package-details" style="display:none;">
-                    <div class="package-details-holder">
-                        <div class="left-nav">
-                            <div class="nav-title">5 Days Exploring Rwanda's amazing primates</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Transfer to Nyungwe Forest</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Chimpanzee Walk</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 3: Transfer to Volcanoes</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 4: Cultural Village Visit</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 5: Return to Kigali</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div class="right-content">
-                            <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                                alt="Nyungwe Forest" class="content-image">
-    
-                            <div class="content-details">
-                                <p class="details-text">
-                                    Start on Day 1 with a picturesque drive from Kigali to Nyungwe Forest National Park. In
-                                    the afternoon, take a canopy walk that provides expansive views of the old rainforest
-                                    and opportunities to see monkeys in the treetops.
-                                </p>
-    
-                                <button class="action-button" onclick="handleBooking()">
-                                    Book Your Stay Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Package 3 Details -->
-                <div id="package3-details" class="package-details" style="display:none;">
-                    <div class="package-details-holder">
-                        <div class="left-nav">
-                            <div class="nav-title">6 Day hiking vacation</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Arrival in Kigali</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Mount Kigali Hike</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 3: Transfer to Volcanoes</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 4: Dian Fossey's Tomb</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 5: Mount Bisoke Climb</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 6: Departure</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div class="right-content">
-                            <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                                alt="Hiking in Rwanda" class="content-image">
-    
-                            <div class="content-details">
-                                <p class="details-text">
-                                    Arrival in Kigali and transfer to the hotel for orientation. Prepare for an exciting
-                                    hiking adventure through Rwanda's beautiful landscapes, including Mount Kigali and Mount
-                                    Bisoke with its stunning crater lake.
-                                </p>
-    
-                                <button class="action-button" onclick="handleBooking()">
-                                    Book Your Stay Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Package 4 Details -->
-                <div id="package4-details" class="package-details" style="display:none;">
-                    <div class="package-details-holder">
-                        <div class="left-nav">
-                            <div class="nav-title">3 Days Akagera and Umva Muhazi</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Akagera Safari</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Umva Muhazi</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 3: Return to Kigali</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div class="right-content">
-                            <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                                alt="Akagera National Park" class="content-image">
-    
-                            <div class="content-details">
-                                <p class="details-text">
-                                    Morning game drive in Akagera National Park, afternoon boat safari. Experience the
-                                    diverse wildlife of Rwanda's only savanna park before relaxing at the beautiful Umva
-                                    Muhazi lakeside resort.
-                                </p>
-    
-                                <button class="action-button" onclick="handleBooking()">
-                                    Book Your Stay Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Package 5 Details -->
-                <div id="package5-details" class="package-details" style="display:none;">
-                    <div class="package-details-holder">
-                        <div class="left-nav">
-                            <div class="nav-title">3 Gorilla Trekking and Lake kivu (Rubavu)</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Gorilla Trekking</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Lake Kivu</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 3: Return to Kigali</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div class="right-content">
-                            <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                                alt="Gorilla Trekking" class="content-image">
-    
-                            <div class="content-details">
-                                <p class="details-text">
-                                    Early morning transfer to Volcanoes National Park for gorilla trekking. Experience the
-                                    unforgettable encounter with mountain gorillas in their natural habitat, followed by
-                                    relaxation at beautiful Lake Kivu.
-                                </p>
-    
-                                <button class="action-button" onclick="handleBooking()">
-                                    Book Your Stay Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Package 6 Details -->
-                <div id="package6-details" class="package-details" style="display:none;">
-                    <div class="package-details-holder">
-                        <div class="left-nav">
-                            <div class="nav-title">3 Days Nyungwe National Park & Tea Plantation</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Transfer to Nyungwe</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Chimpanzee Tracking</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 3: Return to Kigali</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div class="right-content">
-                            <img src="https://images.unsplash.com/photo-1551632436-cbf8dd35adfa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                                alt="Nyungwe Forest" class="content-image">
-    
-                            <div class="content-details">
-                                <p class="details-text">
-                                    Transfer to Nyungwe Forest, afternoon canopy walk. Experience the biodiversity of one of
-                                    Africa's oldest rainforests, with chimpanzee tracking and a visit to scenic tea
-                                    plantations.
-                                </p>
-    
-                                <button class="action-button" onclick="handleBooking()">
-                                    Book Your Stay Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Package 7 Details -->
-                <div id="package7-details" class="package-details" style="display:none;">
-                    <div class="package-details-holder">
-                        <div class="left-nav">
-                            <div class="nav-title">Mountain Gorilla Adventure</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Arrival in Kigali</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Transfer to Volcanoes</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 3: Gorilla Trekking</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 4: Optional Activities</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 5: Departure</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div class="right-content">
-                            <img src="https://images.unsplash.com/photo-1527631746610-bca00a040d60?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                                alt="Mountain Gorilla" class="content-image">
-    
-                            <div class="content-details">
-                                <p class="details-text">
-                                    Arrival in Kigali, city tour including Genocide Memorial. The highlight of this
-                                    adventure is the unforgettable gorilla trekking experience in Volcanoes National Park
-                                    with local guides.
-                                </p>
-    
-                                <button class="action-button" onclick="handleBooking()">
-                                    Book Your Stay Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Package 8 Details -->
-                <div id="package8-details" class="package-details" style="display:none;">
-                    <div class="package-details-holder">
-                        <div class="left-nav">
-                            <div class="nav-title">2-Day Escape to Umva Muhazi</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Transfer to Umva Muhazi</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Return to Kigali</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div class="right-content">
-                    </div>
-                        <img src="https://images.unsplash.com/photo-1470114716159-e389f8712fda?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                            alt="Umva Muhazi" class="content-image">
-
-                        <div class="content-details">
-                            <p class="details-text">
-                                Morning transfer to Umva Muhazi, afternoon boat cruise and fishing. Enjoy a peaceful
-                                retreat at this beautiful lakeside location with nature walks and water activities.
-                            </p>
-
-                            <button class="action-button" onclick="handleBooking()">
-                                Book Your Stay Now
+                    
+                    <!-- Region Filter -->
+                    <div class="region-filter mb-4 ">
+                        <div class="button-group-2" id="locationGroup">
+                            <button class="btn-2  <?php echo $selectedRegion === 'rwanda' ? 'active' : ''; ?>"
+                             onclick="filterPackages('rwanda')" data-value="rwanda">
+                                Rwanda
+                            </button>
+                            <button class="btn-2  <?php echo $selectedRegion === 'east_africa' ? 'active' : ''; ?>"
+                                onclick="filterPackages('east_africa')" data-value="east-africa">
+                                East Africa
                             </button>
                         </div>
                     </div>
                 </div>
-
-                <!-- Package 9 Details -->
-                <div id="package9-details" class="package-details" style="display:none;">
-                    <div class="package-details-holder">
-                        <div class="left-nav">
-                            <div class="nav-title">2 Days SAFARI Vacation</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Akagera Game Drives</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Boat Safari & Return</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div class="right-content">
-                            <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
-                                alt="Akagera Safari" class="content-image">
-    
-                            <div class="content-details">
-                                <p class="details-text">
-                                    Early morning transfer to Akagera National Park, full day game drives. Experience the
-                                    thrill of spotting lions, elephants, rhinos and more in Rwanda's premier safari
-                                    destination.
-                                </p>
-    
-                                <button class="action-button" onclick="handleBooking()">
-                                    Book Your Stay Now
-                                </button>
+                <div class="packages-grid">
+                    <?php foreach ($packages as $package): ?>
+                        <div class="package-card">
+                            <div class="package-image">
+                                <img src="../../../assets/image/<?php echo htmlspecialchars($package['main_image']); ?>"
+                                    alt="<?php echo htmlspecialchars($package['title']); ?>" class="img-fluid">
+                            </div>
+                            <div class="package-content">
+                                <div class="package-data">
+                                    <h3><?php echo htmlspecialchars($package['title']); ?></h3>
+                                    <p><?php echo htmlspecialchars($package['short_description']); ?></p>
+                                </div>
+                                <div class="package-link">
+                                    <button class="package-btn" onclick="showPackageDetails(<?php echo $package['id']; ?>)">
+                                        View Details
+                                    </button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    <?php endforeach; ?>
                 </div>
+            </div>
+        </div>
 
-                <!-- Package 10 Details -->
-                <div id="package10-details" class="package-details" style="display:none;">
-                    <div class="package-details-holder">
-                        <div class="left-nav">
-                            <div class="nav-title">5 Days Exploring Landscapes of Rwanda</div>
-                            <ul class="nav-menu">
-                                <li class="det-nav-item active">
-                                    <a href="#" class="det-nav-link">Day 1: Transfer to Nyungwe</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 2: Chimpanzee Tracking</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 3: Lake Kivu</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 4: Volcanoes Area</a>
-                                </li>
-                                <li class="det-nav-item">
-                                    <a href="#" class="det-nav-link">Day 5: Return to Kigali</a>
-                                </li>
-                            </ul>
-                        </div>
-    
-                        <div class="right-content">
-                            <img src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
-                                alt="Rwanda Landscapes" class="content-image">
-    
-                            <div class="content-details">
-                                <p class="details-text">
-                                    Leave Kigali and travel through the verdant hills of Rwanda to Nyungwe Forest National
-                                    Park. There, you will do an afternoon canopy walk above the old rainforest, which
-                                    provides breathtaking views of the valleys and trees below.
-                                </p>
-    
-                                <button class="action-button" onclick="handleBooking()">
-                                    Book Your Stay Now
-                                </button>
-                            </div>
-                        </div>
-                    </div>
+        <!-- Package Details Modal -->
+        <div id="packageModal" class="package-modal">
+            <div class="modal-contents package-modal-content">
+                <button class="close-btn" onclick="closePackageModal()">&times;</button>
+                <div id="package-details-container" class="package-details">
+                    <!-- Content will be loaded via AJAX -->
                 </div>
             </div>
         </div>
 
         <!-- Travel Expert Modal -->
-        <div id="expertModal" class="modal">
+        <div id="expertModal" class="modal-expert">
             <div class="modal-content">
                 <div class="modal-header">
                     <h2>Speak To A Travel Specialist</h2>
                     <button class="close-btn" onclick="closeModal()">&times;</button>
                 </div>
-                <p style="margin-bottom: 30px; color: #666;">Please share with us a little information about your travel
-                    requirements. One of our travel consultants will then reach out to begin sculpting your journey of a
-                    lifetime!</p>
+                <p style="margin-bottom: 30px; color: #666;">Please share with us a little information about your travel requirements. One of our travel consultants will then reach out to begin sculpting your journey of a lifetime!</p>
 
                 <form id="travelForm">
                     <div class="form-grid">
@@ -707,20 +355,24 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
                             <input type="email" id="email" name="email" placeholder="Type here..." required>
                         </div>
                         <div class="form-group">
-                            <label for="country">Which Country are you travelling from</label>
-                            <input type="text" id="country" name="country" placeholder="Type here..." required>
+                            <label for="phoneNumber">Phone Number</label>
+                            <input type="tel" id="phoneNumber" name="phoneNumber" placeholder="Type here...">
+                        </div>
+                        <div class="form-group">
+                            <label for="travelFromCountry">Which Country are you travelling from</label>
+                            <input type="text" id="travelFromCountry" name="travelFromCountry" placeholder="Type here..." required>
                         </div>
                         <div class="form-group">
                             <label for="startDate">Do you have a travel start date in mind?</label>
                             <input type="date" id="startDate" name="startDate">
                         </div>
                         <div class="form-group">
-                            <label for="nights">How many nights would you like to travel for?</label>
-                            <input type="number" id="nights" name="nights" placeholder="Type here..." min="1">
+                            <label for="endDate">Do you have a travel end date in mind?</label>
+                            <input type="date" id="endDate" name="endDate">
                         </div>
                         <div class="form-group">
-                            <label for="endDate">Do you have a travel start date in mind?</label>
-                            <input type="date" id="endDate" name="endDate">
+                            <label for="nights">How many nights would you like to travel for?</label>
+                            <input type="number" id="nights" name="nights" placeholder="Type here..." min="1">
                         </div>
                     </div>
 
@@ -793,12 +445,34 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
                     <div class="form-grid">
                         <div class="form-group">
                             <label for="gorillaTreks">How many Gorilla Treks Would You Like to Book</label>
-                            <input type="number" id="gorillaTreks" name="gorillaTreks" placeholder="Type here..."
-                                min="0">
+                            <input type="number" id="gorillaTreks" name="gorillaTreks" placeholder="Type here..." min="0">
                         </div>
                         <div class="form-group">
-                            <label for="travelCountry">Which Country are you travelling from</label>
-                            <input type="text" id="travelCountry" name="travelCountry" placeholder="Type here...">
+                            <label for="budgetRange">Budget Range</label>
+                            <select id="budgetRange" name="budgetRange">
+                                <option value="">Select budget range...</option>
+                                <option value="under_1000">Under $1,000</option>
+                                <option value="1000_2500">$1,000 - $2,500</option>
+                                <option value="2500_5000">$2,500 - $5,000</option>
+                                <option value="5000_10000">$5,000 - $10,000</option>
+                                <option value="over_10000">Over $10,000</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="hearAboutUs">How Did You Hear About Us</label>
+                            <select id="hearAboutUs" name="hearAboutUs">
+                                <option value="">Select option...</option>
+                                <option value="google">Google Search</option>
+                                <option value="social_media">Social Media</option>
+                                <option value="friend_referral">Friend/Family Referral</option>
+                                <option value="travel_blog">Travel Blog</option>
+                                <option value="advertisement">Advertisement</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="specialRequests">Special Requests or Comments</label>
+                            <input type="text" id="specialRequests" name="specialRequests" placeholder="Any special requirements...">
                         </div>
                     </div>
 
@@ -807,12 +481,8 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
             </div>
         </div>
 
-
-        <?php
-        include("../../../layouts/footer.php");
-        ?>
+        <?php include("../../../layouts/footer.php"); ?>
     </div>
-
 
     <!-- ADDING JAVASCRIPTS -->
     <?php include("../../../layouts/scripts.php"); ?>
@@ -836,14 +506,26 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
             event.target.classList.add('active');
         }
 
+        /* =========== EXPERT MODAL START ============*/
         function showModal() {
-            document.getElementById('expertModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            console.log('showModal called'); // Debug log
+            const modal = document.getElementById('expertModal');
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                console.log('Modal should be visible now'); // Debug log
+            } else {
+                console.error('Modal element not found');
+            }
         }
 
         function closeModal() {
-            document.getElementById('expertModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+            console.log('closeModal called'); // Debug log
+            const modal = document.getElementById('expertModal');
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
         }
 
         // Close modal when clicking outside
@@ -856,6 +538,12 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
         // Handle form submission
         document.getElementById('travelForm').addEventListener('submit', function (e) {
             e.preventDefault();
+
+            // Show loading state
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
 
             // Get form data
             const formData = new FormData(this);
@@ -871,10 +559,33 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
                 }
             }
 
-            console.log('Form submitted with data:', data);
-            alert('Thank you for your interest! We will contact you soon.');
-            closeModal();
-            this.reset();
+            // Simulate form submission (replace with actual AJAX call)
+            setTimeout(() => {
+                console.log('Form submitted with data:', data);
+                
+                // Show success message
+                const successDiv = document.createElement('div');
+                successDiv.className = 'success-message';
+                successDiv.textContent = 'Thank you for your interest! We will contact you soon.';
+                this.insertBefore(successDiv, this.firstChild);
+                
+                // Reset form
+                this.reset();
+                
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                
+                // Close modal after 2 seconds
+                setTimeout(() => {
+                    closeModal();
+                    // Remove success message
+                    if (successDiv.parentNode) {
+                        successDiv.parentNode.removeChild(successDiv);
+                    }
+                }, 2000);
+                
+            }, 1000);
         });
 
         // Close modal with Escape key
@@ -884,45 +595,256 @@ $locations = $db->query("SELECT * FROM locations WHERE is_active = TRUE ORDER BY
             }
         });
 
-        /* +++++++++++++++++++++++++++++++++++++++++++++++++++
-                             Package Modal scripts
-         +++++++++++++++++++++++++++++++++++++++++++++++++++ */
+        // Auto-calculate nights based on dates
+        document.getElementById('startDate').addEventListener('change', calculateNights);
+        document.getElementById('endDate').addEventListener('change', calculateNights);
+
+        function calculateNights() {
+            const startDate = document.getElementById('startDate').value;
+            const endDate = document.getElementById('endDate').value;
+            
+            if (startDate && endDate) {
+                const start = new Date(startDate);
+                const end = new Date(endDate);
+                const timeDiff = end.getTime() - start.getTime();
+                const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                
+                if (nights > 0) {
+                    document.getElementById('nights').value = nights;
+                }
+            }
+        }
+        /* ==== END EXPERT MODAL =========================== */
+
+        // Package details modal functions
         function showPackageDetails(packageId) {
-            // Hide all package details first
-            document.querySelectorAll('.package-details').forEach(detail => {
-                detail.style.display = 'none';
-            });
-
-            // Show the selected package details
-            document.getElementById(packageId + '-details').style.display = 'block';
-
+            // Show loading state
+            $('#package-details-container').html('<div class="loading-spinner">Loading package details...</div>');
+            
             // Show the modal
-            document.getElementById('packageModal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            $('#packageModal').addClass('active');
+            $('body').css('overflow', 'hidden');
+            
+            // Load package details via AJAX
+            $.ajax({
+                url: '../static/getPackageDetails.php',
+                type: 'GET',
+                data: { package_id: packageId },
+                dataType: 'html',
+                success: function(response) {
+                    $('#package-details-container').html(response);
+                    
+                    // Set up click handlers for day navigation
+                    $('.det-nav-item').click(function(e) {
+                        e.preventDefault();
+                        $('.det-nav-item').removeClass('active');
+                        $(this).addClass('active');
+                        
+                        const dayNumber = $(this).data('day');
+                        $('.day-content').hide();
+                        $(`#day-${dayNumber}`).show();
+                    });
+                    
+                    // Show first day by default
+                    $('.det-nav-item:first').click();
+                },
+                error: function() {
+                    $('#package-details-container').html('<div class="error-message">Failed to load package details. Please try again.</div>');
+                }
+            });
         }
-
+        
         function closePackageModal() {
-            document.getElementById('packageModal').classList.remove('active');
-            document.body.style.overflow = 'auto';
+            $('#packageModal').removeClass('active');
+            $('body').css('overflow', 'auto');
         }
-
+        
         // Close modal when clicking outside
-        document.getElementById('packageModal').addEventListener('click', function (e) {
+        $(document).on('click', '#packageModal', function(e) {
             if (e.target === this) {
                 closePackageModal();
             }
         });
-
+        
         // Close modal with Escape key
-        document.addEventListener('keydown', function (e) {
-            if (e.key === 'Escape' && document.getElementById('packageModal').classList.contains('active')) {
+        $(document).keydown(function(e) {
+            if (e.key === 'Escape' && $('#packageModal').hasClass('active')) {
                 closePackageModal();
             }
         });
+        
+        // Handle booking button click
+        function handleBooking() {
+            showModal();
+        }
+
+        // Region filtering functions
+        function filterPackages(region) {
+            // Update URL without reloading the page
+            const url = new URL(window.location.href);
+            url.searchParams.set('region', region);
+            window.history.pushState({}, '', url);
+            
+            // Highlight active button
+            document.querySelectorAll('.region-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Reload packages via AJAX
+            fetchPackages(region);
+        }
+        
+        function fetchPackages(region) {
+            // Show loading state
+            const packagesGrid = document.querySelector('.packages-grid');
+            packagesGrid.innerHTML = '<div class="loading-spinner">Loading packages...</div>';
+            
+            // Fetch packages for the selected region
+            fetch(`../static/get_packages.php?region=${region}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success && data.packages && data.packages.length > 0) {
+                        renderPackages(data.packages);
+                    } else {
+                        packagesGrid.innerHTML = '<div class="alert alert-info">No packages found for this region.</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error('Fetch error:', error);
+                    packagesGrid.innerHTML = '<div class="alert alert-danger">Failed to load packages. Please try again.</div>';
+                });
+        }
+        
+        function renderPackages(packages) {
+            const packagesGrid = document.querySelector('.packages-grid');
+            let html = '';
+            
+            packages.forEach(package => {
+                html += `
+                    <div class="package-card">
+                        <div class="package-image">
+                            <img src="../../../assets/image/${escapeHtml(package.main_image)}" 
+                                 alt="${escapeHtml(package.title)}" class="img-fluid">
+                        </div>
+                        <div class="package-content">
+                            <div class="package-data">
+                                <h3>${escapeHtml(package.title)}</h3>
+                                <p>${escapeHtml(package.short_description)}</p>
+                            </div>
+                            <div class="package-link">
+                                <button class="package-btn" onclick="showPackageDetails(${package.id})">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            packagesGrid.innerHTML = html;
+        }
+        
+        function escapeHtml(unsafe) {
+            if (!unsafe) return '';
+            return unsafe.toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
     </script>
 
+    <script>
+        class MinimalButtonGroup {
+            constructor(groupElement) {
+                this.group = groupElement;
+                this.buttons = Array.from(this.group.querySelectorAll('.btn-2'));
+                this.activeIndex = this.buttons.findIndex(btn => btn.classList.contains('active'));
+                
+                this.init();
+                this.updateSlider();
+            }
+
+            init() {
+                this.buttons.forEach((btn, index) => {
+                    btn.addEventListener('click', () => this.selectButton(index));
+                });
+            }
+
+            selectButton(index) {
+                if (index === this.activeIndex) return;
+
+                // Update active states
+                this.buttons[this.activeIndex].classList.remove('active');
+                this.buttons[index].classList.add('active');
+                this.activeIndex = index;
+
+                // Update slider position
+                this.updateSlider();
+
+                // Emit change event
+                const selectedValue = this.buttons[index].dataset.value;
+                this.group.dispatchEvent(new CustomEvent('change', {
+                    detail: { 
+                        value: selectedValue, 
+                        index: index,
+                        button: this.buttons[index]
+                    }
+                }));
+            }
+
+            updateSlider() {
+                const activeButton = this.buttons[this.activeIndex];
+                const groupRect = this.group.getBoundingClientRect();
+                const buttonRect = activeButton.getBoundingClientRect();
+                
+                const offsetLeft = buttonRect.left - groupRect.left - 4;
+                const buttonWidth = buttonRect.width;
+                
+                this.group.style.setProperty('--slider-left', `${offsetLeft}px`);
+                this.group.style.setProperty('--slider-width', `${buttonWidth}px`);
+            }
+        }
+
+        // Initialize the button group
+        document.addEventListener('DOMContentLoaded', () => {
+            // Add CSS custom properties for slider animation
+            const style = document.createElement('style');
+            style.textContent = `
+                .button-group::before {
+                    left: var(--slider-left, 4px);
+                    width: var(--slider-width, 70px);
+                }
+            `;
+            document.head.appendChild(style);
+
+            const group = document.getElementById('locationGroup');
+            const buttonGroup = new MinimalButtonGroup(group);
+            
+            // Listen for changes
+            group.addEventListener('change', (e) => {
+                console.log('Selected:', e.detail.value);
+            });
+        });
+
+        // Handle window resize
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                const group = document.getElementById('locationGroup');
+                if (group.buttonGroup) {
+                    group.buttonGroup.updateSlider();
+                }
+            }, 100);
+        });
+    </script>
 </body>
-
 </html>
-
-<!-- TOURISM BEFORE EDITED EVERY THING TO BE RETRIEVED IN DATABASE -->

@@ -4,8 +4,19 @@ require_once '../../../config/database.php';
 
 header('Content-Type: application/json');
 
-// Authentication check (same as above)
-// ...
+// Authentication check
+if (!isset($_COOKIE['jwtToken'])) {
+    http_response_code(401);
+    die(json_encode(['error' => 'Unauthorized']));
+}
+
+$jwtHandler = new JWTHandler();
+$decodedToken = $jwtHandler->validateToken($_COOKIE['jwtToken']);
+
+if ($decodedToken === false) {
+    http_response_code(401);
+    die(json_encode(['error' => 'Unauthorized']));
+}
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(400);
@@ -21,7 +32,14 @@ try {
     $durationDays = $_POST['duration_days'] ?? 1;
     $displayOrder = $_POST['display_order'] ?? 0;
     $isActive = isset($_POST['is_active']) ? 1 : 0;
+    $region = $_POST['region'] ?? 'rwanda';
     
+    // Validate region
+    $validRegions = ['rwanda', 'east_africa'];
+    if (!in_array($region, $validRegions)) {
+        $region = 'rwanda';
+    }
+
     // Handle file upload if new image was provided
     $imagePath = null;
     if (isset($_FILES['main_image']) && $_FILES['main_image']['error'] == 0) {
@@ -51,21 +69,50 @@ try {
     if ($imagePath) {
         $stmt = $db->prepare("UPDATE tourism_packages 
                              SET title = ?, short_description = ?, main_image = ?, 
-                                 duration_days = ?, display_order = ?, is_active = ?, 
-                                 updated_at = NOW() 
+                                 duration_days = ?, display_order = ?, is_active = ?,
+                                 region = ?, updated_at = NOW() 
                              WHERE id = ?");
-        $stmt->execute([$title, $shortDescription, $imagePath, $durationDays, $displayOrder, $isActive, $packageId]);
+        $stmt->execute([
+            $title, 
+            $shortDescription, 
+            $imagePath, 
+            $durationDays, 
+            $displayOrder, 
+            $isActive,
+            $region,
+            $packageId
+        ]);
     } else {
         $stmt = $db->prepare("UPDATE tourism_packages 
                              SET title = ?, short_description = ?, 
-                                 duration_days = ?, display_order = ?, is_active = ?, 
-                                 updated_at = NOW() 
+                                 duration_days = ?, display_order = ?, is_active = ?,
+                                 region = ?, updated_at = NOW() 
                              WHERE id = ?");
-        $stmt->execute([$title, $shortDescription, $durationDays, $displayOrder, $isActive, $packageId]);
+        $stmt->execute([
+            $title, 
+            $shortDescription, 
+            $durationDays, 
+            $displayOrder, 
+            $isActive,
+            $region,
+            $packageId
+        ]);
     }
     
-    echo json_encode(['message' => 'Package updated successfully']);
+    echo json_encode([
+        'success' => true,
+        'message' => 'Package updated successfully',
+        'package' => [
+            'id' => $packageId,
+            'title' => $title,
+            'region' => $region
+        ]
+    ]);
+    
 } catch (PDOException $e) {
     http_response_code(500);
-    die(json_encode(['error' => 'Database error: ' . $e->getMessage()]));
+    echo json_encode([
+        'success' => false,
+        'error' => 'Database error: ' . $e->getMessage()
+    ]);
 }
